@@ -40,7 +40,7 @@ fi
 
 # Description must start with "Use when"
 desc_line=$(grep '^description:' "$file" | head -1 || true)
-if [[ -n "$desc_line" ]] && ! echo "$desc_line" | grep -qi 'Use when'; then
+if [[ -n "$desc_line" ]] && ! echo "$desc_line" | grep -qiE '^description:[[:space:]]*"?Use when'; then
   echo "FAIL: $file description does not start with 'Use when'" >&2
   errors=$((errors + 1))
 fi
@@ -54,7 +54,7 @@ for section in "## Overview" "## When to Use" "## Mandatory Steps" "## Anti-Patt
 done
 
 # Placeholder markers
-if grep -iE '\b(TBD|TODO|FIXME|XXX)\b' "$file"; then
+if grep -qiE '\b(TBD|TODO|FIXME|XXX)\b' "$file"; then
   echo "FAIL: $file contains placeholder markers (TBD/TODO/FIXME/XXX)" >&2
   errors=$((errors + 1))
 fi
