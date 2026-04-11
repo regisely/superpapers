@@ -1,22 +1,18 @@
 {
   "name": "superpapers",
+  "description": "Marketplace for the superpapers plugin — empirical quantitative research for Claude Code",
   "owner": {
     "name": "Regis A. Ely"
   },
   "plugins": [
     {
       "name": "superpapers",
-      "source": ".",
       "description": "Claude Code plugin for empirical quantitative research — brainstorm, plan, execute academic papers with replication-driven discipline. Covers literature search, data collection, statistical modeling, robustness, and journal submission. Field-agnostic: economics, political science, epidemiology, sociology, and more.",
-      "category": "research",
-      "tags": [
-        "research",
-        "academic",
-        "economics",
-        "statistics",
-        "latex",
-        "replication"
-      ]
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Regis A. Ely"
+      }
     }
   ]
 }
