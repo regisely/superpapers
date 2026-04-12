@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Superpapers</title>
+  <title>Superpapers Presentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
   <style>
     :root {
       --bg: #0f172a;
@@ -44,10 +45,6 @@
       display: none !important;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     html,
     body {
       margin: 0;
@@ -57,11 +54,8 @@
         radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 24%),
         radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.18), transparent 26%),
         linear-gradient(180deg, #111827 0%, #0f172a 45%, #020617 100%);
-      background-attachment: fixed;
       color: var(--text);
-      overflow-x: hidden;
-      font-family: "Inter", sans-serif;
-      font-size: 28px;
+      overflow: hidden;
     }
 
     body::before,
@@ -96,41 +90,35 @@
       overflow: hidden;
     }
 
-    /* --- Page sections --- */
-
-    .page-section {
+    .reveal {
       position: relative;
       z-index: 1;
+      font-family: "Inter", sans-serif;
+      font-size: 28px;
+      color: var(--text);
+    }
+
+    .reveal,
+    .reveal .slides,
+    .reveal .slides section {
+      background: transparent;
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      min-height: 100dvh;
-      padding: 48px 0;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      padding: 28px 0;
     }
 
-    .page-section.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-inner {
-      width: var(--content-width);
-      max-width: 100%;
-      padding: 40px 44px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 26px;
-    }
-
-    /* --- Typography --- */
-
-    h1, h2, h3, h4 {
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4 {
       margin: 0;
       color: var(--white);
       font-weight: 800;
@@ -139,21 +127,30 @@
       text-transform: none;
     }
 
-    h2 {
+    .reveal h2 {
       font-size: clamp(2.5rem, 4vw, 4.7rem);
     }
 
-    p, li {
+    .reveal p,
+    .reveal li {
       margin: 0;
       line-height: 1.45;
       font-size: clamp(1rem, 1.2vw, 1.32rem);
     }
 
-    a {
+    .reveal a {
       color: #a5b4fc;
     }
 
-    /* --- Cards --- */
+    .slide-shell {
+      width: var(--content-width);
+      min-height: 80vh;
+      padding: 40px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 26px;
+    }
 
     .hero-panel,
     .glass-card,
@@ -438,9 +435,8 @@
       line-height: 1.36;
     }
 
-    /* --- Demo --- */
-
     .demo-shell {
+      min-height: 80vh;
       justify-content: flex-start;
       gap: 12px;
       padding-top: 18px;
@@ -660,7 +656,6 @@
 
     .demo-stage-wrap {
       position: relative;
-      touch-action: pan-y;
     }
 
     .demo-nav {
@@ -793,8 +788,6 @@
       padding-bottom: 28px;
     }
 
-    /* --- Install --- */
-
     .code-card {
       padding: 28px;
       max-width: 900px;
@@ -824,7 +817,7 @@
     }
 
     code {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-family: "SFMono-Regular", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
       font-size: clamp(0.95rem, 1vw, 1.08rem);
     }
 
@@ -861,8 +854,6 @@
       font-size: 0.95rem;
       font-weight: 700;
     }
-
-    /* --- Lightbox --- */
 
     .lightbox {
       position: fixed;
@@ -968,27 +959,54 @@
       object-fit: contain;
     }
 
-    /* --- Animations --- */
+    .reveal .progress {
+      color: var(--indigo);
+      height: 4px;
+    }
+
+    .reveal .controls {
+      color: #c7d2fe;
+    }
+
+    .reveal .slide-number {
+      background: rgba(2, 6, 23, 0.58);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      right: 26px;
+      bottom: 22px;
+    }
 
     @keyframes gradient-flow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     @keyframes cursor-blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
+      0%,
+      49% {
+        opacity: 1;
+      }
+      50%,
+      100% {
+        opacity: 0;
+      }
     }
-
-    /* --- Tablet --- */
 
     @media (max-width: 1024px) {
       :root {
         --demo-height: min(53vh, 500px);
       }
 
-      .section-inner {
+      .slide-shell {
+        min-height: 86vh;
         padding: 32px 28px;
       }
 
@@ -1025,9 +1043,8 @@
       .demo-timeline {
         width: 100%;
       }
-    }
 
-    /* --- Mobile --- */
+    }
 
     @media (max-width: 768px) {
       :root {
@@ -1039,29 +1056,40 @@
         --radius-sm: 8px;
       }
 
-      body {
+      /* --- Base & Reveal overrides --- */
+      .reveal {
         font-size: 16px;
       }
 
-      .page-section {
-        min-height: auto;
-        padding: 32px 0;
+      .reveal .slides section {
+        padding: 12px 0;
       }
 
-      .section-inner {
+      .reveal h2 {
+        font-size: 1.6rem;
+      }
+
+      .reveal p,
+      .reveal li {
+        font-size: 0.92rem;
+      }
+
+      .reveal .slide-number {
+        padding: 5px 8px;
+        font-size: 0.7rem;
+        right: 12px;
+        bottom: 12px;
+      }
+
+      /* --- Slide shell --- */
+      .slide-shell {
         width: 100%;
+        min-height: auto;
         gap: 16px;
         padding: 16px 14px 20px;
       }
 
-      h2 {
-        font-size: 1.6rem;
-      }
-
-      p, li {
-        font-size: 0.92rem;
-      }
-
+      /* --- Hero --- */
       .hero-panel {
         min-height: auto;
         padding: 22px 16px 26px;
@@ -1098,6 +1126,7 @@
         margin-top: 6px;
       }
 
+      /* --- Pill rows & chips --- */
       .hero-meta,
       .pill-row,
       .flow-row {
@@ -1119,6 +1148,7 @@
         font-size: 0.9rem;
       }
 
+      /* --- Section headers --- */
       .section-header,
       .section-header-wide {
         max-width: 100%;
@@ -1130,6 +1160,7 @@
         font-size: 0.9rem;
       }
 
+      /* --- Grids --- */
       .problem-grid,
       .demo-context-grid {
         grid-template-columns: 1fr;
@@ -1151,6 +1182,7 @@
         gap: 14px;
       }
 
+      /* --- Cards --- */
       .glass-card {
         padding: 16px 14px;
         border-radius: var(--radius-lg);
@@ -1208,6 +1240,7 @@
         font-size: 0.95rem;
       }
 
+      /* --- Demo context cards --- */
       .demo-context-card {
         min-height: auto;
         gap: 10px;
@@ -1222,6 +1255,7 @@
         font-size: 0.82rem;
       }
 
+      /* --- Feature cards --- */
       .feature-card {
         min-height: auto;
         padding: 12px 10px;
@@ -1251,7 +1285,9 @@
         gap: 10px;
       }
 
+      /* --- Demo slide --- */
       .demo-shell {
+        min-height: auto;
         gap: 10px;
         padding-top: 12px;
         padding-bottom: 20px;
@@ -1369,6 +1405,7 @@
         min-height: 2.8em;
       }
 
+      /* --- Install slide --- */
       .install-copy {
         max-width: 100%;
         gap: 12px;
@@ -1400,6 +1437,7 @@
         font-size: 0.8rem;
       }
 
+      /* --- Lightbox --- */
       .lightbox {
         padding: 6px;
       }
@@ -1447,6 +1485,7 @@
         border-radius: 14px;
       }
 
+      /* --- Decorative blurs: tone down --- */
       body::before {
         width: 50vw;
         height: 50vw;
@@ -1460,25 +1499,6 @@
       }
     }
 
-    /* --- Landscape phones --- */
-
-    @media (max-height: 500px) and (orientation: landscape) {
-      .page-section {
-        min-height: auto;
-        padding: 24px 0;
-      }
-
-      .section-inner {
-        padding: 16px 14px;
-      }
-
-      :root {
-        --demo-height: 50vh;
-      }
-    }
-
-    /* --- Touch devices: show demo nav --- */
-
     @media (pointer: coarse) {
       .demo-nav {
         display: flex;
@@ -1491,233 +1511,235 @@
   </style>
 </head>
 <body>
-  <main>
-    <section id="hero" class="page-section">
-      <div class="section-inner">
-        <div class="hero-panel">
-          <span class="eyebrow">A Claude Code Plugin</span>
-          <div class="pill-row">
-            <span class="meta-chip">Regis A. Ely</span>
-            <span class="meta-chip">14 research skills</span>
-            <span class="meta-chip">Replication-first workflow</span>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="slide-shell">
+          <div class="hero-panel">
+            <span class="eyebrow">A Claude Code Plugin</span>
+            <div class="pill-row">
+              <span class="meta-chip">Regis A. Ely</span>
+              <span class="meta-chip">14 research skills</span>
+              <span class="meta-chip">Replication-first workflow</span>
+            </div>
+            <h1 class="display gradient-text">SUPERPAPERS</h1>
+            <p class="lead">AI-Powered Academic Research <span class="lead-muted">From Idea to Published Paper</span></p>
           </div>
-          <h1 class="display gradient-text">SUPERPAPERS</h1>
-          <p class="lead">AI-Powered Academic Research <span class="lead-muted">From Idea to Published Paper</span></p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="problem" class="page-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="eyebrow">The Problem</span>
-          <h2>AI Alone Is Not Enough</h2>
-          <p class="section-copy">Raw chat is useful, but serious research needs a structured way to think with AI.</p>
+      <section>
+        <div class="slide-shell">
+          <div class="section-header">
+            <span class="eyebrow">The Problem</span>
+            <h2>AI Alone Is Not Enough</h2>
+            <p class="section-copy">Raw chat is useful, but serious research needs a structured way to think with AI.</p>
+          </div>
+          <div class="problem-grid">
+            <article class="glass-card problem-card">
+              <span class="problem-number">01</span>
+              <h3>No Shared Research Process</h3>
+              <p>AI can suggest many paths, but there is no disciplined way to debate trade-offs and converge on one design.</p>
+            </article>
+            <article class="glass-card problem-card">
+              <span class="problem-number">02</span>
+              <h3>No Durable Consensus</h3>
+              <p>Good ideas vanish across prompts when assumptions, decisions, and rejected alternatives are not documented.</p>
+            </article>
+            <article class="glass-card problem-card">
+              <span class="problem-number">03</span>
+              <h3>No Reproducible Record</h3>
+              <p>Without a structured pipeline, AI-assisted research turns into scattered chat instead of a traceable paper workflow.</p>
+            </article>
+          </div>
+          <p class="transition-line">Superpapers turns AI into a research partner.</p>
         </div>
-        <div class="problem-grid">
-          <article class="glass-card problem-card">
-            <span class="problem-number">01</span>
-            <h3>No Shared Research Process</h3>
-            <p>AI can suggest many paths, but there is no disciplined way to debate trade-offs and converge on one design.</p>
-          </article>
-          <article class="glass-card problem-card">
-            <span class="problem-number">02</span>
-            <h3>No Durable Consensus</h3>
-            <p>Good ideas vanish across prompts when assumptions, decisions, and rejected alternatives are not documented.</p>
-          </article>
-          <article class="glass-card problem-card">
-            <span class="problem-number">03</span>
-            <h3>No Reproducible Record</h3>
-            <p>Without a structured pipeline, AI-assisted research turns into scattered chat instead of a traceable paper workflow.</p>
-          </article>
-        </div>
-        <p class="transition-line">Superpapers turns AI into a research partner.</p>
-      </div>
-    </section>
+      </section>
 
-    <section id="what-it-is" class="page-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="eyebrow">What It Is</span>
-          <h2>A Research Plugin for Claude Code</h2>
+      <section>
+        <div class="slide-shell">
+          <div class="section-header">
+            <span class="eyebrow">What It Is</span>
+            <h2>A Research Plugin for Claude Code</h2>
+          </div>
+          <div class="overview-layout">
+            <div class="overview-stack">
+              <article class="glass-card headline-card">
+                <strong>Inspired by Superpowers. Adapted to empirical quantitative research.</strong>
+                <p>Superpapers gives researchers a structured way to think with Claude, converge on a design, and keep the full workflow documented and reproducible.</p>
+                <div class="flow-row" aria-label="Research flow">
+                  <span class="flow-pill">Brainstorm</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-pill">Plan</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-pill">Execute</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-pill">Submit</span>
+                </div>
+              </article>
+            </div>
+            <article class="glass-card principle-card">
+              <h3>Built Around 4 Stages</h3>
+              <p class="principle-text">Brainstorm. Plan. Execute. Submit.</p>
+              <p>Each stage leaves artifacts behind: design choices, execution plans, scripts, outputs, and a reproducible paper trail.</p>
+            </article>
+          </div>
         </div>
-        <div class="overview-layout">
-          <div class="overview-stack">
-            <article class="glass-card headline-card">
-              <strong>Inspired by Superpowers. Adapted to empirical quantitative research.</strong>
-              <p>Superpapers gives researchers a structured way to think with Claude, converge on a design, and keep the full workflow documented and reproducible.</p>
-              <div class="flow-row" aria-label="Research flow">
-                <span class="flow-pill">Brainstorm</span>
-                <span class="flow-arrow">&rarr;</span>
-                <span class="flow-pill">Plan</span>
-                <span class="flow-arrow">&rarr;</span>
-                <span class="flow-pill">Execute</span>
-                <span class="flow-arrow">&rarr;</span>
-                <span class="flow-pill">Submit</span>
+      </section>
+
+      <section>
+        <div class="slide-shell feature-shell">
+          <div class="section-header">
+            <span class="eyebrow">Key Features</span>
+            <h2>Why It Works</h2>
+          </div>
+          <div class="feature-grid">
+            <article class="glass-card feature-card">
+              <span class="feature-number">01</span>
+              <h3>Socratic Brainstorming</h3>
+              <p>The plugin challenges question, design, data, and contribution before execution.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">02</span>
+              <h3>Replication-Driven</h3>
+              <p>Tables and figures stay tied to scripts and raw data.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">03</span>
+              <h3>14 Skills</h3>
+              <p>Search, data, modeling, writing, and submission in one system.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">04</span>
+              <h3>Subagent Execution</h3>
+              <p>Independent tasks run in parallel under one reviewed plan.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">05</span>
+              <h3>Field-Agnostic</h3>
+              <p>Built for any empirical quantitative workflow.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">06</span>
+              <h3>Full Pipeline</h3>
+              <p>Idea to manuscript, without handoff gaps.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-shell">
+          <div class="section-header section-header-wide">
+            <span class="eyebrow">Before The Demo</span>
+            <h2>What This Demo Shows</h2>
+            <p class="section-copy">24 screenshots from a real Claude Code session that produced the paper available on the repository page.</p>
+          </div>
+          <div class="demo-context-grid">
+            <article class="glass-card demo-context-card">
+              <div>
+                <h3>Real Session, Real Paper</h3>
+                <p>Brainstorming, design, estimation, robustness, writing, and submission formatting happen in the same research thread.</p>
+              </div>
+              <span class="meta-chip">24 real screenshots</span>
+            </article>
+            <article class="glass-card demo-context-card">
+              <div>
+                <h3>Evidence Forced a Pivot</h3>
+                <p>The first identification strategy looked promising, then failed after estimation. The workflow changes route instead of forcing a weak result.</p>
+              </div>
+            </article>
+            <article class="glass-card demo-context-card">
+              <div>
+                <h3>Honest Assessment Stays Visible</h3>
+                <p>Failed first stages, null results, robustness checks, and reframing decisions remain explicit in the record.</p>
+              </div>
+            </article>
+            <article class="glass-card demo-context-card">
+              <div>
+                <h3>User and AI Decide Together</h3>
+                <p>Claude proposes options, but major choices are discussed with the user before the project moves forward.</p>
               </div>
             </article>
           </div>
-          <article class="glass-card principle-card">
-            <h3>Built Around 4 Stages</h3>
-            <p class="principle-text">Brainstorm. Plan. Execute. Submit.</p>
-            <p>Each stage leaves artifacts behind: design choices, execution plans, scripts, outputs, and a reproducible paper trail.</p>
-          </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="features" class="page-section">
-      <div class="section-inner feature-shell">
-        <div class="section-header">
-          <span class="eyebrow">Key Features</span>
-          <h2>Why It Works</h2>
-        </div>
-        <div class="feature-grid">
-          <article class="glass-card feature-card">
-            <span class="feature-number">01</span>
-            <h3>Socratic Brainstorming</h3>
-            <p>The plugin challenges question, design, data, and contribution before execution.</p>
-          </article>
-          <article class="glass-card feature-card">
-            <span class="feature-number">02</span>
-            <h3>Replication-Driven</h3>
-            <p>Tables and figures stay tied to scripts and raw data.</p>
-          </article>
-          <article class="glass-card feature-card">
-            <span class="feature-number">03</span>
-            <h3>14 Skills</h3>
-            <p>Search, data, modeling, writing, and submission in one system.</p>
-          </article>
-          <article class="glass-card feature-card">
-            <span class="feature-number">04</span>
-            <h3>Subagent Execution</h3>
-            <p>Independent tasks run in parallel under one reviewed plan.</p>
-          </article>
-          <article class="glass-card feature-card">
-            <span class="feature-number">05</span>
-            <h3>Field-Agnostic</h3>
-            <p>Built for any empirical quantitative workflow.</p>
-          </article>
-          <article class="glass-card feature-card">
-            <span class="feature-number">06</span>
-            <h3>Full Pipeline</h3>
-            <p>Idea to manuscript, without handoff gaps.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="demo-context" class="page-section">
-      <div class="section-inner">
-        <div class="section-header section-header-wide">
-          <span class="eyebrow">Before The Demo</span>
-          <h2>What This Demo Shows</h2>
-          <p class="section-copy">24 screenshots from a real Claude Code session that produced the paper available on the repository page.</p>
-        </div>
-        <div class="demo-context-grid">
-          <article class="glass-card demo-context-card">
+      <section id="cinematic-demo">
+        <div class="slide-shell demo-shell">
+          <div class="demo-header">
             <div>
-              <h3>Real Session, Real Paper</h3>
-              <p>Brainstorming, design, estimation, robustness, writing, and submission formatting happen in the same research thread.</p>
+              <span class="eyebrow">Cinematic Demo</span>
+              <h2>A Real Research Session</h2>
+              <p class="demo-subcopy">24 screenshots from brainstorm to submission. Arrows step through.</p>
             </div>
-            <span class="meta-chip">24 real screenshots</span>
-          </article>
-          <article class="glass-card demo-context-card">
-            <div>
-              <h3>Evidence Forced a Pivot</h3>
-              <p>The first identification strategy looked promising, then failed after estimation. The workflow changes route instead of forcing a weak result.</p>
+            <div class="demo-controls">
+              <span class="demo-chip" id="demo-act-label">Brainstorm</span>
+              <span class="demo-counter" id="demo-counter">01 / 24</span>
+              <button class="demo-button" id="demo-toggle" type="button" aria-pressed="false">Auto-play</button>
             </div>
-          </article>
-          <article class="glass-card demo-context-card">
-            <div>
-              <h3>Honest Assessment Stays Visible</h3>
-              <p>Failed first stages, null results, robustness checks, and reframing decisions remain explicit in the record.</p>
-            </div>
-          </article>
-          <article class="glass-card demo-context-card">
-            <div>
-              <h3>User and AI Decide Together</h3>
-              <p>Claude proposes options, but major choices are discussed with the user before the project moves forward.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+          </div>
 
-    <section id="cinematic-demo" class="page-section">
-      <div class="section-inner demo-shell">
-        <div class="demo-header">
-          <div>
-            <span class="eyebrow">Cinematic Demo</span>
-            <h2>A Real Research Session</h2>
-            <p class="demo-subcopy">24 screenshots from brainstorm to submission. Arrows step through.</p>
-          </div>
-          <div class="demo-controls">
-            <span class="demo-chip" id="demo-act-label">Brainstorm</span>
-            <span class="demo-counter" id="demo-counter">01 / 24</span>
-            <button class="demo-button" id="demo-toggle" type="button" aria-pressed="false">Auto-play</button>
-          </div>
-        </div>
-
-        <div class="demo-stage-wrap">
-          <button class="demo-nav demo-nav-prev" id="demo-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
-          <div class="glass-card demo-stage">
-            <div class="demo-viewport" id="demo-viewport" aria-live="off"></div>
-            <button class="demo-inspect" id="demo-inspect" type="button">Zoom</button>
-          </div>
-          <button class="demo-nav demo-nav-next" id="demo-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
-        </div>
-
-        <div class="demo-meta">
-          <div class="demo-timeline">
-            <div class="demo-step" id="demo-step">
-              <span class="demo-step-index" id="demo-step-index">01</span>
-              <span class="demo-step-copy">
-                <strong id="demo-step-title">The journey begins</strong>
-                <span id="demo-step-subtitle">Act I &middot; Brainstorm</span>
-              </span>
+          <div class="demo-stage-wrap">
+            <button class="demo-nav demo-nav-prev" id="demo-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
+            <div class="glass-card demo-stage">
+              <div class="demo-viewport" id="demo-viewport" aria-live="off"></div>
+              <button class="demo-inspect" id="demo-inspect" type="button">Zoom</button>
             </div>
-            <div class="progress-track" aria-hidden="true">
-              <div class="progress-fill" id="demo-progress"></div>
-            </div>
+            <button class="demo-nav demo-nav-next" id="demo-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
           </div>
-          <article class="glass-card annotation-panel">
-            <p class="annotation-act" id="demo-act-detail">Act I &middot; Brainstorm</p>
-            <p class="annotation-text" id="demo-annotation"></p>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <section id="get-started" class="page-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="eyebrow">Get Started</span>
-          <h2>Install from GitHub</h2>
-        </div>
-        <div class="install-grid">
-          <div class="install-copy">
-            <p class="callout-text">Add the GitHub marketplace, install the plugin, and start talking about your research.</p>
-            <div class="link-row">
-              <a class="link-pill" href="https://github.com/regisely/superpapers" target="_blank" rel="noreferrer">github.com/regisely/superpapers</a>
-              <span class="meta-chip">MIT License</span>
+          <div class="demo-meta">
+            <div class="demo-timeline">
+              <div class="demo-step" id="demo-step">
+                <span class="demo-step-index" id="demo-step-index">01</span>
+                <span class="demo-step-copy">
+                  <strong id="demo-step-title">The journey begins</strong>
+                  <span id="demo-step-subtitle">Act I · Brainstorm</span>
+                </span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-fill" id="demo-progress"></div>
+              </div>
             </div>
+            <article class="glass-card annotation-panel">
+              <p class="annotation-act" id="demo-act-detail">Act I · Brainstorm</p>
+              <p class="annotation-text" id="demo-annotation"></p>
+            </article>
           </div>
-          <div class="code-card">
-            <pre><code>/plugin marketplace add regisely/superpapers
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-shell">
+          <div class="section-header">
+            <span class="eyebrow">Get Started</span>
+            <h2>Install from GitHub</h2>
+          </div>
+          <div class="install-grid">
+            <div class="install-copy">
+              <p class="callout-text">Add the GitHub marketplace, install the plugin, and start talking about your research.</p>
+              <div class="link-row">
+                <a class="link-pill" href="https://github.com/regisely/superpapers" target="_blank" rel="noreferrer">github.com/regisely/superpapers</a>
+                <span class="meta-chip">MIT License</span>
+              </div>
+            </div>
+            <div class="code-card">
+              <pre><code>/plugin marketplace add regisely/superpapers
 /plugin install superpapers</code></pre>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </div>
+  </div>
 
   <div class="lightbox" id="lightbox" hidden>
     <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
       <div class="lightbox-header">
         <div class="lightbox-info">
           <strong id="lightbox-title">The journey begins</strong>
-          <span id="lightbox-caption">Act I &middot; Brainstorm &middot; 01 / 24</span>
+          <span id="lightbox-caption">Act I · Brainstorm · 01 / 24</span>
         </div>
         <div class="lightbox-actions">
           <span class="lightbox-tag">Claude Code Demo</span>
@@ -1732,47 +1754,178 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
   <script>
     const demoFrames = [
-      { file: "screenshots/01-brainstorm-start.png", act: "Brainstorm", actLong: "Act I \u00b7 Brainstorm", title: "The journey begins", annotation: "The journey begins: Claude asks for the research question." },
-      { file: "screenshots/02-brainstorm-strategy.png", act: "Brainstorm", actLong: "Act I \u00b7 Brainstorm", title: "Research mode clarified", annotation: "Exploratory or confirmatory? Every downstream decision follows." },
-      { file: "screenshots/03-brainstorm-gap.png", act: "Brainstorm", actLong: "Act I \u00b7 Brainstorm", title: "Contribution validated", annotation: "Literature gap verified. Contribution is defensible." },
-      { file: "screenshots/04-design-approaches.png", act: "Design", actLong: "Act II \u00b7 Design", title: "Approaches compared", annotation: "Three approaches proposed with explicit trade-offs." },
-      { file: "screenshots/05-design-data.png", act: "Design", actLong: "Act II \u00b7 Design", title: "Data map locked", annotation: "Data sources mapped: BIS, Penn World Table, World Bank." },
-      { file: "screenshots/06-design-identification.png", act: "Design", actLong: "Act II \u00b7 Design", title: "Identification strategy", annotation: "Bartik shift-share instrument from cross-border banking flows." },
-      { file: "screenshots/07-design-estimation.png", act: "Design", actLong: "Act II \u00b7 Design", title: "Estimation path defined", annotation: "Full estimation plan: OLS baseline, 2SLS, decomposition." },
-      { file: "screenshots/08-outputs-tables.png", act: "Design", actLong: "Act II \u00b7 Design", title: "Outputs planned first", annotation: "Tables and figures planned before touching any data." },
-      { file: "screenshots/09-robustness-journals.png", act: "Design", actLong: "Act II \u00b7 Design", title: "Robustness and journals", annotation: "Robustness checks and journal targets locked in upfront." },
-      { file: "screenshots/10-spec-written.png", act: "Design", actLong: "Act II \u00b7 Design", title: "Spec committed", annotation: "Design spec written, reviewed, and committed." },
-      { file: "screenshots/11-write-plan.png", act: "Plan", actLong: "Act III \u00b7 Plan", title: "Execution plan expanded", annotation: "Implementation plan: 30+ tasks across six research phases." },
-      { file: "screenshots/12-execute-plan.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Parallel execution begins", annotation: "Subagents dispatch in parallel. Data collection begins." },
-      { file: "screenshots/13-execute-collection-complete.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Collection complete", annotation: "Five collection tasks complete. The data manifest is written before preparation starts." },
-      { file: "screenshots/14-execute-preparation-complete.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Preparation complete", annotation: "Parallel cleaning and merging produce the final analysis panel." },
-      { file: "screenshots/15-execute-exploratory-analysis.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Exploratory outputs ready", annotation: "Descriptives, scatter plot, composition trends, and diagnostics run in parallel." },
-      { file: "screenshots/16-execute-main-analysis.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Main analysis challenged", annotation: "Execution stops when the first stage fails. Diagnosis starts before moving on." },
-      { file: "screenshots/17-execute-identification-diagnosis.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Identification diagnosis", annotation: "Two diagnostic tracks run in parallel. The Bartik construction is fixed, but the first stage still fails." },
-      { file: "screenshots/18-execute-gmm-pivot.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "GMM pivot launched", annotation: "The project pivots to system GMM, with main and composition estimations running in parallel." },
-      { file: "screenshots/19-execute-heterogeneity-framing.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Results story consolidated", annotation: "Heterogeneity checks add no differential effect, and framing starts from a verified null result." },
-      { file: "screenshots/20-execute-literature-framing.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Framing locked", annotation: "The null result is grounded in literature, mechanisms, and a coherent paper narrative." },
-      { file: "screenshots/21-execute-robustness-parallel.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Robustness in parallel", annotation: "Five robustness checks run in parallel and each one reinforces the null result." },
-      { file: "screenshots/22-execute-robustness-complete.png", act: "Execute", actLong: "Act IV \u00b7 Execute", title: "Writing starts cleanly", annotation: "Robustness closes cleanly, outputs are inventoried, and the paper draft starts from validated results." },
-      { file: "screenshots/23-submit-formatting-start.png", act: "Submit", actLong: "Submit", title: "Submission formatting", annotation: "Journal guidelines are fetched and the manuscript is formatted for the target outlet." },
-      { file: "screenshots/24-submit-checklist-verified.png", act: "Submit", actLong: "Submit", title: "Submission ready", annotation: "A full submission checklist confirms the paper is formatted and ready for final author details." }
-    ]
-
-    /* --- Section reveal on scroll --- */
-
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add("is-visible")
-        })
+      {
+        file: "screenshots/01-brainstorm-start.png",
+        act: "Brainstorm",
+        actLong: "Act I · Brainstorm",
+        title: "The journey begins",
+        annotation: "The journey begins: Claude asks for the research question."
       },
-      { threshold: 0.1 }
-    )
-    document.querySelectorAll(".page-section").forEach(s => sectionObserver.observe(s))
-
-    /* --- Cinematic Demo --- */
+      {
+        file: "screenshots/02-brainstorm-strategy.png",
+        act: "Brainstorm",
+        actLong: "Act I · Brainstorm",
+        title: "Research mode clarified",
+        annotation: "Exploratory or confirmatory? Every downstream decision follows."
+      },
+      {
+        file: "screenshots/03-brainstorm-gap.png",
+        act: "Brainstorm",
+        actLong: "Act I · Brainstorm",
+        title: "Contribution validated",
+        annotation: "Literature gap verified. Contribution is defensible."
+      },
+      {
+        file: "screenshots/04-design-approaches.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Approaches compared",
+        annotation: "Three approaches proposed with explicit trade-offs."
+      },
+      {
+        file: "screenshots/05-design-data.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Data map locked",
+        annotation: "Data sources mapped: BIS, Penn World Table, World Bank."
+      },
+      {
+        file: "screenshots/06-design-identification.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Identification strategy",
+        annotation: "Bartik shift-share instrument from cross-border banking flows."
+      },
+      {
+        file: "screenshots/07-design-estimation.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Estimation path defined",
+        annotation: "Full estimation plan: OLS baseline, 2SLS, decomposition."
+      },
+      {
+        file: "screenshots/08-outputs-tables.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Outputs planned first",
+        annotation: "Tables and figures planned before touching any data."
+      },
+      {
+        file: "screenshots/09-robustness-journals.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Robustness and journals",
+        annotation: "Robustness checks and journal targets locked in upfront."
+      },
+      {
+        file: "screenshots/10-spec-written.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Spec committed",
+        annotation: "Design spec written, reviewed, and committed."
+      },
+      {
+        file: "screenshots/11-write-plan.png",
+        act: "Plan",
+        actLong: "Act III · Plan",
+        title: "Execution plan expanded",
+        annotation: "Implementation plan: 30+ tasks across six research phases."
+      },
+      {
+        file: "screenshots/12-execute-plan.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Parallel execution begins",
+        annotation: "Subagents dispatch in parallel. Data collection begins."
+      },
+      {
+        file: "screenshots/13-execute-collection-complete.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Collection complete",
+        annotation: "Five collection tasks complete. The data manifest is written before preparation starts."
+      },
+      {
+        file: "screenshots/14-execute-preparation-complete.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Preparation complete",
+        annotation: "Parallel cleaning and merging produce the final analysis panel."
+      },
+      {
+        file: "screenshots/15-execute-exploratory-analysis.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Exploratory outputs ready",
+        annotation: "Descriptives, scatter plot, composition trends, and diagnostics run in parallel."
+      },
+      {
+        file: "screenshots/16-execute-main-analysis.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Main analysis challenged",
+        annotation: "Execution stops when the first stage fails. Diagnosis starts before moving on."
+      },
+      {
+        file: "screenshots/17-execute-identification-diagnosis.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Identification diagnosis",
+        annotation: "Two diagnostic tracks run in parallel. The Bartik construction is fixed, but the first stage still fails."
+      },
+      {
+        file: "screenshots/18-execute-gmm-pivot.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "GMM pivot launched",
+        annotation: "The project pivots to system GMM, with main and composition estimations running in parallel."
+      },
+      {
+        file: "screenshots/19-execute-heterogeneity-framing.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Results story consolidated",
+        annotation: "Heterogeneity checks add no differential effect, and framing starts from a verified null result."
+      },
+      {
+        file: "screenshots/20-execute-literature-framing.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Framing locked",
+        annotation: "The null result is grounded in literature, mechanisms, and a coherent paper narrative."
+      },
+      {
+        file: "screenshots/21-execute-robustness-parallel.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Robustness in parallel",
+        annotation: "Five robustness checks run in parallel and each one reinforces the null result."
+      },
+      {
+        file: "screenshots/22-execute-robustness-complete.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Writing starts cleanly",
+        annotation: "Robustness closes cleanly, outputs are inventoried, and the paper draft starts from validated results."
+      },
+      {
+        file: "screenshots/23-submit-formatting-start.png",
+        act: "Submit",
+        actLong: "Submit",
+        title: "Submission formatting",
+        annotation: "Journal guidelines are fetched and the manuscript is formatted for the target outlet."
+      },
+      {
+        file: "screenshots/24-submit-checklist-verified.png",
+        act: "Submit",
+        actLong: "Submit",
+        title: "Submission ready",
+        annotation: "A full submission checklist confirms the paper is formatted and ready for final author details."
+      }
+    ]
 
     class CinematicDemo {
       constructor(frames) {
@@ -1802,44 +1955,35 @@
         this.typeTimer = null
         this.typingDelay = 24
         this.autoplayDelay = 6000
+        this.previousRevealKeyboard = true
         this.imageElements = []
         this.handleKeydown = this.handleKeydown.bind(this)
+        this.handleSlideChange = this.handleSlideChange.bind(this)
       }
 
       init() {
         this.buildImages()
         this.bindEvents()
         this.show(0, { skipTyping: true })
-        this.observeVisibility()
+        this.handleSlideChange({ currentSlide: Reveal.getCurrentSlide() })
       }
 
       buildImages() {
         const fragment = document.createDocumentFragment()
+
         this.frames.forEach((frame, index) => {
           const image = document.createElement("img")
           image.className = "demo-image"
           image.src = frame.file
           image.alt = frame.annotation
           image.decoding = "async"
-          image.loading = index === 0 ? "eager" : "lazy"
+          image.loading = "eager"
           image.addEventListener("click", () => this.openLightbox())
           fragment.appendChild(image)
           this.imageElements.push(image)
         })
-        this.viewport.appendChild(fragment)
-      }
 
-      observeVisibility() {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) this.start()
-              else this.stop()
-            })
-          },
-          { threshold: 0.3 }
-        )
-        observer.observe(this.slide)
+        this.viewport.appendChild(fragment)
       }
 
       bindEvents() {
@@ -1847,7 +1991,9 @@
         this.inspectButton.addEventListener("click", () => this.openLightbox())
         this.lightboxClose.addEventListener("click", () => this.closeLightbox())
         this.lightboxBackdrop.addEventListener("click", event => {
-          if (event.target === this.lightboxBackdrop) this.closeLightbox()
+          if (event.target === this.lightboxBackdrop) {
+            this.closeLightbox()
+          }
         })
 
         document.getElementById("demo-prev").addEventListener("click", () => this.previous())
@@ -1870,7 +2016,7 @@
           element.addEventListener("touchend", event => {
             const dx = event.changedTouches[0].clientX - startX
             const dy = event.changedTouches[0].clientY - startY
-            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
               if (dx < 0) this.next()
               else this.previous()
             }
@@ -1882,18 +2028,38 @@
         addSwipe(this.lightbox)
 
         document.addEventListener("keydown", this.handleKeydown, true)
+
+        Reveal.on("ready", this.handleSlideChange)
+        Reveal.on("slidechanged", this.handleSlideChange)
+      }
+
+      handleSlideChange(event) {
+        const currentSlide = event.currentSlide || Reveal.getCurrentSlide()
+
+        if (currentSlide === this.slide) {
+          this.start()
+          return
+        }
+
+        this.stop()
       }
 
       isActiveSlide() {
-        const rect = this.slide.getBoundingClientRect()
-        return rect.top < window.innerHeight && rect.bottom > 0
+        return Reveal.getCurrentSlide() === this.slide
       }
 
       setMode(nextMode) {
-        if (this.mode === nextMode) return
+        if (this.mode === nextMode) {
+          return
+        }
+
         clearTimeout(this.advanceTimer)
         this.advanceTimer = null
-        if (nextMode === "playing") this.scheduleAdvance()
+
+        if (nextMode === "playing") {
+          this.scheduleAdvance()
+        }
+
         this.mode = nextMode
         this.updateToggleButton()
       }
@@ -1903,7 +2069,10 @@
       }
 
       stop() {
-        if (this.lightboxOpen()) this.closeLightbox({ restoreFocus: false })
+        if (this.lightboxOpen()) {
+          this.closeLightbox({ restoreFocus: false })
+        }
+
         clearTimeout(this.advanceTimer)
         clearInterval(this.typeTimer)
         this.advanceTimer = null
@@ -1916,11 +2085,15 @@
       show(index, options = {}) {
         const { skipTyping = false } = options
         const frame = this.frames[index]
-        if (!frame) return
+
+        if (!frame) {
+          return
+        }
 
         this.currentIndex = index
-        this.imageElements.forEach((image, i) => {
-          image.classList.toggle("is-active", i === index)
+
+        this.imageElements.forEach((image, imageIndex) => {
+          image.classList.toggle("is-active", imageIndex === index)
         })
 
         this.counter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(this.frames.length).padStart(2, "0")}`
@@ -1931,7 +2104,9 @@
         this.stepSubtitle.textContent = frame.actLong
         this.progress.style.width = `${((index + 1) / this.frames.length) * 100}%`
 
-        if (this.lightboxOpen()) this.updateLightbox()
+        if (this.lightboxOpen()) {
+          this.updateLightbox()
+        }
 
         if (skipTyping) {
           this.annotation.classList.remove("is-typing")
@@ -1940,18 +2115,22 @@
           this.typeAnnotation(frame.annotation)
         }
 
-        if (this.mode === "playing") this.scheduleAdvance()
+        if (this.mode === "playing") {
+          this.scheduleAdvance()
+        }
       }
 
       typeAnnotation(text) {
         clearInterval(this.typeTimer)
         this.annotation.textContent = ""
         this.annotation.classList.add("is-typing")
-        let i = 0
+
+        let index = 0
         this.typeTimer = window.setInterval(() => {
-          i += 1
-          this.annotation.textContent = text.slice(0, i)
-          if (i >= text.length) {
+          index += 1
+          this.annotation.textContent = text.slice(0, index)
+
+          if (index >= text.length) {
             clearInterval(this.typeTimer)
             this.typeTimer = null
             this.annotation.classList.remove("is-typing")
@@ -1961,16 +2140,28 @@
 
       scheduleAdvance() {
         clearTimeout(this.advanceTimer)
-        this.advanceTimer = window.setTimeout(() => this.next(), this.autoplayDelay)
+        this.advanceTimer = window.setTimeout(() => {
+          this.next()
+        }, this.autoplayDelay)
       }
 
-      next() { this.show((this.currentIndex + 1) % this.frames.length) }
-      previous() { this.show((this.currentIndex - 1 + this.frames.length) % this.frames.length) }
+      next() {
+        this.show((this.currentIndex + 1) % this.frames.length)
+      }
+
+      previous() {
+        this.show((this.currentIndex - 1 + this.frames.length) % this.frames.length)
+      }
 
       togglePause(forcePaused) {
         const nextPaused = typeof forcePaused === "boolean" ? forcePaused : !this.userPaused
         this.userPaused = nextPaused
-        if (!this.isActiveSlide()) { this.updateToggleButton(); return }
+
+        if (!this.isActiveSlide()) {
+          this.updateToggleButton()
+          return
+        }
+
         this.setMode(this.userPaused ? "paused" : "playing")
       }
 
@@ -1980,12 +2171,21 @@
         this.toggleButton.setAttribute("aria-pressed", String(autoPlaying))
       }
 
-      openLightbox() {
-        if (this.lightboxOpen()) return
+      openLightbox(options = {}) {
+        const { restorePlayback = true } = options
+
+        if (this.lightboxOpen()) {
+          return
+        }
+
+        this.previousRevealKeyboard = Reveal.getConfig().keyboard
+        Reveal.configure({ keyboard: false })
+
         this.updateLightbox()
         this.lightbox.hidden = false
         document.body.classList.add("lightbox-open")
-        if (this.isActiveSlide()) {
+
+        if (restorePlayback && this.isActiveSlide()) {
           this.setMode(this.userPaused ? "paused" : "playing")
         } else {
           this.updateToggleButton()
@@ -1994,16 +2194,23 @@
 
       closeLightbox(options = {}) {
         const { restoreFocus = true } = options
-        if (!this.lightboxOpen()) return
+
+        if (!this.lightboxOpen()) {
+          return
+        }
+
         this.lightbox.hidden = true
         document.body.classList.remove("lightbox-open")
+        Reveal.configure({ keyboard: this.previousRevealKeyboard })
+
         if (this.isActiveSlide()) {
           this.setMode(this.userPaused ? "paused" : "playing")
         } else {
           this.mode = "idle"
           this.updateToggleButton()
         }
-        if (restoreFocus && window.matchMedia("(pointer: fine)").matches) {
+
+        if (restoreFocus) {
           this.inspectButton.focus()
         }
       }
@@ -2013,21 +2220,27 @@
         this.lightboxImage.src = frame.file
         this.lightboxImage.alt = frame.annotation
         this.lightboxTitle.textContent = frame.title
-        this.lightboxCaption.textContent = `${frame.actLong} \u00b7 ${String(this.currentIndex + 1).padStart(2, "0")} / ${String(this.frames.length).padStart(2, "0")}`
+        this.lightboxCaption.textContent = `${frame.actLong} · ${String(this.currentIndex + 1).padStart(2, "0")} / ${String(this.frames.length).padStart(2, "0")}`
       }
 
-      lightboxOpen() { return !this.lightbox.hidden }
+      lightboxOpen() {
+        return !this.lightbox.hidden
+      }
 
       handleKeydown(event) {
-        if (!this.isActiveSlide() && !this.lightboxOpen()) return
+        if (!this.isActiveSlide()) {
+          return
+        }
 
         const key = event.key
-        const forward = ["ArrowRight", "ArrowDown", "PageDown"]
-        const backward = ["ArrowLeft", "ArrowUp", "PageUp"]
-        const isNav = forward.includes(key) || backward.includes(key)
-        const isControl = key === " " || key === "Enter" || key.toLowerCase() === "z" || key === "Escape"
+        const forwardKeys = ["ArrowRight", "ArrowDown", "PageDown"]
+        const backwardKeys = ["ArrowLeft", "ArrowUp", "PageUp"]
+        const shouldHandleNavigation = forwardKeys.includes(key) || backwardKeys.includes(key)
+        const shouldHandleControl = key === " " || key === "Enter" || key.toLowerCase() === "z" || key === "Escape"
 
-        if (!isNav && !isControl) return
+        if (!shouldHandleNavigation && !shouldHandleControl) {
+          return
+        }
 
         if (key === "Escape" && this.lightboxOpen()) {
           event.preventDefault()
@@ -2039,8 +2252,12 @@
         if (key === " " || key === "Enter") {
           event.preventDefault()
           event.stopPropagation()
-          if (key === "Enter") this.openLightbox()
-          else this.togglePause()
+
+          if (key === "Enter") {
+            this.openLightbox()
+          } else {
+            this.togglePause()
+          }
           return
         }
 
@@ -2051,28 +2268,67 @@
           return
         }
 
-        if (isNav) {
-          const movingForward = forward.includes(key)
-          const isEdge = movingForward
+        if (shouldHandleNavigation) {
+          const movingForward = forwardKeys.includes(key)
+          const isEdgeFrame = movingForward
             ? this.currentIndex === this.frames.length - 1
             : this.currentIndex === 0
 
-          if (!this.lightboxOpen() && isEdge) return
+          if (!this.lightboxOpen() && isEdgeFrame) {
+            return
+          }
 
-          if (this.lightboxOpen() && isEdge) {
+          if (this.lightboxOpen() && isEdgeFrame) {
             event.preventDefault()
             event.stopPropagation()
             this.closeLightbox({ restoreFocus: false })
+            if (movingForward) {
+              Reveal.next()
+            } else {
+              Reveal.prev()
+            }
             return
           }
 
           event.preventDefault()
           event.stopPropagation()
-          if (movingForward) this.next()
-          else this.previous()
+
+          if (movingForward) {
+            this.next()
+          } else {
+            this.previous()
+          }
         }
       }
     }
+
+    function mobileConfig() {
+      const mobile = window.innerWidth <= 768 || window.innerHeight <= 500
+      return {
+        width: mobile ? window.innerWidth : 1600,
+        height: mobile ? window.innerHeight : 900,
+        margin: mobile ? 0 : 0.04,
+        minScale: mobile ? 1 : 0.2,
+        maxScale: mobile ? 1 : 1.5,
+      }
+    }
+
+    Reveal.initialize({
+      ...mobileConfig(),
+      controls: true,
+      progress: true,
+      slideNumber: "c/t",
+      hash: true,
+      transition: "fade",
+      backgroundTransition: "fade",
+      controlsTutorial: false,
+      center: true
+    })
+
+    window.addEventListener("resize", () => {
+      Reveal.configure(mobileConfig())
+      Reveal.layout()
+    })
 
     const cinematicDemo = new CinematicDemo(demoFrames)
     cinematicDemo.init()
