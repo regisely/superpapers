@@ -686,7 +686,7 @@
     }
 
     .lightbox-nav {
-      display: none;
+      display: flex;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -1345,14 +1345,6 @@
         border-radius: 14px;
       }
 
-      .demo-nav {
-        display: flex;
-      }
-
-      .demo-nav-next {
-        right: 8px;
-      }
-
       .demo-inspect {
         display: none;
       }
@@ -1493,10 +1485,6 @@
         border-radius: 14px;
       }
 
-      .lightbox-nav {
-        display: flex;
-      }
-
       /* --- Decorative blurs: tone down --- */
       body::before {
         width: 50vw;
@@ -1508,6 +1496,16 @@
         width: 50vw;
         height: 50vw;
         opacity: 0.5;
+      }
+    }
+
+    @media (pointer: coarse) {
+      .demo-nav {
+        display: flex;
+      }
+
+      .demo-inspect {
+        display: none;
       }
     }
   </style>
@@ -1667,7 +1665,7 @@
         </div>
       </section>
 
-      <section id="cinematic-demo" data-touch="false">
+      <section id="cinematic-demo">
         <div class="slide-shell demo-shell">
           <div class="demo-header">
             <div>
@@ -2009,13 +2007,11 @@
           element.addEventListener("touchstart", event => {
             startX = event.touches[0].clientX
             startY = event.touches[0].clientY
-          }, { passive: false })
+          }, { passive: true })
           element.addEventListener("touchmove", event => {
-            if (this.isActiveSlide() || this.lightboxOpen()) {
-              const dx = Math.abs(event.touches[0].clientX - startX)
-              const dy = Math.abs(event.touches[0].clientY - startY)
-              if (dx > dy && dx > 10) event.preventDefault()
-            }
+            const dx = Math.abs(event.touches[0].clientX - startX)
+            const dy = Math.abs(event.touches[0].clientY - startY)
+            if (dx > dy && dx > 10) event.preventDefault()
           }, { passive: false })
           element.addEventListener("touchend", event => {
             const dx = event.changedTouches[0].clientX - startX
@@ -2027,7 +2023,8 @@
           }, { passive: true })
         }
 
-        addSwipe(this.slide)
+        const stageWrap = this.slide.querySelector(".demo-stage-wrap")
+        if (stageWrap) addSwipe(stageWrap)
         addSwipe(this.lightbox)
 
         document.addEventListener("keydown", this.handleKeydown, true)
@@ -2305,13 +2302,19 @@
       }
     }
 
-    const isMobile = window.innerWidth <= 768
+    function mobileConfig() {
+      const mobile = window.innerWidth <= 768 || window.innerHeight <= 500
+      return {
+        width: mobile ? window.innerWidth : 1600,
+        height: mobile ? window.innerHeight : 900,
+        margin: mobile ? 0 : 0.04,
+        minScale: mobile ? 1 : 0.2,
+        maxScale: mobile ? 1 : 1.5,
+      }
+    }
+
     Reveal.initialize({
-      width: isMobile ? window.innerWidth : 1600,
-      height: isMobile ? window.innerHeight : 900,
-      margin: isMobile ? 0 : 0.04,
-      minScale: isMobile ? 1 : 0.2,
-      maxScale: isMobile ? 1 : 1.5,
+      ...mobileConfig(),
       controls: true,
       progress: true,
       slideNumber: "c/t",
@@ -2320,6 +2323,11 @@
       backgroundTransition: "fade",
       controlsTutorial: false,
       center: true
+    })
+
+    window.addEventListener("resize", () => {
+      Reveal.configure(mobileConfig())
+      Reveal.layout()
     })
 
     const cinematicDemo = new CinematicDemo(demoFrames)
