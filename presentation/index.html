@@ -1,0 +1,1812 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Superpapers Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-deep: #020617;
+      --panel: rgba(15, 23, 42, 0.62);
+      --panel-strong: rgba(15, 23, 42, 0.82);
+      --panel-soft: rgba(30, 41, 59, 0.48);
+      --line: rgba(148, 163, 184, 0.18);
+      --line-strong: rgba(129, 140, 248, 0.36);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --subtle: #64748b;
+      --white: #f8fafc;
+      --indigo: #6366f1;
+      --violet: #8b5cf6;
+      --cyan: #38bdf8;
+      --emerald: #34d399;
+      --shadow: 0 28px 80px rgba(2, 6, 23, 0.48);
+      --glow: 0 0 0 1px rgba(129, 140, 248, 0.18), 0 30px 120px rgba(99, 102, 241, 0.18);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --content-width: min(92vw, 1320px);
+      --demo-height: min(61vh, 590px);
+      --transition-fast: 240ms ease;
+      --transition-slow: 800ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(99, 102, 241, 0.25), transparent 28%),
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 24%),
+        radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.18), transparent 26%),
+        linear-gradient(180deg, #111827 0%, #0f172a 45%, #020617 100%);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(12px);
+    }
+
+    body::before {
+      top: 7vh;
+      left: 6vw;
+      width: 24vw;
+      height: 24vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.28), transparent 70%);
+    }
+
+    body::after {
+      right: 8vw;
+      bottom: 6vh;
+      width: 28vw;
+      height: 28vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 68%);
+    }
+
+    body.lightbox-open {
+      overflow: hidden;
+    }
+
+    .reveal {
+      position: relative;
+      z-index: 1;
+      font-family: "Inter", sans-serif;
+      font-size: 28px;
+      color: var(--text);
+    }
+
+    .reveal,
+    .reveal .slides,
+    .reveal .slides section {
+      background: transparent;
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 0;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4 {
+      margin: 0;
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      text-transform: none;
+    }
+
+    .reveal h2 {
+      font-size: clamp(2.5rem, 4vw, 4.7rem);
+    }
+
+    .reveal p,
+    .reveal li {
+      margin: 0;
+      line-height: 1.45;
+      font-size: clamp(1rem, 1.2vw, 1.32rem);
+    }
+
+    .reveal a {
+      color: #a5b4fc;
+    }
+
+    .slide-shell {
+      width: var(--content-width);
+      min-height: 80vh;
+      padding: 40px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 26px;
+    }
+
+    .hero-panel,
+    .glass-card,
+    .code-card,
+    .lightbox-dialog {
+      position: relative;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)) padding-box,
+        linear-gradient(140deg, rgba(99, 102, 241, 0.42), rgba(139, 92, 246, 0.28), rgba(56, 189, 248, 0.18)) border-box;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .hero-panel {
+      min-height: clamp(380px, 50vh, 430px);
+      padding: 46px 56px 62px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      background:
+        linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.7)) padding-box,
+        linear-gradient(120deg, rgba(99, 102, 241, 0.9), rgba(139, 92, 246, 0.72), rgba(56, 189, 248, 0.68), rgba(99, 102, 241, 0.88)) border-box;
+      background-size: 100% 100%, 220% 220%;
+      animation: gradient-flow 14s ease infinite;
+      overflow: hidden;
+    }
+
+    .hero-panel .eyebrow {
+      margin-bottom: 2px;
+    }
+
+    .hero-panel .pill-row {
+      margin-bottom: 4px;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -8% -24% auto;
+      width: 34vw;
+      height: 34vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.22), transparent 64%);
+      pointer-events: none;
+    }
+
+    .glass-card {
+      padding: 26px 24px;
+      background-color: var(--panel);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 16px;
+      border: 1px solid rgba(165, 180, 252, 0.22);
+      border-radius: 999px;
+      background: rgba(30, 41, 59, 0.45);
+      color: #c7d2fe;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      box-shadow: 0 0 14px rgba(99, 102, 241, 0.82);
+    }
+
+    .display {
+      font-size: clamp(4rem, 9vw, 7.8rem);
+      line-height: 0.9;
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #c7d2fe 0%, #818cf8 30%, #a78bfa 58%, #67e8f9 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradient-flow 12s ease infinite;
+    }
+
+    .lead {
+      max-width: 24ch;
+      font-size: clamp(1.45rem, 2vw, 2.15rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.18;
+    }
+
+    .lead-muted {
+      display: inline-block;
+      margin-top: 10px;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .hero-meta,
+    .pill-row,
+    .flow-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .meta-chip,
+    .flow-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(15, 23, 42, 0.55);
+      color: #dbeafe;
+      font-size: 0.96rem;
+      font-weight: 600;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .flow-row {
+      gap: 18px;
+    }
+
+    .flow-arrow {
+      color: rgba(165, 180, 252, 0.72);
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 28ch;
+    }
+
+    .section-header-wide {
+      max-width: 40ch;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      max-width: 44ch;
+      font-size: 1.08rem;
+    }
+
+    .problem-grid,
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .problem-card h3,
+    .feature-card h3 {
+      margin-bottom: 14px;
+      font-size: clamp(1.32rem, 1.5vw, 1.72rem);
+      line-height: 1.05;
+    }
+
+    .problem-card p,
+    .feature-card p {
+      color: var(--muted);
+    }
+
+    .problem-card {
+      min-height: 210px;
+    }
+
+    .problem-number,
+    .feature-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.22), rgba(139, 92, 246, 0.28));
+      color: #c7d2fe;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .transition-line,
+    .principle-text,
+    .callout-text {
+      font-size: clamp(1.15rem, 1.6vw, 1.55rem);
+      font-weight: 600;
+      color: #e9d5ff;
+      letter-spacing: -0.03em;
+    }
+
+    .transition-line {
+      padding-top: 10px;
+    }
+
+    .overview-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .overview-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .headline-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 280px;
+      justify-content: space-between;
+    }
+
+    .headline-card strong {
+      display: block;
+      font-size: clamp(1.65rem, 2vw, 2.25rem);
+      line-height: 1.05;
+      color: var(--white);
+      letter-spacing: -0.04em;
+    }
+
+    .headline-card p {
+      color: var(--muted);
+      max-width: 42ch;
+    }
+
+    .principle-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 100%;
+    }
+
+    .principle-card h3 {
+      font-size: 1.5rem;
+    }
+
+    .demo-context-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .demo-context-card {
+      min-height: 188px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: space-between;
+    }
+
+    .demo-context-card h3 {
+      font-size: clamp(1.34rem, 1.55vw, 1.76rem);
+      line-height: 1.04;
+    }
+
+    .demo-context-card p {
+      color: var(--muted);
+      max-width: 38ch;
+      font-size: 0.98rem;
+      line-height: 1.36;
+    }
+
+    .demo-shell {
+      min-height: 80vh;
+      justify-content: flex-start;
+      gap: 12px;
+      padding-top: 18px;
+      padding-bottom: 44px;
+    }
+
+    .demo-header,
+    .demo-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .demo-header {
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .demo-header .eyebrow {
+      margin-bottom: 14px;
+    }
+
+    .demo-header > :first-child {
+      flex: 1 1 78%;
+      max-width: 78%;
+    }
+
+    .demo-header h2 {
+      font-size: clamp(1.9rem, 2.85vw, 3rem);
+    }
+
+    .demo-subcopy {
+      margin-top: 4px;
+      color: var(--muted);
+      max-width: 52ch;
+      font-size: 0.94rem;
+    }
+
+    .demo-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .demo-chip,
+    .demo-counter,
+    .demo-button,
+    .demo-inspect {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(15, 23, 42, 0.72);
+      color: var(--white);
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .demo-chip,
+    .demo-counter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 14px;
+    }
+
+    .demo-chip {
+      color: #c4b5fd;
+    }
+
+    .demo-button,
+    .demo-inspect,
+    .lightbox-close {
+      cursor: pointer;
+      transition:
+        transform var(--transition-fast),
+        border-color var(--transition-fast),
+        background-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        opacity var(--transition-fast);
+    }
+
+    .demo-button {
+      min-height: 42px;
+      padding: 9px 16px;
+    }
+
+    .demo-button:hover,
+    .demo-inspect:hover,
+    .lightbox-close:hover {
+      transform: translateY(-2px);
+      border-color: rgba(129, 140, 248, 0.42);
+      box-shadow: 0 18px 40px rgba(99, 102, 241, 0.16);
+    }
+
+    .demo-stage {
+      padding: 10px;
+      overflow: hidden;
+      box-shadow: var(--glow);
+    }
+
+    .demo-viewport {
+      position: relative;
+      width: min(81vw, 1120px);
+      max-width: 100%;
+      height: var(--demo-height);
+      margin: 0 auto;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(99, 102, 241, 0.22), transparent 28%),
+        linear-gradient(180deg, rgba(2, 6, 23, 0.86), rgba(2, 6, 23, 0.62));
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 34px 90px rgba(2, 6, 23, 0.45);
+    }
+
+    .demo-stage::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 28px;
+      border: 1px solid rgba(129, 140, 248, 0.08);
+      pointer-events: none;
+    }
+
+    .demo-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: brightness(1.24) contrast(1.08);
+      opacity: 0;
+      transform: scale(1.02);
+      transition: opacity var(--transition-slow), transform var(--transition-slow);
+      user-select: none;
+      cursor: zoom-in;
+    }
+
+    .demo-image.is-active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 1;
+    }
+
+    .demo-timeline {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 240px;
+    }
+
+    .demo-meta {
+      gap: 16px;
+      padding-bottom: 18px;
+    }
+
+    .demo-step {
+      position: static;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      max-width: 100%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      background: rgba(2, 6, 23, 0.72);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 18px 50px rgba(2, 6, 23, 0.38);
+    }
+
+    .demo-step-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.28), rgba(139, 92, 246, 0.4));
+      color: #dbeafe;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .demo-step-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .demo-step-copy strong {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .demo-step-copy span {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .demo-inspect {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      z-index: 3;
+      min-height: 44px;
+      padding: 10px 18px;
+    }
+
+    .progress-track {
+      position: relative;
+      flex: 1 1 auto;
+      min-width: 180px;
+      height: 7px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(71, 85, 105, 0.58);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .progress-fill {
+      width: 8.333%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cyan), var(--indigo), var(--violet));
+      box-shadow: 0 0 24px rgba(99, 102, 241, 0.44);
+      transition: width 420ms ease;
+    }
+
+    .annotation-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 0 0 min(33vw, 380px);
+      min-height: 90px;
+      padding: 16px 18px;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .annotation-act {
+      color: #c4b5fd;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .annotation-text {
+      min-height: 3.72em;
+      color: var(--white);
+      font-size: clamp(0.86rem, 0.94vw, 0.96rem);
+      font-weight: 600;
+      line-height: 1.24;
+      letter-spacing: -0.02em;
+    }
+
+    .annotation-text.is-typing::after {
+      content: "";
+      display: inline-block;
+      width: 0.7ch;
+      height: 1.05em;
+      margin-left: 0.18ch;
+      vertical-align: -0.15em;
+      border-right: 2px solid #c4b5fd;
+      animation: cursor-blink 0.9s steps(1) infinite;
+    }
+
+    .feature-card {
+      min-height: 178px;
+      padding: 22px 20px;
+    }
+
+    .feature-card p {
+      max-width: 24ch;
+      font-size: 0.98rem;
+      line-height: 1.35;
+    }
+
+    .feature-shell {
+      gap: 18px;
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
+
+    .code-card {
+      padding: 28px;
+      max-width: 900px;
+      background:
+        linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.82)) padding-box,
+        linear-gradient(135deg, rgba(99, 102, 241, 0.46), rgba(56, 189, 248, 0.22), rgba(139, 92, 246, 0.36)) border-box;
+    }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .install-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 34ch;
+    }
+
+    pre {
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
+
+    code {
+      font-family: "SFMono-Regular", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: clamp(0.95rem, 1vw, 1.08rem);
+    }
+
+    .code-card code {
+      display: block;
+      padding: 22px 24px;
+      border-radius: 20px;
+      background: rgba(2, 6, 23, 0.92);
+      color: #e2e8f0;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .link-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.28);
+      background: rgba(30, 41, 59, 0.56);
+      color: #c7d2fe;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5vh 2.5vw;
+      background: rgba(2, 6, 23, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .lightbox-dialog {
+      width: 95vw;
+      height: 95vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background:
+        linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.84)) padding-box,
+        linear-gradient(135deg, rgba(99, 102, 241, 0.78), rgba(56, 189, 248, 0.26), rgba(139, 92, 246, 0.62)) border-box;
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.22), 0 40px 120px rgba(99, 102, 241, 0.22);
+    }
+
+    .lightbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .lightbox-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .lightbox-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .lightbox-info strong {
+      color: var(--white);
+      font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .lightbox-info span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .lightbox-close {
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(2, 6, 23, 0.88);
+      color: var(--white);
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .lightbox-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.2);
+      background: rgba(30, 41, 59, 0.56);
+      color: #c7d2fe;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .lightbox-image-wrap {
+      position: relative;
+      flex: 1 1 auto;
+      border-radius: 26px;
+      overflow: hidden;
+      background: rgba(2, 6, 23, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .lightbox-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .reveal .progress {
+      color: var(--indigo);
+      height: 4px;
+    }
+
+    .reveal .controls {
+      color: #c7d2fe;
+    }
+
+    .reveal .slide-number {
+      background: rgba(2, 6, 23, 0.58);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      right: 26px;
+      bottom: 22px;
+    }
+
+    @keyframes gradient-flow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes cursor-blink {
+      0%,
+      49% {
+        opacity: 1;
+      }
+      50%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      :root {
+        --demo-height: min(53vh, 500px);
+      }
+
+      .slide-shell {
+        min-height: 86vh;
+        padding: 32px 28px;
+      }
+
+      .overview-layout,
+      .install-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-grid,
+      .feature-grid,
+      .demo-context-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .demo-header,
+      .demo-meta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .demo-header > :first-child {
+        max-width: none;
+      }
+
+      .demo-controls {
+        justify-content: flex-start;
+      }
+
+      .annotation-panel {
+        flex-basis: auto;
+        width: 100%;
+      }
+
+      .demo-timeline {
+        width: 100%;
+      }
+
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --content-width: min(95vw, 1320px);
+        --demo-height: min(44vh, 360px);
+      }
+
+      .reveal {
+        font-size: 22px;
+      }
+
+      .slide-shell {
+        gap: 20px;
+        padding: 20px 16px 24px;
+      }
+
+      .hero-panel {
+        min-height: 0;
+        padding: 30px 22px 36px;
+      }
+
+      .problem-grid,
+      .feature-grid,
+      .demo-context-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-inspect {
+        top: 16px;
+        right: 16px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-dialog {
+        width: 100%;
+        height: 100%;
+        padding: 14px;
+        border-radius: 24px;
+      }
+
+      .lightbox-header {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="slide-shell">
+          <div class="hero-panel">
+            <span class="eyebrow">A Claude Code Plugin</span>
+            <div class="pill-row">
+              <span class="meta-chip">Regis A. Ely</span>
+              <span class="meta-chip">14 research skills</span>
+              <span class="meta-chip">Replication-first workflow</span>
+            </div>
+            <h1 class="display gradient-text">SUPERPAPERS</h1>
+            <p class="lead">AI-Powered Academic Research <span class="lead-muted">From Idea to Published Paper</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-shell">
+          <div class="section-header">
+            <span class="eyebrow">The Problem</span>
+            <h2>AI Alone Is Not Enough</h2>
+            <p class="section-copy">Raw chat is useful, but serious research needs a structured way to think with AI.</p>
+          </div>
+          <div class="problem-grid">
+            <article class="glass-card problem-card">
+              <span class="problem-number">01</span>
+              <h3>No Shared Research Process</h3>
+              <p>AI can suggest many paths, but there is no disciplined way to debate trade-offs and converge on one design.</p>
+            </article>
+            <article class="glass-card problem-card">
+              <span class="problem-number">02</span>
+              <h3>No Durable Consensus</h3>
+              <p>Good ideas vanish across prompts when assumptions, decisions, and rejected alternatives are not documented.</p>
+            </article>
+            <article class="glass-card problem-card">
+              <span class="problem-number">03</span>
+              <h3>No Reproducible Record</h3>
+              <p>Without a structured pipeline, AI-assisted research turns into scattered chat instead of a traceable paper workflow.</p>
+            </article>
+          </div>
+          <p class="transition-line">Superpapers turns AI into a research partner.</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-shell">
+          <div class="section-header">
+            <span class="eyebrow">What It Is</span>
+            <h2>A Research Plugin for Claude Code</h2>
+          </div>
+          <div class="overview-layout">
+            <div class="overview-stack">
+              <article class="glass-card headline-card">
+                <strong>Inspired by Superpowers. Adapted to empirical quantitative research.</strong>
+                <p>Superpapers gives researchers a structured way to think with Claude, converge on a design, and keep the full workflow documented and reproducible.</p>
+                <div class="flow-row" aria-label="Research flow">
+                  <span class="flow-pill">Brainstorm</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-pill">Plan</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-pill">Execute</span>
+                  <span class="flow-arrow">→</span>
+                  <span class="flow-pill">Submit</span>
+                </div>
+              </article>
+            </div>
+            <article class="glass-card principle-card">
+              <h3>Built Around 4 Stages</h3>
+              <p class="principle-text">Brainstorm. Plan. Execute. Submit.</p>
+              <p>Each stage leaves artifacts behind: design choices, execution plans, scripts, outputs, and a reproducible paper trail.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-shell feature-shell">
+          <div class="section-header">
+            <span class="eyebrow">Key Features</span>
+            <h2>Why It Works</h2>
+          </div>
+          <div class="feature-grid">
+            <article class="glass-card feature-card">
+              <span class="feature-number">01</span>
+              <h3>Socratic Brainstorming</h3>
+              <p>The plugin challenges question, design, data, and contribution before execution.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">02</span>
+              <h3>Replication-Driven</h3>
+              <p>Tables and figures stay tied to scripts and raw data.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">03</span>
+              <h3>14 Skills</h3>
+              <p>Search, data, modeling, writing, and submission in one system.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">04</span>
+              <h3>Subagent Execution</h3>
+              <p>Independent tasks run in parallel under one reviewed plan.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">05</span>
+              <h3>Field-Agnostic</h3>
+              <p>Built for any empirical quantitative workflow.</p>
+            </article>
+            <article class="glass-card feature-card">
+              <span class="feature-number">06</span>
+              <h3>Full Pipeline</h3>
+              <p>Idea to manuscript, without handoff gaps.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-shell">
+          <div class="section-header section-header-wide">
+            <span class="eyebrow">Before The Demo</span>
+            <h2>What This Demo Shows</h2>
+            <p class="section-copy">24 screenshots from a real Claude Code session that produced the paper available on the repository page.</p>
+          </div>
+          <div class="demo-context-grid">
+            <article class="glass-card demo-context-card">
+              <div>
+                <h3>Real Session, Real Paper</h3>
+                <p>Brainstorming, design, estimation, robustness, writing, and submission formatting happen in the same research thread.</p>
+              </div>
+              <span class="meta-chip">24 real screenshots</span>
+            </article>
+            <article class="glass-card demo-context-card">
+              <div>
+                <h3>Evidence Forced a Pivot</h3>
+                <p>The first identification strategy looked promising, then failed after estimation. The workflow changes route instead of forcing a weak result.</p>
+              </div>
+            </article>
+            <article class="glass-card demo-context-card">
+              <div>
+                <h3>Honest Assessment Stays Visible</h3>
+                <p>Failed first stages, null results, robustness checks, and reframing decisions remain explicit in the record.</p>
+              </div>
+            </article>
+            <article class="glass-card demo-context-card">
+              <div>
+                <h3>User and AI Decide Together</h3>
+                <p>Claude proposes options, but major choices are discussed with the user before the project moves forward.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="cinematic-demo">
+        <div class="slide-shell demo-shell">
+          <div class="demo-header">
+            <div>
+              <span class="eyebrow">Cinematic Demo</span>
+              <h2>A Real Research Session</h2>
+              <p class="demo-subcopy">24 screenshots from brainstorm to submission. Arrows step through.</p>
+            </div>
+            <div class="demo-controls">
+              <span class="demo-chip" id="demo-act-label">Brainstorm</span>
+              <span class="demo-counter" id="demo-counter">01 / 24</span>
+              <button class="demo-button" id="demo-toggle" type="button" aria-pressed="false">Auto-play</button>
+            </div>
+          </div>
+
+          <div class="glass-card demo-stage">
+            <div class="demo-viewport" id="demo-viewport" aria-live="off"></div>
+            <button class="demo-inspect" id="demo-inspect" type="button">Zoom</button>
+          </div>
+
+          <div class="demo-meta">
+            <div class="demo-timeline">
+              <div class="demo-step" id="demo-step">
+                <span class="demo-step-index" id="demo-step-index">01</span>
+                <span class="demo-step-copy">
+                  <strong id="demo-step-title">The journey begins</strong>
+                  <span id="demo-step-subtitle">Act I · Brainstorm</span>
+                </span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-fill" id="demo-progress"></div>
+              </div>
+            </div>
+            <article class="glass-card annotation-panel">
+              <p class="annotation-act" id="demo-act-detail">Act I · Brainstorm</p>
+              <p class="annotation-text" id="demo-annotation"></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-shell">
+          <div class="section-header">
+            <span class="eyebrow">Get Started</span>
+            <h2>Install from GitHub</h2>
+          </div>
+          <div class="install-grid">
+            <div class="install-copy">
+              <p class="callout-text">Add the GitHub marketplace, install the plugin, and start talking about your research.</p>
+              <div class="link-row">
+                <a class="link-pill" href="https://github.com/regisely/superpapers" target="_blank" rel="noreferrer">github.com/regisely/superpapers</a>
+                <span class="meta-chip">MIT License</span>
+              </div>
+            </div>
+            <div class="code-card">
+              <pre><code>/plugin marketplace add regisely/superpapers
+/plugin install superpapers</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+      <div class="lightbox-header">
+        <div class="lightbox-info">
+          <strong id="lightbox-title">The journey begins</strong>
+          <span id="lightbox-caption">Act I · Brainstorm · 01 / 24</span>
+        </div>
+        <div class="lightbox-actions">
+          <span class="lightbox-tag">Claude Code Demo</span>
+          <button class="lightbox-close" id="lightbox-close" type="button">Close</button>
+        </div>
+      </div>
+      <div class="lightbox-image-wrap" id="lightbox-backdrop">
+        <img class="lightbox-image" id="lightbox-image" alt="">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script>
+    const demoFrames = [
+      {
+        file: "screenshots/01-brainstorm-start.png",
+        act: "Brainstorm",
+        actLong: "Act I · Brainstorm",
+        title: "The journey begins",
+        annotation: "The journey begins: Claude asks for the research question."
+      },
+      {
+        file: "screenshots/02-brainstorm-strategy.png",
+        act: "Brainstorm",
+        actLong: "Act I · Brainstorm",
+        title: "Research mode clarified",
+        annotation: "Exploratory or confirmatory? Every downstream decision follows."
+      },
+      {
+        file: "screenshots/03-brainstorm-gap.png",
+        act: "Brainstorm",
+        actLong: "Act I · Brainstorm",
+        title: "Contribution validated",
+        annotation: "Literature gap verified. Contribution is defensible."
+      },
+      {
+        file: "screenshots/04-design-approaches.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Approaches compared",
+        annotation: "Three approaches proposed with explicit trade-offs."
+      },
+      {
+        file: "screenshots/05-design-data.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Data map locked",
+        annotation: "Data sources mapped: BIS, Penn World Table, World Bank."
+      },
+      {
+        file: "screenshots/06-design-identification.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Identification strategy",
+        annotation: "Bartik shift-share instrument from cross-border banking flows."
+      },
+      {
+        file: "screenshots/07-design-estimation.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Estimation path defined",
+        annotation: "Full estimation plan: OLS baseline, 2SLS, decomposition."
+      },
+      {
+        file: "screenshots/08-outputs-tables.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Outputs planned first",
+        annotation: "Tables and figures planned before touching any data."
+      },
+      {
+        file: "screenshots/09-robustness-journals.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Robustness and journals",
+        annotation: "Robustness checks and journal targets locked in upfront."
+      },
+      {
+        file: "screenshots/10-spec-written.png",
+        act: "Design",
+        actLong: "Act II · Design",
+        title: "Spec committed",
+        annotation: "Design spec written, reviewed, and committed."
+      },
+      {
+        file: "screenshots/11-write-plan.png",
+        act: "Plan",
+        actLong: "Act III · Plan",
+        title: "Execution plan expanded",
+        annotation: "Implementation plan: 30+ tasks across six research phases."
+      },
+      {
+        file: "screenshots/12-execute-plan.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Parallel execution begins",
+        annotation: "Subagents dispatch in parallel. Data collection begins."
+      },
+      {
+        file: "screenshots/13-execute-collection-complete.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Collection complete",
+        annotation: "Five collection tasks complete. The data manifest is written before preparation starts."
+      },
+      {
+        file: "screenshots/14-execute-preparation-complete.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Preparation complete",
+        annotation: "Parallel cleaning and merging produce the final analysis panel."
+      },
+      {
+        file: "screenshots/15-execute-exploratory-analysis.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Exploratory outputs ready",
+        annotation: "Descriptives, scatter plot, composition trends, and diagnostics run in parallel."
+      },
+      {
+        file: "screenshots/16-execute-main-analysis.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Main analysis challenged",
+        annotation: "Execution stops when the first stage fails. Diagnosis starts before moving on."
+      },
+      {
+        file: "screenshots/17-execute-identification-diagnosis.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Identification diagnosis",
+        annotation: "Two diagnostic tracks run in parallel. The Bartik construction is fixed, but the first stage still fails."
+      },
+      {
+        file: "screenshots/18-execute-gmm-pivot.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "GMM pivot launched",
+        annotation: "The project pivots to system GMM, with main and composition estimations running in parallel."
+      },
+      {
+        file: "screenshots/19-execute-heterogeneity-framing.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Results story consolidated",
+        annotation: "Heterogeneity checks add no differential effect, and framing starts from a verified null result."
+      },
+      {
+        file: "screenshots/20-execute-literature-framing.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Framing locked",
+        annotation: "The null result is grounded in literature, mechanisms, and a coherent paper narrative."
+      },
+      {
+        file: "screenshots/21-execute-robustness-parallel.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Robustness in parallel",
+        annotation: "Five robustness checks run in parallel and each one reinforces the null result."
+      },
+      {
+        file: "screenshots/22-execute-robustness-complete.png",
+        act: "Execute",
+        actLong: "Act IV · Execute",
+        title: "Writing starts cleanly",
+        annotation: "Robustness closes cleanly, outputs are inventoried, and the paper draft starts from validated results."
+      },
+      {
+        file: "screenshots/23-submit-formatting-start.png",
+        act: "Submit",
+        actLong: "Submit",
+        title: "Submission formatting",
+        annotation: "Journal guidelines are fetched and the manuscript is formatted for the target outlet."
+      },
+      {
+        file: "screenshots/24-submit-checklist-verified.png",
+        act: "Submit",
+        actLong: "Submit",
+        title: "Submission ready",
+        annotation: "A full submission checklist confirms the paper is formatted and ready for final author details."
+      }
+    ]
+
+    class CinematicDemo {
+      constructor(frames) {
+        this.frames = frames
+        this.slide = document.getElementById("cinematic-demo")
+        this.viewport = document.getElementById("demo-viewport")
+        this.counter = document.getElementById("demo-counter")
+        this.actLabel = document.getElementById("demo-act-label")
+        this.actDetail = document.getElementById("demo-act-detail")
+        this.annotation = document.getElementById("demo-annotation")
+        this.progress = document.getElementById("demo-progress")
+        this.toggleButton = document.getElementById("demo-toggle")
+        this.inspectButton = document.getElementById("demo-inspect")
+        this.stepIndex = document.getElementById("demo-step-index")
+        this.stepTitle = document.getElementById("demo-step-title")
+        this.stepSubtitle = document.getElementById("demo-step-subtitle")
+        this.lightbox = document.getElementById("lightbox")
+        this.lightboxImage = document.getElementById("lightbox-image")
+        this.lightboxTitle = document.getElementById("lightbox-title")
+        this.lightboxCaption = document.getElementById("lightbox-caption")
+        this.lightboxClose = document.getElementById("lightbox-close")
+        this.lightboxBackdrop = document.getElementById("lightbox-backdrop")
+        this.currentIndex = 0
+        this.mode = "idle"
+        this.userPaused = true
+        this.advanceTimer = null
+        this.typeTimer = null
+        this.typingDelay = 24
+        this.autoplayDelay = 6000
+        this.previousRevealKeyboard = true
+        this.imageElements = []
+        this.handleKeydown = this.handleKeydown.bind(this)
+        this.handleSlideChange = this.handleSlideChange.bind(this)
+      }
+
+      init() {
+        this.buildImages()
+        this.bindEvents()
+        this.show(0, { skipTyping: true })
+        this.handleSlideChange({ currentSlide: Reveal.getCurrentSlide() })
+      }
+
+      buildImages() {
+        const fragment = document.createDocumentFragment()
+
+        this.frames.forEach((frame, index) => {
+          const image = document.createElement("img")
+          image.className = "demo-image"
+          image.src = frame.file
+          image.alt = frame.annotation
+          image.decoding = "async"
+          image.loading = "eager"
+          image.addEventListener("click", () => this.openLightbox())
+          fragment.appendChild(image)
+          this.imageElements.push(image)
+        })
+
+        this.viewport.appendChild(fragment)
+      }
+
+      bindEvents() {
+        this.toggleButton.addEventListener("click", () => this.togglePause())
+        this.inspectButton.addEventListener("click", () => this.openLightbox())
+        this.lightboxClose.addEventListener("click", () => this.closeLightbox())
+        this.lightboxBackdrop.addEventListener("click", event => {
+          if (event.target === this.lightboxBackdrop) {
+            this.closeLightbox()
+          }
+        })
+
+        document.addEventListener("keydown", this.handleKeydown, true)
+
+        Reveal.on("ready", this.handleSlideChange)
+        Reveal.on("slidechanged", this.handleSlideChange)
+      }
+
+      handleSlideChange(event) {
+        const currentSlide = event.currentSlide || Reveal.getCurrentSlide()
+
+        if (currentSlide === this.slide) {
+          this.start()
+          return
+        }
+
+        this.stop()
+      }
+
+      isActiveSlide() {
+        return Reveal.getCurrentSlide() === this.slide
+      }
+
+      setMode(nextMode) {
+        if (this.mode === nextMode) {
+          return
+        }
+
+        clearTimeout(this.advanceTimer)
+        this.advanceTimer = null
+
+        if (nextMode === "playing") {
+          this.scheduleAdvance()
+        }
+
+        this.mode = nextMode
+        this.updateToggleButton()
+      }
+
+      start() {
+        this.setMode(this.userPaused ? "paused" : "playing")
+      }
+
+      stop() {
+        if (this.lightboxOpen()) {
+          this.closeLightbox({ restoreFocus: false })
+        }
+
+        clearTimeout(this.advanceTimer)
+        clearInterval(this.typeTimer)
+        this.advanceTimer = null
+        this.typeTimer = null
+        this.annotation.classList.remove("is-typing")
+        this.mode = "idle"
+        this.updateToggleButton()
+      }
+
+      show(index, options = {}) {
+        const { skipTyping = false } = options
+        const frame = this.frames[index]
+
+        if (!frame) {
+          return
+        }
+
+        this.currentIndex = index
+
+        this.imageElements.forEach((image, imageIndex) => {
+          image.classList.toggle("is-active", imageIndex === index)
+        })
+
+        this.counter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(this.frames.length).padStart(2, "0")}`
+        this.actLabel.textContent = frame.act
+        this.actDetail.textContent = frame.actLong
+        this.stepIndex.textContent = String(index + 1).padStart(2, "0")
+        this.stepTitle.textContent = frame.title
+        this.stepSubtitle.textContent = frame.actLong
+        this.progress.style.width = `${((index + 1) / this.frames.length) * 100}%`
+
+        if (this.lightboxOpen()) {
+          this.updateLightbox()
+        }
+
+        if (skipTyping) {
+          this.annotation.classList.remove("is-typing")
+          this.annotation.textContent = frame.annotation
+        } else {
+          this.typeAnnotation(frame.annotation)
+        }
+
+        if (this.mode === "playing") {
+          this.scheduleAdvance()
+        }
+      }
+
+      typeAnnotation(text) {
+        clearInterval(this.typeTimer)
+        this.annotation.textContent = ""
+        this.annotation.classList.add("is-typing")
+
+        let index = 0
+        this.typeTimer = window.setInterval(() => {
+          index += 1
+          this.annotation.textContent = text.slice(0, index)
+
+          if (index >= text.length) {
+            clearInterval(this.typeTimer)
+            this.typeTimer = null
+            this.annotation.classList.remove("is-typing")
+          }
+        }, this.typingDelay)
+      }
+
+      scheduleAdvance() {
+        clearTimeout(this.advanceTimer)
+        this.advanceTimer = window.setTimeout(() => {
+          this.next()
+        }, this.autoplayDelay)
+      }
+
+      next() {
+        this.show((this.currentIndex + 1) % this.frames.length)
+      }
+
+      previous() {
+        this.show((this.currentIndex - 1 + this.frames.length) % this.frames.length)
+      }
+
+      togglePause(forcePaused) {
+        const nextPaused = typeof forcePaused === "boolean" ? forcePaused : !this.userPaused
+        this.userPaused = nextPaused
+
+        if (!this.isActiveSlide()) {
+          this.updateToggleButton()
+          return
+        }
+
+        this.setMode(this.userPaused ? "paused" : "playing")
+      }
+
+      updateToggleButton() {
+        const autoPlaying = !this.userPaused && this.mode === "playing"
+        this.toggleButton.textContent = autoPlaying ? "Stop Auto-play" : "Auto-play"
+        this.toggleButton.setAttribute("aria-pressed", String(autoPlaying))
+      }
+
+      openLightbox(options = {}) {
+        const { restorePlayback = true } = options
+
+        if (this.lightboxOpen()) {
+          return
+        }
+
+        this.previousRevealKeyboard = Reveal.getConfig().keyboard
+        Reveal.configure({ keyboard: false })
+
+        this.updateLightbox()
+        this.lightbox.hidden = false
+        document.body.classList.add("lightbox-open")
+
+        if (restorePlayback && this.isActiveSlide()) {
+          this.setMode(this.userPaused ? "paused" : "playing")
+        } else {
+          this.updateToggleButton()
+        }
+      }
+
+      closeLightbox(options = {}) {
+        const { restoreFocus = true } = options
+
+        if (!this.lightboxOpen()) {
+          return
+        }
+
+        this.lightbox.hidden = true
+        document.body.classList.remove("lightbox-open")
+        Reveal.configure({ keyboard: this.previousRevealKeyboard })
+
+        if (this.isActiveSlide()) {
+          this.setMode(this.userPaused ? "paused" : "playing")
+        } else {
+          this.mode = "idle"
+          this.updateToggleButton()
+        }
+
+        if (restoreFocus) {
+          this.inspectButton.focus()
+        }
+      }
+
+      updateLightbox() {
+        const frame = this.frames[this.currentIndex]
+        this.lightboxImage.src = frame.file
+        this.lightboxImage.alt = frame.annotation
+        this.lightboxTitle.textContent = frame.title
+        this.lightboxCaption.textContent = `${frame.actLong} · ${String(this.currentIndex + 1).padStart(2, "0")} / ${String(this.frames.length).padStart(2, "0")}`
+      }
+
+      lightboxOpen() {
+        return !this.lightbox.hidden
+      }
+
+      handleKeydown(event) {
+        if (!this.isActiveSlide()) {
+          return
+        }
+
+        const key = event.key
+        const forwardKeys = ["ArrowRight", "ArrowDown", "PageDown"]
+        const backwardKeys = ["ArrowLeft", "ArrowUp", "PageUp"]
+        const shouldHandleNavigation = forwardKeys.includes(key) || backwardKeys.includes(key)
+        const shouldHandleControl = key === " " || key === "Enter" || key.toLowerCase() === "z" || key === "Escape"
+
+        if (!shouldHandleNavigation && !shouldHandleControl) {
+          return
+        }
+
+        if (key === "Escape" && this.lightboxOpen()) {
+          event.preventDefault()
+          event.stopPropagation()
+          this.closeLightbox()
+          return
+        }
+
+        if (key === " " || key === "Enter") {
+          event.preventDefault()
+          event.stopPropagation()
+
+          if (key === "Enter") {
+            this.openLightbox()
+          } else {
+            this.togglePause()
+          }
+          return
+        }
+
+        if (key.toLowerCase() === "z") {
+          event.preventDefault()
+          event.stopPropagation()
+          this.openLightbox()
+          return
+        }
+
+        if (shouldHandleNavigation) {
+          const movingForward = forwardKeys.includes(key)
+          const isEdgeFrame = movingForward
+            ? this.currentIndex === this.frames.length - 1
+            : this.currentIndex === 0
+
+          if (!this.lightboxOpen() && isEdgeFrame) {
+            return
+          }
+
+          if (this.lightboxOpen() && isEdgeFrame) {
+            event.preventDefault()
+            event.stopPropagation()
+            this.closeLightbox({ restoreFocus: false })
+            if (movingForward) {
+              Reveal.next()
+            } else {
+              Reveal.prev()
+            }
+            return
+          }
+
+          event.preventDefault()
+          event.stopPropagation()
+
+          if (movingForward) {
+            this.next()
+          } else {
+            this.previous()
+          }
+        }
+      }
+    }
+
+    Reveal.initialize({
+      width: 1600,
+      height: 900,
+      margin: 0.04,
+      controls: true,
+      progress: true,
+      slideNumber: "c/t",
+      hash: true,
+      transition: "fade",
+      backgroundTransition: "fade",
+      controlsTutorial: false,
+      center: true
+    })
+
+    const cinematicDemo = new CinematicDemo(demoFrames)
+    cinematicDemo.init()
+  </script>
+</body>
+</html>

@@ -1,7 +1,9 @@
 # Sandbox device redirects (Claude Code sandbox)
 .bash_profile
 .bashrc
+.codex
 .claude/
+.superpowers/
 .gitconfig
 .gitmodules
 .idea
@@ -32,3 +34,23 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Local dev and research artifacts
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+.env
+.env.*
+.python-version
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+public/
+.private-docs/
+
+# Example (data and codes)
+
+credit_and_productivity/
+docs/

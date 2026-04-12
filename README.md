@@ -10,18 +10,36 @@ The plugin is field-agnostic. Although it is inspired by applied economics and e
 
 Superpapers is a standalone plugin with no dependencies on Superpowers or any other Claude Code plugin. Plugin internals (skills, scripts, templates, comments) are English-only, but the plugin produces paper content (sections, tables, captions) in whatever language the user chooses for their paper.
 
-The full design rationale and architectural decisions are in [`docs/superpapers/specs/2026-04-09-superpapers-design.md`](docs/superpapers/specs/2026-04-09-superpapers-design.md).
-
 ## Installation
 
-Add the plugin as a local marketplace in any Claude Code session:
+Add the plugin from GitHub in any Claude Code session:
 
 ```
-/plugin marketplace add /path/to/superpapers
+/plugin marketplace add regisely/superpapers
 /plugin install superpapers
 ```
 
-Replace `/path/to/superpapers` with the absolute path to your clone of this repository. After installation, the skills become available automatically when you discuss research tasks.
+Claude Code accepts a GitHub repo directly as the marketplace source. After installation, the skills become available automatically when you discuss research tasks.
+
+## Demo Materials
+
+The repository includes a full presentation and the paper generated from the real research session shown in that deck.
+
+The demo is not a scripted toy example. It walks through a real Claude Code session in which:
+
+- the project starts from a concrete empirical question;
+- the first identification strategy looks plausible, then fails after estimation;
+- the workflow pivots to a second strategy instead of forcing a weak result;
+- null results, failed diagnostics, robustness checks, and reframing decisions stay explicit;
+- the user remains in the loop for major research decisions.
+
+Links:
+
+- Live presentation: [regisely.github.io/superpapers/](https://regisely.github.io/superpapers/)
+- Hosted paper PDF: [regisely.github.io/superpapers/credit_and_productivity_paper.pdf](https://regisely.github.io/superpapers/credit_and_productivity_paper.pdf)
+- Repository copy of the paper: [`credit_and_productivity_paper.pdf`](credit_and_productivity_paper.pdf)
+
+The presentation source lives in `presentation/`, with screenshot assets in `presentation/screenshots/`. GitHub Pages publishes that directory directly at the site root, so no separate `pages/` source folder is needed.
 
 ## Skills Overview
 
@@ -47,8 +65,8 @@ Fourteen skills organized by role:
 ## Typical Workflow
 
 1. **Start a new project.** Copy `templates/CLAUDE.superpapers.md` into your project root, fill in the research context (field, question, paper language, target journals).
-2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y". The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved to `docs/superpapers/specs/`.
-3. **Plan.** Once the spec is approved, the `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts and verification criteria per task.
+2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y". The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`.
+3. **Plan.** Once the spec is approved, the `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts and verification criteria per task, typically saved inside the research project under `docs/superpapers/plans/`.
 4. **Execute.** The `execute-plan` skill dispatches subagents per task, verifies after each phase, and runs the full pipeline end-to-end before declaring any result final.
 5. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements.
 
@@ -68,20 +86,6 @@ Help me find recent papers on minimum wage effects in Latin America, verified vi
 
 ```
 Run a staggered DiD on this panel of state-level policy adoptions from 2010 to 2024.
-```
-
-Portuguese:
-
-```
-Quero fazer um paper sobre o impacto da digitalização do comércio sobre o mercado de trabalho.
-```
-
-```
-Preciso coletar dados do Banco Central sobre a taxa Selic e o câmbio desde 2000.
-```
-
-```
-Preparar o paper para submissão na Revista Brasileira de Economia, seguindo o template deles.
 ```
 
 Skills activate automatically based on the conversation context — you do not need to invoke them by name.
