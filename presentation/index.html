@@ -988,24 +988,79 @@
 
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
       :root {
-        --content-width: min(95vw, 1320px);
+        --content-width: 100%;
         --demo-height: min(44vh, 360px);
       }
 
       .reveal {
-        font-size: 22px;
+        font-size: 18px;
+      }
+
+      .reveal .slides {
+        width: 100% !important;
+        height: auto !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        overflow: visible !important;
+      }
+
+      .reveal .slides section {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100vh;
+        transform: none !important;
+        top: 0 !important;
+        left: 0 !important;
+        padding: 16px !important;
       }
 
       .slide-shell {
+        width: 100%;
+        min-height: auto;
         gap: 20px;
         padding: 20px 16px 24px;
       }
 
       .hero-panel {
         min-height: 0;
-        padding: 30px 22px 36px;
+        padding: 24px 18px 30px;
+      }
+
+      .hero-panel::after {
+        display: none;
+      }
+
+      .display {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+      }
+
+      .lead {
+        max-width: 100%;
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+      }
+
+      .meta-row {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .meta-chip,
+      .flow-pill {
+        min-height: 40px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+      }
+
+      .section-header,
+      .section-header-wide {
+        max-width: 100%;
+      }
+
+      .section-copy {
+        max-width: 100%;
       }
 
       .problem-grid,
@@ -1014,24 +1069,36 @@
         grid-template-columns: 1fr;
       }
 
+      .problem-card {
+        min-height: auto;
+      }
+
+      .headline-card {
+        min-height: auto;
+      }
+
       .demo-inspect {
-        top: 16px;
-        right: 16px;
+        top: 12px;
+        right: 12px;
       }
 
       .lightbox {
-        padding: 12px;
+        padding: 8px;
       }
 
       .lightbox-dialog {
         width: 100%;
         height: 100%;
-        padding: 14px;
-        border-radius: 24px;
+        padding: 12px;
+        border-radius: 18px;
       }
 
       .lightbox-header {
         align-items: flex-start;
+      }
+
+      .glass-card {
+        padding: 22px 18px;
       }
     }
   </style>
@@ -1795,6 +1862,10 @@
       width: 1600,
       height: 900,
       margin: 0.04,
+      minScale: 0.2,
+      maxScale: 1.5,
+      respondToHashChanges: true,
+      disableLayout: window.innerWidth <= 768,
       controls: true,
       progress: true,
       slideNumber: "c/t",
