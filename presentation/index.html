@@ -654,33 +654,62 @@
       padding: 10px 18px;
     }
 
+    .demo-stage-wrap {
+      position: relative;
+    }
+
     .demo-nav {
       display: none;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      z-index: 4;
-      width: 40px;
-      height: 40px;
+      z-index: 5;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(15, 23, 42, 0.9);
       color: var(--white);
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       line-height: 1;
       cursor: pointer;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
     }
 
     .demo-nav-prev {
-      left: 8px;
+      left: -4px;
     }
 
     .demo-nav-next {
-      right: 48px;
+      right: -4px;
+    }
+
+    .lightbox-nav {
+      display: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--white);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-nav-prev {
+      left: 10px;
+    }
+
+    .lightbox-nav-next {
+      right: 10px;
     }
 
     .progress-track {
@@ -1131,12 +1160,16 @@
         font-size: 0.9rem;
       }
 
-      /* --- Grids: all single-column --- */
+      /* --- Grids --- */
       .problem-grid,
-      .feature-grid,
       .demo-context-grid {
         grid-template-columns: 1fr;
         gap: 10px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
       }
 
       .overview-layout {
@@ -1225,18 +1258,31 @@
       /* --- Feature cards --- */
       .feature-card {
         min-height: auto;
-        padding: 16px 14px;
+        padding: 12px 10px;
       }
 
       .feature-card p {
         max-width: 100%;
-        font-size: 0.85rem;
+        font-size: 0.72rem;
+        line-height: 1.25;
+      }
+
+      .feature-card h3 {
+        font-size: 0.88rem;
+        margin-bottom: 4px;
+      }
+
+      .feature-number {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 8px;
+        font-size: 0.7rem;
       }
 
       .feature-shell {
-        padding-top: 16px;
-        padding-bottom: 16px;
-        gap: 14px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        gap: 10px;
       }
 
       /* --- Demo slide --- */
@@ -1447,6 +1493,10 @@
         border-radius: 14px;
       }
 
+      .lightbox-nav {
+        display: flex;
+      }
+
       /* --- Decorative blurs: tone down --- */
       body::before {
         width: 50vw;
@@ -1617,7 +1667,7 @@
         </div>
       </section>
 
-      <section id="cinematic-demo">
+      <section id="cinematic-demo" data-touch="false">
         <div class="slide-shell demo-shell">
           <div class="demo-header">
             <div>
@@ -1632,11 +1682,13 @@
             </div>
           </div>
 
-          <div class="glass-card demo-stage">
+          <div class="demo-stage-wrap">
             <button class="demo-nav demo-nav-prev" id="demo-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
-            <div class="demo-viewport" id="demo-viewport" aria-live="off"></div>
+            <div class="glass-card demo-stage">
+              <div class="demo-viewport" id="demo-viewport" aria-live="off"></div>
+              <button class="demo-inspect" id="demo-inspect" type="button">Zoom</button>
+            </div>
             <button class="demo-nav demo-nav-next" id="demo-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
-            <button class="demo-inspect" id="demo-inspect" type="button">Zoom</button>
           </div>
 
           <div class="demo-meta">
@@ -1697,7 +1749,9 @@
         </div>
       </div>
       <div class="lightbox-image-wrap" id="lightbox-backdrop">
+        <button class="lightbox-nav lightbox-nav-prev" id="lightbox-prev" type="button" aria-label="Previous">&lsaquo;</button>
         <img class="lightbox-image" id="lightbox-image" alt="">
+        <button class="lightbox-nav lightbox-nav-next" id="lightbox-next" type="button" aria-label="Next">&rsaquo;</button>
       </div>
     </div>
   </div>
@@ -1946,21 +2000,35 @@
 
         document.getElementById("demo-prev").addEventListener("click", () => this.previous())
         document.getElementById("demo-next").addEventListener("click", () => this.next())
+        document.getElementById("lightbox-prev").addEventListener("click", () => this.previous())
+        document.getElementById("lightbox-next").addEventListener("click", () => this.next())
 
-        let touchStartX = 0
-        let touchStartY = 0
-        this.viewport.addEventListener("touchstart", event => {
-          touchStartX = event.touches[0].clientX
-          touchStartY = event.touches[0].clientY
-        }, { passive: true })
-        this.viewport.addEventListener("touchend", event => {
-          const dx = event.changedTouches[0].clientX - touchStartX
-          const dy = event.changedTouches[0].clientY - touchStartY
-          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-            if (dx < 0) this.next()
-            else this.previous()
-          }
-        }, { passive: true })
+        const addSwipe = (element) => {
+          let startX = 0
+          let startY = 0
+          element.addEventListener("touchstart", event => {
+            startX = event.touches[0].clientX
+            startY = event.touches[0].clientY
+          }, { passive: false })
+          element.addEventListener("touchmove", event => {
+            if (this.isActiveSlide() || this.lightboxOpen()) {
+              const dx = Math.abs(event.touches[0].clientX - startX)
+              const dy = Math.abs(event.touches[0].clientY - startY)
+              if (dx > dy && dx > 10) event.preventDefault()
+            }
+          }, { passive: false })
+          element.addEventListener("touchend", event => {
+            const dx = event.changedTouches[0].clientX - startX
+            const dy = event.changedTouches[0].clientY - startY
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+              if (dx < 0) this.next()
+              else this.previous()
+            }
+          }, { passive: true })
+        }
+
+        addSwipe(this.slide)
+        addSwipe(this.lightbox)
 
         document.addEventListener("keydown", this.handleKeydown, true)
 
@@ -2000,13 +2068,10 @@
       }
 
       start() {
-        Reveal.configure({ touch: false })
         this.setMode(this.userPaused ? "paused" : "playing")
       }
 
       stop() {
-        Reveal.configure({ touch: true })
-
         if (this.lightboxOpen()) {
           this.closeLightbox({ restoreFocus: false })
         }
