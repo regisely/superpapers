@@ -2210,7 +2210,7 @@
           this.updateToggleButton()
         }
 
-        if (restoreFocus) {
+        if (restoreFocus && this.inspectButton.offsetParent !== null) {
           this.inspectButton.focus()
         }
       }
