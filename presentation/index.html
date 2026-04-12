@@ -654,6 +654,35 @@
       padding: 10px 18px;
     }
 
+    .demo-nav {
+      display: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--white);
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .demo-nav-prev {
+      left: 8px;
+    }
+
+    .demo-nav-next {
+      right: 48px;
+    }
+
     .progress-track {
       position: relative;
       flex: 1 1 auto;
@@ -1270,12 +1299,16 @@
         border-radius: 14px;
       }
 
-      .demo-inspect {
-        top: 8px;
+      .demo-nav {
+        display: flex;
+      }
+
+      .demo-nav-next {
         right: 8px;
-        min-height: 32px;
-        padding: 6px 12px;
-        font-size: 0.75rem;
+      }
+
+      .demo-inspect {
+        display: none;
       }
 
       .demo-meta {
@@ -1600,7 +1633,9 @@
           </div>
 
           <div class="glass-card demo-stage">
+            <button class="demo-nav demo-nav-prev" id="demo-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
             <div class="demo-viewport" id="demo-viewport" aria-live="off"></div>
+            <button class="demo-nav demo-nav-next" id="demo-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
             <button class="demo-inspect" id="demo-inspect" type="button">Zoom</button>
           </div>
 
@@ -1909,6 +1944,24 @@
           }
         })
 
+        document.getElementById("demo-prev").addEventListener("click", () => this.previous())
+        document.getElementById("demo-next").addEventListener("click", () => this.next())
+
+        let touchStartX = 0
+        let touchStartY = 0
+        this.viewport.addEventListener("touchstart", event => {
+          touchStartX = event.touches[0].clientX
+          touchStartY = event.touches[0].clientY
+        }, { passive: true })
+        this.viewport.addEventListener("touchend", event => {
+          const dx = event.changedTouches[0].clientX - touchStartX
+          const dy = event.changedTouches[0].clientY - touchStartY
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+            if (dx < 0) this.next()
+            else this.previous()
+          }
+        }, { passive: true })
+
         document.addEventListener("keydown", this.handleKeydown, true)
 
         Reveal.on("ready", this.handleSlideChange)
@@ -1947,10 +2000,13 @@
       }
 
       start() {
+        Reveal.configure({ touch: false })
         this.setMode(this.userPaused ? "paused" : "playing")
       }
 
       stop() {
+        Reveal.configure({ touch: true })
+
         if (this.lightboxOpen()) {
           this.closeLightbox({ restoreFocus: false })
         }
@@ -2198,7 +2254,7 @@
       transition: "fade",
       backgroundTransition: "fade",
       controlsTutorial: false,
-      center: !isMobile
+      center: true
     })
 
     const cinematicDemo = new CinematicDemo(demoFrames)
