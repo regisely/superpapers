@@ -2302,12 +2302,19 @@
       }
     }
 
+    function mobileConfig() {
+      const mobile = window.innerWidth <= 768 || window.innerHeight <= 500
+      return {
+        width: mobile ? window.innerWidth : 1600,
+        height: mobile ? window.innerHeight : 900,
+        margin: mobile ? 0 : 0.04,
+        minScale: mobile ? 1 : 0.2,
+        maxScale: mobile ? 1 : 1.5,
+      }
+    }
+
     Reveal.initialize({
-      width: 1600,
-      height: 900,
-      margin: 0.04,
-      minScale: 0.1,
-      maxScale: 2.0,
+      ...mobileConfig(),
       controls: true,
       progress: true,
       slideNumber: "c/t",
@@ -2316,6 +2323,11 @@
       backgroundTransition: "fade",
       controlsTutorial: false,
       center: true
+    })
+
+    window.addEventListener("resize", () => {
+      Reveal.configure(mobileConfig())
+      Reveal.layout()
     })
 
     const cinematicDemo = new CinematicDemo(demoFrames)
