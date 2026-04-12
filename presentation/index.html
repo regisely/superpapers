@@ -1000,6 +1000,637 @@
       }
     }
 
+    @media (max-width: 1024px) {
+      :root {
+        --demo-height: min(53vh, 500px);
+      }
+
+      .slide-shell {
+        min-height: 86vh;
+        padding: 32px 28px;
+      }
+
+      .overview-layout,
+      .install-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-grid,
+      .feature-grid,
+      .demo-context-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .demo-header,
+      .demo-meta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .demo-header > :first-child {
+        max-width: none;
+      }
+
+      .demo-controls {
+        justify-content: flex-start;
+      }
+
+      .annotation-panel {
+        flex-basis: auto;
+        width: 100%;
+      }
+
+      .demo-timeline {
+        width: 100%;
+      }
+
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --content-width: 100%;
+        --demo-height: 45vw;
+        --radius-xl: 18px;
+        --radius-lg: 14px;
+        --radius-md: 10px;
+        --radius-sm: 8px;
+      }
+
+      /* --- Base & Reveal overrides --- */
+      .reveal {
+        font-size: 16px;
+      }
+
+      .reveal .slides section {
+        padding: 12px 0;
+      }
+
+      .reveal h2 {
+        font-size: 1.6rem;
+      }
+
+      .reveal p,
+      .reveal li {
+        font-size: 0.92rem;
+      }
+
+      .reveal .slide-number {
+        padding: 5px 8px;
+        font-size: 0.7rem;
+        right: 12px;
+        bottom: 12px;
+      }
+
+      /* --- Slide shell --- */
+      .slide-shell {
+        width: 100%;
+        min-height: auto;
+        gap: 16px;
+        padding: 16px 14px 20px;
+      }
+
+      /* --- Hero --- */
+      .hero-panel {
+        min-height: auto;
+        padding: 22px 16px 26px;
+        gap: 10px;
+      }
+
+      .hero-panel::after {
+        display: none;
+      }
+
+      .display {
+        font-size: 2.8rem;
+        line-height: 0.95;
+      }
+
+      .eyebrow {
+        padding: 7px 12px;
+        font-size: 0.7rem;
+        gap: 7px;
+      }
+
+      .eyebrow::before {
+        width: 6px;
+        height: 6px;
+      }
+
+      .lead {
+        max-width: 100%;
+        font-size: 1.05rem;
+        line-height: 1.25;
+      }
+
+      .lead-muted {
+        margin-top: 6px;
+      }
+
+      /* --- Pill rows & chips --- */
+      .hero-meta,
+      .pill-row,
+      .flow-row {
+        gap: 8px;
+      }
+
+      .meta-chip,
+      .flow-pill {
+        min-height: 34px;
+        padding: 6px 12px;
+        font-size: 0.78rem;
+      }
+
+      .flow-row {
+        gap: 8px;
+      }
+
+      .flow-arrow {
+        font-size: 0.9rem;
+      }
+
+      /* --- Section headers --- */
+      .section-header,
+      .section-header-wide {
+        max-width: 100%;
+        gap: 10px;
+      }
+
+      .section-copy {
+        max-width: 100%;
+        font-size: 0.9rem;
+      }
+
+      /* --- Grids --- */
+      .problem-grid,
+      .demo-context-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .overview-layout {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .install-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      /* --- Cards --- */
+      .glass-card {
+        padding: 16px 14px;
+        border-radius: var(--radius-lg);
+      }
+
+      .problem-card {
+        min-height: auto;
+      }
+
+      .problem-card h3,
+      .feature-card h3 {
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+
+      .problem-card p,
+      .feature-card p {
+        font-size: 0.85rem;
+      }
+
+      .problem-number,
+      .feature-number {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+      }
+
+      .headline-card {
+        min-height: auto;
+        gap: 12px;
+      }
+
+      .headline-card strong {
+        font-size: 1.15rem;
+      }
+
+      .headline-card p {
+        max-width: 100%;
+        font-size: 0.88rem;
+      }
+
+      .principle-card {
+        gap: 12px;
+      }
+
+      .principle-card h3 {
+        font-size: 1.15rem;
+      }
+
+      .transition-line,
+      .principle-text,
+      .callout-text {
+        font-size: 0.95rem;
+      }
+
+      /* --- Demo context cards --- */
+      .demo-context-card {
+        min-height: auto;
+        gap: 10px;
+      }
+
+      .demo-context-card h3 {
+        font-size: 1.05rem;
+      }
+
+      .demo-context-card p {
+        max-width: 100%;
+        font-size: 0.82rem;
+      }
+
+      /* --- Feature cards --- */
+      .feature-card {
+        min-height: auto;
+        padding: 12px 10px;
+      }
+
+      .feature-card p {
+        max-width: 100%;
+        font-size: 0.72rem;
+        line-height: 1.25;
+      }
+
+      .feature-card h3 {
+        font-size: 0.88rem;
+        margin-bottom: 4px;
+      }
+
+      .feature-number {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 8px;
+        font-size: 0.7rem;
+      }
+
+      .feature-shell {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        gap: 10px;
+      }
+
+      /* --- Demo slide --- */
+      .demo-shell {
+        min-height: auto;
+        gap: 10px;
+        padding-top: 12px;
+        padding-bottom: 20px;
+      }
+
+      .demo-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .demo-header > :first-child {
+        flex: none;
+        max-width: 100%;
+      }
+
+      .demo-header .eyebrow {
+        margin-bottom: 8px;
+      }
+
+      .demo-header h2 {
+        font-size: 1.4rem;
+      }
+
+      .demo-subcopy {
+        max-width: 100%;
+        font-size: 0.82rem;
+      }
+
+      .demo-controls {
+        justify-content: flex-start;
+        gap: 8px;
+      }
+
+      .demo-chip,
+      .demo-counter {
+        min-height: 34px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+      }
+
+      .demo-button {
+        min-height: 34px;
+        padding: 6px 12px;
+        font-size: 0.78rem;
+      }
+
+      .demo-stage {
+        padding: 6px;
+      }
+
+      .demo-viewport {
+        width: 100%;
+        height: var(--demo-height);
+        border-radius: 14px;
+      }
+
+      .demo-inspect {
+        display: none;
+      }
+
+      .demo-meta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding-bottom: 10px;
+      }
+
+      .demo-timeline {
+        width: 100%;
+        min-width: 0;
+        gap: 8px;
+      }
+
+      .demo-step {
+        padding: 8px 10px;
+        gap: 8px;
+        border-radius: 12px;
+      }
+
+      .demo-step-index {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        font-size: 0.75rem;
+      }
+
+      .demo-step-copy strong {
+        font-size: 0.8rem;
+      }
+
+      .demo-step-copy span {
+        font-size: 0.68rem;
+      }
+
+      .progress-track {
+        min-width: 0;
+        height: 5px;
+      }
+
+      .annotation-panel {
+        flex: none;
+        width: 100%;
+        min-height: auto;
+        padding: 12px 14px;
+        gap: 6px;
+      }
+
+      .annotation-act {
+        font-size: 0.68rem;
+      }
+
+      .annotation-text {
+        font-size: 0.82rem;
+        min-height: 2.8em;
+      }
+
+      /* --- Install slide --- */
+      .install-copy {
+        max-width: 100%;
+        gap: 12px;
+      }
+
+      .callout-text {
+        font-size: 0.92rem;
+      }
+
+      .code-card {
+        padding: 16px;
+        max-width: 100%;
+      }
+
+      .code-card code {
+        padding: 14px 16px;
+        border-radius: 12px;
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+
+      .link-row {
+        gap: 8px;
+      }
+
+      .link-pill {
+        min-height: 38px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+
+      /* --- Lightbox --- */
+      .lightbox {
+        padding: 6px;
+      }
+
+      .lightbox-dialog {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        border-radius: 14px;
+        gap: 10px;
+      }
+
+      .lightbox-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .lightbox-info strong {
+        font-size: 0.88rem;
+        white-space: normal;
+      }
+
+      .lightbox-info span {
+        font-size: 0.78rem;
+      }
+
+      .lightbox-actions {
+        gap: 8px;
+      }
+
+      .lightbox-tag {
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+      }
+
+      .lightbox-close {
+        min-height: 36px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+
+      .lightbox-image-wrap {
+        border-radius: 14px;
+      }
+
+      /* --- Decorative blurs: tone down --- */
+      body::before {
+        width: 50vw;
+        height: 50vw;
+        opacity: 0.5;
+      }
+
+      body::after {
+        width: 50vw;
+        height: 50vw;
+        opacity: 0.5;
+      }
+    }
+
+    @media (max-height: 500px) and (orientation: landscape) {
+      .slide-shell {
+        min-height: auto;
+        padding: 12px 20px;
+        gap: 10px;
+      }
+
+      .hero-panel {
+        min-height: auto;
+        padding: 16px 24px 20px;
+        gap: 6px;
+      }
+
+      .hero-panel::after {
+        display: none;
+      }
+
+      .display {
+        font-size: clamp(2rem, 6vh, 3.5rem);
+      }
+
+      .lead {
+        font-size: clamp(0.9rem, 2.5vh, 1.4rem);
+      }
+
+      .eyebrow {
+        padding: 5px 10px;
+        font-size: 0.65rem;
+      }
+
+      .meta-chip,
+      .flow-pill {
+        min-height: 28px;
+        padding: 4px 10px;
+        font-size: 0.7rem;
+      }
+
+      .reveal h2 {
+        font-size: clamp(1.4rem, 5vh, 2.5rem);
+      }
+
+      .reveal p,
+      .reveal li {
+        font-size: clamp(0.7rem, 2vh, 1rem);
+      }
+
+      .section-copy {
+        font-size: 0.8rem;
+      }
+
+      .problem-card,
+      .headline-card,
+      .demo-context-card {
+        min-height: auto;
+      }
+
+      .problem-card h3,
+      .feature-card h3 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+
+      .problem-number,
+      .feature-number {
+        width: 28px;
+        height: 28px;
+        margin-bottom: 8px;
+        font-size: 0.7rem;
+      }
+
+      .glass-card {
+        padding: 14px 12px;
+      }
+
+      .problem-grid,
+      .feature-grid {
+        gap: 8px;
+      }
+
+      .feature-card {
+        min-height: auto;
+        padding: 12px 10px;
+      }
+
+      .demo-shell {
+        min-height: auto;
+        padding-top: 8px;
+        padding-bottom: 12px;
+        gap: 6px;
+      }
+
+      :root {
+        --demo-height: min(50vh, 280px);
+      }
+
+      .demo-header .eyebrow {
+        margin-bottom: 4px;
+      }
+
+      .annotation-panel {
+        min-height: auto;
+        padding: 8px 12px;
+      }
+
+      .annotation-text {
+        min-height: 2em;
+        font-size: 0.75rem;
+      }
+
+      .transition-line,
+      .principle-text,
+      .callout-text {
+        font-size: 0.9rem;
+      }
+
+      .code-card {
+        padding: 14px;
+      }
+
+      .code-card code {
+        padding: 12px 14px;
+        font-size: 0.8rem;
+      }
+
+      .reveal .slide-number {
+        padding: 4px 8px;
+        font-size: 0.6rem;
+        right: 10px;
+        bottom: 8px;
+      }
+    }
+
     @media (pointer: coarse) {
       .demo-nav {
         display: flex;
@@ -1803,12 +2434,19 @@
       }
     }
 
+    function mobileConfig() {
+      const mobile = window.innerWidth <= 768 || window.innerHeight <= 500
+      return {
+        width: mobile ? window.innerWidth : 1600,
+        height: mobile ? window.innerHeight : 900,
+        margin: mobile ? 0 : 0.04,
+        minScale: mobile ? 1 : 0.2,
+        maxScale: mobile ? 1 : 1.5,
+      }
+    }
+
     Reveal.initialize({
-      width: 1600,
-      height: 900,
-      margin: 0.02,
-      minScale: 0.15,
-      maxScale: 2.0,
+      ...mobileConfig(),
       controls: true,
       progress: true,
       slideNumber: "c/t",
@@ -1817,6 +2455,11 @@
       backgroundTransition: "fade",
       controlsTutorial: false,
       center: true
+    })
+
+    window.addEventListener("resize", () => {
+      Reveal.configure(mobileConfig())
+      Reveal.layout()
     })
 
     const cinematicDemo = new CinematicDemo(demoFrames)
