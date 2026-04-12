@@ -991,42 +991,51 @@
     @media (max-width: 768px) {
       :root {
         --content-width: 100%;
-        --demo-height: min(44vh, 360px);
+        --demo-height: 45vw;
+        --radius-xl: 18px;
+        --radius-lg: 14px;
+        --radius-md: 10px;
+        --radius-sm: 8px;
       }
 
+      /* --- Base & Reveal overrides --- */
       .reveal {
-        font-size: 18px;
-      }
-
-      .reveal .slides {
-        width: 100% !important;
-        height: auto !important;
-        top: 0 !important;
-        left: 0 !important;
-        transform: none !important;
-        overflow: visible !important;
+        font-size: 16px;
       }
 
       .reveal .slides section {
-        width: 100% !important;
-        height: auto !important;
-        min-height: 100vh;
-        transform: none !important;
-        top: 0 !important;
-        left: 0 !important;
-        padding: 16px !important;
+        padding: 12px 0;
       }
 
+      .reveal h2 {
+        font-size: 1.6rem;
+      }
+
+      .reveal p,
+      .reveal li {
+        font-size: 0.92rem;
+      }
+
+      .reveal .slide-number {
+        padding: 5px 8px;
+        font-size: 0.7rem;
+        right: 12px;
+        bottom: 12px;
+      }
+
+      /* --- Slide shell --- */
       .slide-shell {
         width: 100%;
         min-height: auto;
-        gap: 20px;
-        padding: 20px 16px 24px;
+        gap: 16px;
+        padding: 16px 14px 20px;
       }
 
+      /* --- Hero --- */
       .hero-panel {
-        min-height: 0;
-        padding: 24px 18px 30px;
+        min-height: auto;
+        padding: 22px 16px 26px;
+        gap: 10px;
       }
 
       .hero-panel::after {
@@ -1034,71 +1043,388 @@
       }
 
       .display {
-        font-size: clamp(2.5rem, 12vw, 4rem);
+        font-size: 2.8rem;
+        line-height: 0.95;
+      }
+
+      .eyebrow {
+        padding: 7px 12px;
+        font-size: 0.7rem;
+        gap: 7px;
+      }
+
+      .eyebrow::before {
+        width: 6px;
+        height: 6px;
       }
 
       .lead {
         max-width: 100%;
-        font-size: clamp(1.1rem, 4vw, 1.5rem);
+        font-size: 1.05rem;
+        line-height: 1.25;
       }
 
-      .meta-row {
-        flex-wrap: wrap;
+      .lead-muted {
+        margin-top: 6px;
+      }
+
+      /* --- Pill rows & chips --- */
+      .hero-meta,
+      .pill-row,
+      .flow-row {
         gap: 8px;
       }
 
       .meta-chip,
       .flow-pill {
-        min-height: 40px;
-        padding: 8px 14px;
-        font-size: 0.85rem;
+        min-height: 34px;
+        padding: 6px 12px;
+        font-size: 0.78rem;
       }
 
+      .flow-row {
+        gap: 8px;
+      }
+
+      .flow-arrow {
+        font-size: 0.9rem;
+      }
+
+      /* --- Section headers --- */
       .section-header,
       .section-header-wide {
         max-width: 100%;
+        gap: 10px;
       }
 
       .section-copy {
         max-width: 100%;
+        font-size: 0.9rem;
       }
 
+      /* --- Grids: all single-column --- */
       .problem-grid,
       .feature-grid,
       .demo-context-grid {
         grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .overview-layout {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .install-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      /* --- Cards --- */
+      .glass-card {
+        padding: 16px 14px;
+        border-radius: var(--radius-lg);
       }
 
       .problem-card {
         min-height: auto;
       }
 
+      .problem-card h3,
+      .feature-card h3 {
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+
+      .problem-card p,
+      .feature-card p {
+        font-size: 0.85rem;
+      }
+
+      .problem-number,
+      .feature-number {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+      }
+
       .headline-card {
         min-height: auto;
+        gap: 12px;
+      }
+
+      .headline-card strong {
+        font-size: 1.15rem;
+      }
+
+      .headline-card p {
+        max-width: 100%;
+        font-size: 0.88rem;
+      }
+
+      .principle-card {
+        gap: 12px;
+      }
+
+      .principle-card h3 {
+        font-size: 1.15rem;
+      }
+
+      .transition-line,
+      .principle-text,
+      .callout-text {
+        font-size: 0.95rem;
+      }
+
+      /* --- Demo context cards --- */
+      .demo-context-card {
+        min-height: auto;
+        gap: 10px;
+      }
+
+      .demo-context-card h3 {
+        font-size: 1.05rem;
+      }
+
+      .demo-context-card p {
+        max-width: 100%;
+        font-size: 0.82rem;
+      }
+
+      /* --- Feature cards --- */
+      .feature-card {
+        min-height: auto;
+        padding: 16px 14px;
+      }
+
+      .feature-card p {
+        max-width: 100%;
+        font-size: 0.85rem;
+      }
+
+      .feature-shell {
+        padding-top: 16px;
+        padding-bottom: 16px;
+        gap: 14px;
+      }
+
+      /* --- Demo slide --- */
+      .demo-shell {
+        min-height: auto;
+        gap: 10px;
+        padding-top: 12px;
+        padding-bottom: 20px;
+      }
+
+      .demo-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .demo-header > :first-child {
+        flex: none;
+        max-width: 100%;
+      }
+
+      .demo-header .eyebrow {
+        margin-bottom: 8px;
+      }
+
+      .demo-header h2 {
+        font-size: 1.4rem;
+      }
+
+      .demo-subcopy {
+        max-width: 100%;
+        font-size: 0.82rem;
+      }
+
+      .demo-controls {
+        justify-content: flex-start;
+        gap: 8px;
+      }
+
+      .demo-chip,
+      .demo-counter {
+        min-height: 34px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+      }
+
+      .demo-button {
+        min-height: 34px;
+        padding: 6px 12px;
+        font-size: 0.78rem;
+      }
+
+      .demo-stage {
+        padding: 6px;
+      }
+
+      .demo-viewport {
+        width: 100%;
+        height: var(--demo-height);
+        border-radius: 14px;
       }
 
       .demo-inspect {
-        top: 12px;
-        right: 12px;
+        top: 8px;
+        right: 8px;
+        min-height: 32px;
+        padding: 6px 12px;
+        font-size: 0.75rem;
       }
 
+      .demo-meta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding-bottom: 10px;
+      }
+
+      .demo-timeline {
+        width: 100%;
+        min-width: 0;
+        gap: 8px;
+      }
+
+      .demo-step {
+        padding: 8px 10px;
+        gap: 8px;
+        border-radius: 12px;
+      }
+
+      .demo-step-index {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        font-size: 0.75rem;
+      }
+
+      .demo-step-copy strong {
+        font-size: 0.8rem;
+      }
+
+      .demo-step-copy span {
+        font-size: 0.68rem;
+      }
+
+      .progress-track {
+        min-width: 0;
+        height: 5px;
+      }
+
+      .annotation-panel {
+        flex: none;
+        width: 100%;
+        min-height: auto;
+        padding: 12px 14px;
+        gap: 6px;
+      }
+
+      .annotation-act {
+        font-size: 0.68rem;
+      }
+
+      .annotation-text {
+        font-size: 0.82rem;
+        min-height: 2.8em;
+      }
+
+      /* --- Install slide --- */
+      .install-copy {
+        max-width: 100%;
+        gap: 12px;
+      }
+
+      .callout-text {
+        font-size: 0.92rem;
+      }
+
+      .code-card {
+        padding: 16px;
+        max-width: 100%;
+      }
+
+      .code-card code {
+        padding: 14px 16px;
+        border-radius: 12px;
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+
+      .link-row {
+        gap: 8px;
+      }
+
+      .link-pill {
+        min-height: 38px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+
+      /* --- Lightbox --- */
       .lightbox {
-        padding: 8px;
+        padding: 6px;
       }
 
       .lightbox-dialog {
         width: 100%;
         height: 100%;
-        padding: 12px;
-        border-radius: 18px;
+        padding: 10px;
+        border-radius: 14px;
+        gap: 10px;
       }
 
       .lightbox-header {
-        align-items: flex-start;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
       }
 
-      .glass-card {
-        padding: 22px 18px;
+      .lightbox-info strong {
+        font-size: 0.88rem;
+        white-space: normal;
+      }
+
+      .lightbox-info span {
+        font-size: 0.78rem;
+      }
+
+      .lightbox-actions {
+        gap: 8px;
+      }
+
+      .lightbox-tag {
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+      }
+
+      .lightbox-close {
+        min-height: 36px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+
+      .lightbox-image-wrap {
+        border-radius: 14px;
+      }
+
+      /* --- Decorative blurs: tone down --- */
+      body::before {
+        width: 50vw;
+        height: 50vw;
+        opacity: 0.5;
+      }
+
+      body::after {
+        width: 50vw;
+        height: 50vw;
+        opacity: 0.5;
       }
     }
   </style>
@@ -1858,14 +2184,13 @@
       }
     }
 
+    const isMobile = window.innerWidth <= 768
     Reveal.initialize({
-      width: 1600,
-      height: 900,
-      margin: 0.04,
-      minScale: 0.2,
-      maxScale: 1.5,
-      respondToHashChanges: true,
-      disableLayout: window.innerWidth <= 768,
+      width: isMobile ? window.innerWidth : 1600,
+      height: isMobile ? window.innerHeight : 900,
+      margin: isMobile ? 0 : 0.04,
+      minScale: isMobile ? 1 : 0.2,
+      maxScale: isMobile ? 1 : 1.5,
       controls: true,
       progress: true,
       slideNumber: "c/t",
@@ -1873,7 +2198,7 @@
       transition: "fade",
       backgroundTransition: "fade",
       controlsTutorial: false,
-      center: true
+      center: !isMobile
     })
 
     const cinematicDemo = new CinematicDemo(demoFrames)
