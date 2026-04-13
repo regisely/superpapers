@@ -185,5 +185,3 @@ Your conversation with Claude Code can happen in any language. Only the plugin i
 MIT License.
 
 Author: Regis A. Ely (<regisaely@gmail.com>).
-
-Issues and contributions: see the project homepage.
