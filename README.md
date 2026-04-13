@@ -34,6 +34,16 @@ Optional project settings command:
 
 This creates or updates `CLAUDE.superpapers.md` in the current project. You can run it at the start of a project or later, after brainstorm has already written a spec in `docs/superpapers/specs/`.
 
+Explicit workflow commands:
+
+```
+/superpapers:brainstorm
+/superpapers:write-plan
+/superpapers:execute-plan
+```
+
+These commands are the superpapers-specific entry points for the main research workflow and avoid confusion with generic commands from other plugins.
+
 <a id="demonstration"></a>
 ## Demonstration
 
@@ -85,9 +95,9 @@ Fourteen skills organized by role:
 ## Typical Workflow
 
 1. **Start a new project.** Optionally run `/superpapers:init` to create `CLAUDE.superpapers.md`, the project settings file. You can also skip it and start talking to Claude directly; the plugin can infer settings from context or ask when needed.
-2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y". The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`. This spec is separate from `CLAUDE.superpapers.md`.
-3. **Plan.** Once the spec is approved, the `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts and verification criteria per task, typically saved inside the research project under `docs/superpapers/plans/`.
-4. **Execute.** The `execute-plan` skill dispatches subagents per task, verifies after each phase, and runs the full pipeline end-to-end before declaring any result final.
+2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y" or invoke `/superpapers:brainstorm`. The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`. This spec is separate from `CLAUDE.superpapers.md`.
+3. **Plan.** Once the spec is approved, invoke `/superpapers:write-plan` or continue naturally in the conversation. The `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts and verification criteria per task, typically saved inside the research project under `docs/superpapers/plans/`.
+4. **Execute.** Invoke `/superpapers:execute-plan` or continue naturally in the conversation. The `execute-plan` skill dispatches subagents per task, verifies after each phase, and runs the full pipeline end-to-end before declaring any result final.
 5. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements.
 
 Throughout the workflow, `academic-baseline` enforces the non-negotiable principles and `replication-driven-research` guarantees the pipeline stays reproducible.

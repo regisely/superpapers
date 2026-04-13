@@ -688,13 +688,15 @@
       height: 48px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(2, 6, 23, 0.82);
-      color: rgba(248, 250, 252, 0.92);
+      background: rgba(2, 6, 23, 0.46);
+      color: rgba(248, 250, 252, 0.78);
       font-size: 1.55rem;
       line-height: 1;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 18px 44px rgba(2, 6, 23, 0.34);
+      box-shadow: 0 14px 34px rgba(2, 6, 23, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .demo-nav-prev {
@@ -1582,16 +1584,22 @@
         overscroll-behavior-y: contain;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
-        padding-top: max(8px, var(--safe-top));
-        padding-bottom: max(12px, var(--safe-bottom));
+        padding-top: max(4px, var(--safe-top));
+        padding-bottom: max(8px, var(--safe-bottom));
       }
 
       .slide-shell {
         min-height: max-content;
         justify-content: flex-start;
-        gap: 10px;
-        padding-top: max(10px, var(--safe-top));
-        padding-bottom: max(16px, var(--safe-bottom));
+        gap: 8px;
+        padding-top: max(6px, var(--safe-top));
+        padding-right: max(10px, var(--safe-right));
+        padding-bottom: max(10px, var(--safe-bottom));
+        padding-left: max(10px, var(--safe-left));
+      }
+
+      .reveal h2 {
+        font-size: 1.38rem;
       }
 
       .hero-panel {
@@ -1635,8 +1643,8 @@
       .headline-card p,
       .demo-context-card p,
       .callout-text {
-        font-size: 0.76rem;
-        line-height: 1.28;
+        font-size: 0.72rem;
+        line-height: 1.22;
       }
 
       .problem-grid,
@@ -1645,6 +1653,11 @@
       .overview-layout,
       .install-grid {
         gap: 8px;
+      }
+
+      .problem-grid,
+      .feature-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .problem-card,
@@ -1656,15 +1669,17 @@
       }
 
       .problem-card,
-      .feature-card {
-        padding: 12px;
+      .feature-card,
+      .demo-context-card {
+        padding: 10px;
+        gap: 8px;
       }
 
       .problem-card h3,
       .feature-card h3,
       .demo-context-card h3 {
-        margin-bottom: 6px;
-        font-size: 0.92rem;
+        margin-bottom: 4px;
+        font-size: 0.84rem;
         line-height: 1.08;
       }
 
