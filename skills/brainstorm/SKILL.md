@@ -7,7 +7,7 @@ description: Use when starting a new research project, exploring a research idea
 
 ## Overview
 
-This is the first step in the superpapers pipeline for any new research project. It mirrors the Superpowers brainstorming philosophy — Socratic questions, proposed approaches, incremental design approval — but asks research-specific questions. The terminal state is invoking `write-plan`. No implementation, data collection, or literature review beyond gap-verification happens until the design spec is written and approved by the user.
+This is the first step in the superpapers pipeline for any new research project. It starts by invoking `academic-baseline` as the standing policy layer for the session, then mirrors the Superpowers brainstorming philosophy — Socratic questions, proposed approaches, incremental design approval — but asks research-specific questions. The terminal state is invoking `write-plan`. No implementation, data collection, or literature review beyond gap-verification happens until the design spec is written and approved by the user.
 
 ## When to Use
 
@@ -30,11 +30,13 @@ Do NOT invoke `write-plan`, `execute-plan`, data collection, analysis, or any li
 
 ## Mandatory Steps
 
-1. **Explore project context.** Check for `CLAUDE.superpapers.md`, existing `data/`, `paper/`, `.bib` files, and git history. Learn what already exists before asking questions.
+1. **Invoke `academic-baseline` first.** Load `CLAUDE.superpapers.md` if present, carry its settings into the session, and apply `academic-baseline` principles from the first question onward.
 
-2. **Detect research field and paper language.** From project context when possible; otherwise ask the user. The field shapes which databases, methods, and journals will be relevant. The paper language determines later user-facing output.
+2. **Explore project context.** Check for `CLAUDE.superpapers.md`, existing `data/`, `paper/`, `.bib` files, and git history. Learn what already exists before asking questions.
 
-3. **Ask Socratic questions one at a time.** Do not batch. Use multiple choice where possible. Cover these topics in roughly this order:
+3. **Detect research field and paper language.** From project context when possible; otherwise ask the user. The field shapes which databases, methods, and journals will be relevant. The paper language determines later user-facing output.
+
+4. **Ask Socratic questions one at a time.** Do not batch. Use multiple choice where possible. Cover these topics in roughly this order:
    - **Research question:** What is the question? Can it be rejected by data?
    - **Exploratory vs confirmatory:** This shapes every downstream decision — specification rigidity, multiple testing corrections, framing.
    - **Causal vs descriptive:** What would a causal answer require — and is that answerable with the available data?
@@ -44,19 +46,19 @@ Do NOT invoke `write-plan`, `execute-plan`, data collection, analysis, or any li
    - **Statistical power:** Order-of-magnitude check — is the sample large enough to detect plausible effect sizes?
    - **Publication tier:** Target journal tier — and is the design consistent with that tier's expectations?
 
-4. **Propose 2-3 empirical approaches with trade-offs.** Always recommend one and explain why. Present options conversationally, not as a menu.
+5. **Propose 2-3 empirical approaches with trade-offs.** Always recommend one and explain why. Present options conversationally, not as a menu.
 
-5. **Present the research design section by section, getting approval after each section.** Sections: research question, data strategy, identification strategy, estimation plan, expected outputs (tables/figures), robustness plan, submission target.
+6. **Present the research design section by section, getting approval after each section.** Sections: research question, data strategy, identification strategy, estimation plan, expected outputs (tables/figures), robustness plan, submission target.
 
-6. **Scale each section to its complexity.** A simple descriptive study may need one paragraph per section. A novel identification strategy may need several.
+7. **Scale each section to its complexity.** A simple descriptive study may need one paragraph per section. A novel identification strategy may need several.
 
-7. **Write the spec** to `docs/superpapers/specs/YYYY-MM-DD-<topic>-design.md` in English. The spec is a plugin artifact, not paper content — English keeps it consistent across projects.
+8. **Write the spec** to `docs/superpapers/specs/YYYY-MM-DD-<topic>-design.md` in English. The spec is a plugin artifact, not paper content — English keeps it consistent across projects.
 
-8. **Self-review the spec** for placeholders, internal contradictions, scope problems, and ambiguous requirements. Fix inline.
+9. **Self-review the spec** for placeholders, internal contradictions, scope problems, and ambiguous requirements. Fix inline.
 
-9. **Ask the user to review the written spec.** Wait for explicit approval before proceeding.
+10. **Ask the user to review the written spec.** Wait for explicit approval before proceeding.
 
-10. **Transition to `write-plan`.** This is the only terminal state. Do not invoke `execute-plan` or any implementation skill directly.
+11. **Transition to `write-plan`.** This is the only terminal state. Do not invoke `execute-plan` or any implementation skill directly.
 
 ## Guardrails
 
@@ -80,6 +82,7 @@ Do NOT invoke `write-plan`, `execute-plan`, data collection, analysis, or any li
 
 - [ ] Research field detected and confirmed
 - [ ] Paper language established (even if default English)
+- [ ] `academic-baseline` invoked first and applied throughout the brainstorm
 - [ ] Research question is falsifiable and explicit
 - [ ] Exploratory-versus-confirmatory distinction made
 - [ ] Identification strategy identified (or "none, this is descriptive" made explicit)

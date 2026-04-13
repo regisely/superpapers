@@ -36,7 +36,10 @@ This project follows the superpapers canonical structure:
 ## Instructions for Claude Code
 
 - Use the `superpapers` plugin skills for all research tasks in this project.
+- Invoke `academic-baseline` first in every research session and keep it active as the standing policy layer.
 - Enforce `replication-driven-research` as a guardrail for every analysis step.
+- When executing a plan, treat each task's `Skills involved` field as mandatory routing, not a suggestion.
+- For any journal-facing work (target outlet, author instructions, template adaptation, formatting, blinding, checklist, cover letter, submission portal), invoke `journal-guidelines` in the current session.
 - Respect the paper language setting above for all user-facing paper content (sections, tables notes, figure captions).
 - Plugin internals, scripts, and code comments remain in English regardless of paper language.
 - Never fabricate citations — verify every reference via web.

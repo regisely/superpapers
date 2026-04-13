@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.0] - 2026-04-13
+
+Strengthened orchestration rules for skill loading and task routing.
+
+- `academic-baseline` is now explicitly invoked first in `brainstorm`, `write-plan`, and `execute-plan`
+- `write-plan` now treats `Skills involved` as mandatory routing metadata, with `academic-baseline` required on every task
+- `journal-guidelines` is now required for journal-facing tasks, submission formatting, and compliance checks
+- `execute-plan` now explicitly honors each task's declared `Skills involved` field during execution
+- `CLAUDE.superpapers.md` template and README updated to document the stronger orchestration contract
+
 ## [1.0.0] - 2025-04-13
 
 Initial stable release.
@@ -18,4 +28,5 @@ Initial stable release.
 - Interactive presentation deployed to GitHub Pages
 - Worked example: `credit_and_productivity/`
 
+[1.1.0]: https://github.com/regisely/superpapers/releases/tag/v1.1.0
 [1.0.0]: https://github.com/regisely/superpapers/releases/tag/v1.0.0

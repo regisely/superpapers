@@ -3,7 +3,7 @@ description: Translate an approved superpapers design spec into a research execu
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
 ---
 
-Use the `write-plan` skill from the superpapers plugin for the current project.
+Use the `academic-baseline` skill first, then the `write-plan` skill from the superpapers plugin for the current project.
 
 Command intent:
 
@@ -21,10 +21,12 @@ Execution rules:
 3. If a spec exists, prefer the most recent approved spec unless the user points to a different one.
 
 4. Run the `write-plan` skill as the authoritative workflow:
+   - invoke `academic-baseline` first and keep it active through planning
    - read the spec in full
    - organize work into research phases
    - write the plan to `docs/superpapers/plans/`
    - make verification criteria explicit per task
+   - require explicit `Skills involved` per task, including `academic-baseline` on every task and `journal-guidelines` on every journal-facing task
 
 5. Keep this command within superpapers. Do not route to generic planning behavior from other plugins.
 

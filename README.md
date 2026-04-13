@@ -3,7 +3,9 @@
 A Claude Code plugin that uses AI subagents and a Socratic method of human-AI interaction to brainstorm, plan, and execute empirical academic papers. Inspired by the [superpowers](https://github.com/obra/superpowers) plugin philosophy, it brings the same discipline to quantitative research.
 
 - Live presentation: [superpapers](https://regisely.com/superpapers/)
-- Example Paper: [credit_and_productivity.pdf](https://regisely.com/superpapers/credit_and_productivity.pdf)
+Example Papers:
+- [credit_and_productivity.pdf](https://regisely.com/superpapers/credit_and_productivity.pdf)
+- [monetary_pass_through.pdf](https://regisely.com/superpapers/monetary_pass_through.pdf)
 
 ## What It Is
 
@@ -31,7 +33,7 @@ Claude Code accepts a GitHub repo directly as the marketplace source. After inst
 
 ## Usage
 
-After installation, just tell Claude what you want to research. The plugin skills activate automatically based on the conversation context:
+After installation, just tell Claude what you want to research. The plugin skills activate based on the conversation context, and the orchestration workflow explicitly loads `academic-baseline` first for research stages:
 
 ```
 I want to write a paper on the effect of wildfire smoke exposure on emergency room visits.
@@ -113,11 +115,11 @@ Fourteen skills organized by role:
 
 1. **Start a new project.** Create a new folder for your research and open Claude Code inside it. Optionally run `/superpapers:init` to create `CLAUDE.superpapers.md` with your project settings, or skip it and start talking to Claude directly. The plugin can infer settings from context or ask when needed.
 2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y" or invoke `/superpapers:brainstorm`. The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`. This spec is separate from `CLAUDE.superpapers.md`.
-3. **Plan.** Once the spec is approved, invoke `/superpapers:write-plan` or continue naturally in the conversation. The `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts and verification criteria per task, typically saved inside the research project under `docs/superpapers/plans/`.
-4. **Execute.** Invoke `/superpapers:execute-plan` or continue naturally in the conversation. The `execute-plan` skill dispatches subagents per task, verifies after each phase, and runs the full pipeline end-to-end before declaring any result final.
-5. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements.
+3. **Plan.** Once the spec is approved, invoke `/superpapers:write-plan` or continue naturally in the conversation. The `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts, verification criteria, and `Skills involved` routing per task, typically saved inside the research project under `docs/superpapers/plans/`.
+4. **Execute.** Invoke `/superpapers:execute-plan` or continue naturally in the conversation. The `execute-plan` skill dispatches subagents per task, verifies after each phase, honors each task's `Skills involved` field, and runs the full pipeline end-to-end before declaring any result final.
+5. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements. Journal-facing work is not considered valid without `journal-guidelines`.
 
-Throughout the workflow, `academic-baseline` enforces the non-negotiable principles and `replication-driven-research` guarantees the pipeline stays reproducible.
+Throughout the workflow, `academic-baseline` is invoked first as the standing policy layer, and `replication-driven-research` guarantees the pipeline stays reproducible.
 
 ## Project Setup
 

@@ -3,7 +3,7 @@ description: Start the superpapers brainstorm workflow for a research project
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
 ---
 
-Use the `brainstorm` skill from the superpapers plugin for the current project.
+Use the `academic-baseline` skill first, then the `brainstorm` skill from the superpapers plugin for the current project.
 
 Command intent:
 
@@ -21,6 +21,7 @@ Execution rules:
 2. If the project already has an approved design spec, do not start a fresh brainstorm silently. Tell the user what already exists and ask whether they want to revise the existing design or start a new one.
 
 3. If no approved spec exists, run the `brainstorm` skill exactly as intended by the plugin:
+   - invoke `academic-baseline` first and keep it active through the brainstorm
    - establish field and paper language
    - ask Socratic research questions one at a time
    - compare approaches with trade-offs

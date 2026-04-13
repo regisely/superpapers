@@ -3,7 +3,7 @@ description: Execute a superpapers research plan phase by phase with reproducibi
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
 ---
 
-Use the `execute-plan` skill from the superpapers plugin for the current project.
+Use the `academic-baseline` skill first, then the `execute-plan` skill from the superpapers plugin for the current project.
 
 Command intent:
 
@@ -22,8 +22,11 @@ Execution rules:
 3. If a plan exists, prefer the most recent approved plan unless the user specifies another one.
 
 4. Run the `execute-plan` skill as the authoritative workflow:
+   - invoke `academic-baseline` first and keep it active through execution
    - load the plan in full
+   - honor each task's `Skills involved` field as required routing
    - invoke `replication-driven-research`
+   - invoke `journal-guidelines` for any journal-facing task
    - execute phase by phase
    - stop on verification failures
    - summarize phase boundaries and final status
