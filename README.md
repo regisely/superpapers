@@ -3,9 +3,11 @@
 A Claude Code plugin that uses AI subagents and a Socratic method of human-AI interaction to brainstorm, plan, and execute empirical academic papers. Inspired by the [superpowers](https://github.com/obra/superpowers) plugin philosophy, it brings the same discipline to quantitative research.
 
 - Live presentation: [superpapers](https://regisely.com/superpapers/)
-Example Papers:
-- [credit_and_productivity.pdf](https://regisely.com/superpapers/credit_and_productivity.pdf)
-- [monetary_pass_through.pdf](https://regisely.com/superpapers/monetary_pass_through.pdf)
+- Example Papers:
+- [credit_and_productivity.pdf](https://regisely.com/superpapers/examples/credit_and_productivity.pdf)
+- [monetary_pass_through.pdf](https://regisely.com/superpapers/examples/monetary_pass_through.pdf)
+
+> **Disclaimer:** Superpapers works with any Claude subscription or API access, but the **Max plan** with **Claude Opus 4.6 (1M context)** is recommended — building a publishable academic paper is a token-intensive task. All generated code and paper content should be thoroughly reviewed before publication. Check the AI-use policies of your target journals before submitting and make sure you participate in every decision during the process.
 
 ## What It Is
 

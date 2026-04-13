@@ -26,7 +26,7 @@ Initial stable release.
 - Table overflow prevention and landscape fallback in `tables-and-figures`
 - End-matter sections (Data Availability, Competing Interests, Acknowledgments with AI declaration) in `journal-guidelines`
 - Interactive presentation deployed to GitHub Pages
-- Worked example: `credit_and_productivity/`
+- Worked example: `examples/credit_and_productivity.pdf`
 
 [1.1.0]: https://github.com/regisely/superpapers/releases/tag/v1.1.0
 [1.0.0]: https://github.com/regisely/superpapers/releases/tag/v1.0.0
