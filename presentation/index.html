@@ -32,7 +32,12 @@
       --radius-md: 18px;
       --radius-sm: 14px;
       --content-width: min(92vw, 1320px);
-      --demo-height: min(61vh, 590px);
+      --demo-height: min(61dvh, 590px);
+      --demo-aspect: 2.42;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
       --transition-fast: 240ms ease;
       --transition-slow: 800ms ease;
     }
@@ -88,6 +93,11 @@
 
     body.lightbox-open {
       overflow: hidden;
+    }
+
+    body.page-zoomed .demo-nav,
+    body.page-zoomed .demo-inspect {
+      opacity: 0.42;
     }
 
     .reveal {
@@ -513,8 +523,11 @@
 
     .demo-button,
     .demo-inspect,
-    .lightbox-close {
+    .lightbox-close,
+    .demo-nav,
+    .lightbox-nav {
       cursor: pointer;
+      touch-action: manipulation;
       transition:
         transform var(--transition-fast),
         border-color var(--transition-fast),
@@ -547,6 +560,7 @@
       width: min(81vw, 1120px);
       max-width: 100%;
       height: var(--demo-height);
+      aspect-ratio: var(--demo-aspect);
       margin: 0 auto;
       border-radius: 28px;
       overflow: hidden;
@@ -646,6 +660,9 @@
     }
 
     .demo-inspect {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       position: absolute;
       top: 22px;
       right: 22px;
@@ -656,6 +673,9 @@
 
     .demo-stage-wrap {
       position: relative;
+      padding-left: max(12px, var(--safe-left));
+      padding-right: max(12px, var(--safe-right));
+      touch-action: pan-y pinch-zoom;
     }
 
     .demo-nav {
@@ -664,25 +684,25 @@
       top: 50%;
       transform: translateY(-50%);
       z-index: 5;
-      width: 36px;
-      height: 36px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(15, 23, 42, 0.4);
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 1.3rem;
+      background: rgba(2, 6, 23, 0.82);
+      color: rgba(248, 250, 252, 0.92);
+      font-size: 1.55rem;
       line-height: 1;
-      cursor: pointer;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 18px 44px rgba(2, 6, 23, 0.34);
     }
 
     .demo-nav-prev {
-      left: -4px;
+      left: max(18px, calc(var(--safe-left) + 6px));
     }
 
     .demo-nav-next {
-      right: -4px;
+      right: max(18px, calc(var(--safe-right) + 6px));
     }
 
     .lightbox-nav {
@@ -691,25 +711,25 @@
       top: 50%;
       transform: translateY(-50%);
       z-index: 5;
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(15, 23, 42, 0.4);
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 1.5rem;
+      background: rgba(2, 6, 23, 0.82);
+      color: rgba(248, 250, 252, 0.92);
+      font-size: 1.6rem;
       line-height: 1;
-      cursor: pointer;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 18px 44px rgba(2, 6, 23, 0.34);
     }
 
     .lightbox-nav-prev {
-      left: 10px;
+      left: max(16px, calc(var(--safe-left) + 4px));
     }
 
     .lightbox-nav-next {
-      right: 10px;
+      right: max(16px, calc(var(--safe-right) + 4px));
     }
 
     .progress-track {
@@ -862,7 +882,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2.5vh 2.5vw;
+      padding:
+        max(10px, var(--safe-top))
+        max(10px, var(--safe-right))
+        max(10px, var(--safe-bottom))
+        max(10px, var(--safe-left));
       background: rgba(2, 6, 23, 0.82);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
@@ -885,12 +909,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 18px;
     }
 
     .lightbox-actions {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 10px;
       flex-shrink: 0;
     }
@@ -951,6 +977,7 @@
       background: rgba(2, 6, 23, 0.92);
       border: 1px solid rgba(148, 163, 184, 0.12);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      touch-action: pan-y pinch-zoom;
     }
 
     .lightbox-image {
@@ -973,8 +1000,8 @@
       color: var(--text);
       border-radius: 999px;
       padding: 8px 12px;
-      right: 26px;
-      bottom: 22px;
+      right: max(16px, calc(var(--safe-right) + 10px));
+      bottom: max(14px, calc(var(--safe-bottom) + 8px));
     }
 
     @keyframes gradient-flow {
@@ -1002,7 +1029,7 @@
 
     @media (max-width: 1024px) {
       :root {
-        --demo-height: min(53vh, 500px);
+        --demo-height: min(52dvh, 500px);
       }
 
       .slide-shell {
@@ -1049,7 +1076,7 @@
     @media (max-width: 768px) {
       :root {
         --content-width: 100%;
-        --demo-height: 45vw;
+        --demo-height: clamp(200px, 48vw, 280px);
         --radius-xl: 18px;
         --radius-lg: 14px;
         --radius-md: 10px;
@@ -1077,8 +1104,8 @@
       .reveal .slide-number {
         padding: 5px 8px;
         font-size: 0.7rem;
-        right: 12px;
-        bottom: 12px;
+        right: max(10px, calc(var(--safe-right) + 6px));
+        bottom: max(10px, calc(var(--safe-bottom) + 6px));
       }
 
       /* --- Slide shell --- */
@@ -1086,7 +1113,11 @@
         width: 100%;
         min-height: auto;
         gap: 16px;
-        padding: 16px 14px 20px;
+        padding:
+          max(16px, var(--safe-top))
+          max(14px, var(--safe-right))
+          max(20px, var(--safe-bottom))
+          max(14px, var(--safe-left));
       }
 
       /* --- Hero --- */
@@ -1346,7 +1377,25 @@
       }
 
       .demo-inspect {
-        display: none;
+        top: 12px;
+        right: 12px;
+        min-height: 36px;
+        padding: 8px 12px;
+        font-size: 0.78rem;
+      }
+
+      .demo-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+      }
+
+      .demo-nav-prev {
+        left: max(10px, calc(var(--safe-left) + 2px));
+      }
+
+      .demo-nav-next {
+        right: max(10px, calc(var(--safe-right) + 2px));
       }
 
       .demo-meta {
@@ -1439,7 +1488,11 @@
 
       /* --- Lightbox --- */
       .lightbox {
-        padding: 6px;
+        padding:
+          max(6px, var(--safe-top))
+          max(6px, var(--safe-right))
+          max(6px, var(--safe-bottom))
+          max(6px, var(--safe-left));
       }
 
       .lightbox-dialog {
@@ -1466,7 +1519,9 @@
       }
 
       .lightbox-actions {
+        justify-content: space-between;
         gap: 8px;
+        width: 100%;
       }
 
       .lightbox-tag {
@@ -1483,6 +1538,12 @@
 
       .lightbox-image-wrap {
         border-radius: 14px;
+      }
+
+      .lightbox-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
       }
 
       /* --- Decorative blurs: tone down --- */
@@ -1503,9 +1564,113 @@
       .demo-nav {
         display: flex;
       }
+    }
 
+    @media (max-height: 540px) and (orientation: landscape) {
+      :root {
+        --demo-height: min(48dvh, 230px);
+      }
+
+      .slide-shell {
+        gap: 10px;
+      }
+
+      .demo-shell {
+        gap: 8px;
+        padding-top: 8px;
+        padding-bottom: max(12px, var(--safe-bottom));
+      }
+
+      .demo-header {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .demo-header > :first-child {
+        flex: 1 1 auto;
+        max-width: none;
+      }
+
+      .demo-header .eyebrow {
+        margin-bottom: 6px;
+      }
+
+      .demo-header h2 {
+        font-size: 1.3rem;
+      }
+
+      .demo-subcopy {
+        font-size: 0.76rem;
+      }
+
+      .demo-controls {
+        justify-content: flex-end;
+        gap: 6px;
+      }
+
+      .demo-chip,
+      .demo-counter,
+      .demo-button,
       .demo-inspect {
-        display: none;
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 0.72rem;
+      }
+
+      .demo-stage {
+        padding: 6px;
+      }
+
+      .demo-meta {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 8px;
+        padding-bottom: 6px;
+      }
+
+      .demo-timeline {
+        min-width: 0;
+      }
+
+      .annotation-panel {
+        flex: 0 0 min(34vw, 240px);
+        width: auto;
+        padding: 10px 12px;
+      }
+
+      .annotation-text {
+        min-height: auto;
+      }
+
+      .lightbox-dialog {
+        gap: 8px;
+      }
+
+      .lightbox-header {
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .lightbox-info strong {
+        font-size: 0.82rem;
+      }
+
+      .lightbox-info span {
+        font-size: 0.74rem;
+      }
+
+      .lightbox-close,
+      .lightbox-tag {
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 0.72rem;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1180px) {
+      :root {
+        --demo-height: min(48dvh, 460px);
       }
     }
   </style>
@@ -1680,7 +1845,7 @@
             </div>
           </div>
 
-          <div class="demo-stage-wrap">
+          <div class="demo-stage-wrap" data-prevent-swipe>
             <button class="demo-nav demo-nav-prev" id="demo-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
             <div class="glass-card demo-stage">
               <div class="demo-viewport" id="demo-viewport" aria-live="off"></div>
@@ -1746,7 +1911,7 @@
           <button class="lightbox-close" id="lightbox-close" type="button">Close</button>
         </div>
       </div>
-      <div class="lightbox-image-wrap" id="lightbox-backdrop">
+      <div class="lightbox-image-wrap" id="lightbox-backdrop" data-prevent-swipe>
         <button class="lightbox-nav lightbox-nav-prev" id="lightbox-prev" type="button" aria-label="Previous">&lsaquo;</button>
         <img class="lightbox-image" id="lightbox-image" alt="">
         <button class="lightbox-nav lightbox-nav-next" id="lightbox-next" type="button" aria-label="Next">&rsaquo;</button>
@@ -1927,6 +2092,66 @@
       }
     ]
 
+    function getViewportMetrics() {
+      const visualViewport = window.visualViewport
+      const scale = visualViewport?.scale || 1
+
+      return {
+        width: Math.max(window.innerWidth || 375, 320),
+        height: Math.max(window.innerHeight || 667, 480),
+        scale
+      }
+    }
+
+    function isCompactViewport(metrics = getViewportMetrics()) {
+      return metrics.width <= 820 || metrics.height <= 560
+    }
+
+    function isPageZoomed() {
+      return getViewportMetrics().scale > 1.01
+    }
+
+    function syncZoomStateClass() {
+      document.body.classList.toggle("page-zoomed", isPageZoomed())
+    }
+
+    function computeRevealConfig() {
+      const metrics = getViewportMetrics()
+      const compact = isCompactViewport(metrics)
+
+      return {
+        width: compact ? metrics.width : 1600,
+        height: compact ? metrics.height : 900,
+        margin: compact ? 0 : 0.04,
+        minScale: compact ? 0.45 : 0.2,
+        maxScale: compact ? 1.15 : 1.5,
+        touch: !isPageZoomed(),
+        scrollActivationWidth: null
+      }
+    }
+
+    function applyRevealConfig() {
+      syncZoomStateClass()
+
+      if (typeof Reveal.configure !== "function") {
+        return
+      }
+
+      Reveal.configure(computeRevealConfig())
+      Reveal.layout()
+    }
+
+    function debounce(callback, delay = 140) {
+      let timer = null
+
+      return () => {
+        clearTimeout(timer)
+        timer = window.setTimeout(() => {
+          callback()
+        }, delay)
+      }
+    }
+
     class CinematicDemo {
       constructor(frames) {
         this.frames = frames
@@ -1956,6 +2181,7 @@
         this.typingDelay = 24
         this.autoplayDelay = 6000
         this.previousRevealKeyboard = true
+        this.ignoreClickUntil = 0
         this.imageElements = []
         this.handleKeydown = this.handleKeydown.bind(this)
         this.handleSlideChange = this.handleSlideChange.bind(this)
@@ -1978,7 +2204,14 @@
           image.alt = frame.annotation
           image.decoding = "async"
           image.loading = "eager"
-          image.addEventListener("click", () => this.openLightbox())
+          image.addEventListener("click", event => {
+            if (this.shouldIgnoreSyntheticClick()) {
+              event.preventDefault()
+              return
+            }
+
+            this.openLightbox()
+          })
           fragment.appendChild(image)
           this.imageElements.push(image)
         })
@@ -1991,7 +2224,7 @@
         this.inspectButton.addEventListener("click", () => this.openLightbox())
         this.lightboxClose.addEventListener("click", () => this.closeLightbox())
         this.lightboxBackdrop.addEventListener("click", event => {
-          if (event.target === this.lightboxBackdrop) {
+          if (event.target === this.lightboxBackdrop && !this.shouldIgnoreSyntheticClick()) {
             this.closeLightbox()
           }
         })
@@ -2001,31 +2234,85 @@
         document.getElementById("lightbox-prev").addEventListener("click", () => this.previous())
         document.getElementById("lightbox-next").addEventListener("click", () => this.next())
 
-        const addSwipe = (element) => {
+        const addSwipe = (element, onSwipe) => {
           let startX = 0
           let startY = 0
+          let tracking = false
+
+          const reset = () => {
+            startX = 0
+            startY = 0
+            tracking = false
+          }
+
           element.addEventListener("touchstart", event => {
+            if (
+              event.touches.length !== 1 ||
+              !this.isActiveSlide() ||
+              this.shouldIgnoreSwipeStart(event.target) ||
+              isPageZoomed()
+            ) {
+              reset()
+              return
+            }
+
+            tracking = true
             startX = event.touches[0].clientX
             startY = event.touches[0].clientY
           }, { passive: true })
           element.addEventListener("touchmove", event => {
+            if (!tracking) {
+              return
+            }
+
+            if (event.touches.length !== 1 || isPageZoomed()) {
+              reset()
+              return
+            }
+
             const dx = Math.abs(event.touches[0].clientX - startX)
             const dy = Math.abs(event.touches[0].clientY - startY)
-            if (dx > dy && dx > 10) event.preventDefault()
+
+            if (dx > dy && dx > 14) {
+              event.preventDefault()
+            }
           }, { passive: false })
           element.addEventListener("touchend", event => {
+            if (!tracking) {
+              reset()
+              return
+            }
+
+            tracking = false
+
+            if (event.changedTouches.length !== 1 || isPageZoomed()) {
+              return
+            }
+
             const dx = event.changedTouches[0].clientX - startX
             const dy = event.changedTouches[0].clientY - startY
-            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-              if (dx < 0) this.next()
-              else this.previous()
+
+            if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+              this.suppressSyntheticClicks()
+              onSwipe(dx < 0 ? "next" : "previous")
             }
           }, { passive: true })
+
+          element.addEventListener("touchcancel", reset, { passive: true })
         }
 
         const stageWrap = this.slide.querySelector(".demo-stage-wrap")
-        if (stageWrap) addSwipe(stageWrap)
-        addSwipe(this.lightbox)
+        if (stageWrap) {
+          addSwipe(stageWrap, direction => {
+            if (direction === "next") this.next()
+            else this.previous()
+          })
+        }
+
+        addSwipe(this.lightboxBackdrop, direction => {
+          if (direction === "next") this.next()
+          else this.previous()
+        })
 
         document.addEventListener("keydown", this.handleKeydown, true)
 
@@ -2210,7 +2497,9 @@
           this.updateToggleButton()
         }
 
-        if (restoreFocus && this.inspectButton.offsetParent !== null) {
+        const finePointer = window.matchMedia?.("(pointer: fine)")?.matches ?? false
+
+        if (restoreFocus && finePointer && this.inspectButton.offsetParent !== null) {
           this.inspectButton.focus()
         }
       }
@@ -2225,6 +2514,18 @@
 
       lightboxOpen() {
         return !this.lightbox.hidden
+      }
+
+      shouldIgnoreSwipeStart(target) {
+        return Boolean(target?.closest("button, a, input, select, textarea, summary, [role='button']"))
+      }
+
+      suppressSyntheticClicks(duration = 420) {
+        this.ignoreClickUntil = window.performance.now() + duration
+      }
+
+      shouldIgnoreSyntheticClick() {
+        return window.performance.now() < this.ignoreClickUntil
       }
 
       handleKeydown(event) {
@@ -2302,21 +2603,10 @@
       }
     }
 
-    function mobileConfig() {
-      const w = window.innerWidth || 375
-      const h = window.innerHeight || 667
-      const mobile = w <= 768 || h <= 500
-      return {
-        width: mobile ? Math.max(w, 320) : 1600,
-        height: mobile ? Math.max(h, 480) : 900,
-        margin: mobile ? 0 : 0.04,
-        minScale: mobile ? 0.4 : 0.2,
-        maxScale: mobile ? 1.2 : 1.5,
-      }
-    }
+    syncZoomStateClass()
 
-    Reveal.initialize({
-      ...mobileConfig(),
+    const revealReady = Reveal.initialize({
+      ...computeRevealConfig(),
       controls: true,
       progress: true,
       slideNumber: "c/t",
@@ -2327,9 +2617,20 @@
       center: true
     })
 
+    revealReady.then(() => {
+      const handleViewportChange = debounce(() => {
+        applyRevealConfig()
+      })
 
-    const cinematicDemo = new CinematicDemo(demoFrames)
-    cinematicDemo.init()
+      window.addEventListener("resize", handleViewportChange)
+      window.addEventListener("orientationchange", handleViewportChange)
+      window.visualViewport?.addEventListener("resize", handleViewportChange)
+
+      applyRevealConfig()
+
+      const cinematicDemo = new CinematicDemo(demoFrames)
+      cinematicDemo.init()
+    })
   </script>
 </body>
 </html>
