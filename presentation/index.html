@@ -675,7 +675,7 @@
       position: relative;
       padding-left: max(12px, var(--safe-left));
       padding-right: max(12px, var(--safe-right));
-      touch-action: pan-y pinch-zoom;
+      touch-action: pan-x pan-y pinch-zoom;
     }
 
     .demo-nav {
@@ -977,7 +977,7 @@
       background: rgba(2, 6, 23, 0.92);
       border: 1px solid rgba(148, 163, 184, 0.12);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-      touch-action: pan-y pinch-zoom;
+      touch-action: pan-x pan-y pinch-zoom;
     }
 
     .lightbox-image {
@@ -1571,8 +1571,141 @@
         --demo-height: min(48dvh, 230px);
       }
 
+      .reveal .slides {
+        height: 100dvh;
+      }
+
+      .reveal .slides section {
+        align-items: flex-start;
+        height: 100dvh;
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        padding-top: max(8px, var(--safe-top));
+        padding-bottom: max(12px, var(--safe-bottom));
+      }
+
       .slide-shell {
+        min-height: max-content;
+        justify-content: flex-start;
         gap: 10px;
+        padding-top: max(10px, var(--safe-top));
+        padding-bottom: max(16px, var(--safe-bottom));
+      }
+
+      .hero-panel {
+        min-height: auto;
+        padding: 20px 22px 24px;
+        gap: 8px;
+      }
+
+      .display {
+        font-size: 2.9rem;
+      }
+
+      .lead {
+        font-size: 1rem;
+        line-height: 1.18;
+      }
+
+      .meta-chip,
+      .flow-pill,
+      .link-pill {
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 0.74rem;
+      }
+
+      .eyebrow {
+        padding: 6px 10px;
+        font-size: 0.64rem;
+        gap: 6px;
+      }
+
+      .section-header,
+      .section-header-wide {
+        gap: 8px;
+        max-width: 100%;
+      }
+
+      .section-copy,
+      .problem-card p,
+      .feature-card p,
+      .headline-card p,
+      .demo-context-card p,
+      .callout-text {
+        font-size: 0.76rem;
+        line-height: 1.28;
+      }
+
+      .problem-grid,
+      .feature-grid,
+      .demo-context-grid,
+      .overview-layout,
+      .install-grid {
+        gap: 8px;
+      }
+
+      .problem-card,
+      .feature-card,
+      .headline-card,
+      .demo-context-card,
+      .code-card {
+        min-height: auto;
+      }
+
+      .problem-card,
+      .feature-card {
+        padding: 12px;
+      }
+
+      .problem-card h3,
+      .feature-card h3,
+      .demo-context-card h3 {
+        margin-bottom: 6px;
+        font-size: 0.92rem;
+        line-height: 1.08;
+      }
+
+      .problem-number,
+      .feature-number {
+        width: 26px;
+        height: 26px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        font-size: 0.7rem;
+      }
+
+      .headline-card {
+        gap: 10px;
+      }
+
+      .headline-card strong,
+      .principle-card h3 {
+        font-size: 1.05rem;
+        line-height: 1.02;
+      }
+
+      .transition-line,
+      .principle-text {
+        font-size: 0.88rem;
+      }
+
+      .feature-shell {
+        gap: 8px;
+        padding-top: 8px;
+        padding-bottom: 12px;
+      }
+
+      .code-card {
+        padding: 12px;
+      }
+
+      .code-card code {
+        padding: 10px 12px;
+        font-size: 0.72rem;
+        line-height: 1.42;
       }
 
       .demo-shell {

@@ -57,9 +57,9 @@ Stages covered in the live presentation:
 
 [Open the interactive presentation](https://regisely.github.io/superpapers/)
 
-![Representative demo screenshot](presentation/screenshots/16-execute-main-analysis.png)
+![Representative demo screenshot](presentation/screenshots/01-brainstorm-start.png)
 
-_Representative moment from the real session: the first strategy fails under estimation, so the workflow stops to diagnose instead of forcing a result._
+_Representative moment from the real session: the workflow starts from a concrete research question and begins structuring the project before any implementation._
 
 ## Skills Overview
 
