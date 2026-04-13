@@ -1,4 +1,6 @@
 # Sandbox device redirects (Claude Code sandbox)
+AGENTS.md
+CLAUDE.md
 .bash_profile
 .bashrc
 .codex

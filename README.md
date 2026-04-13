@@ -26,6 +26,17 @@ Add the plugin from GitHub in any Claude Code session:
 
 Claude Code accepts a GitHub repo directly as the marketplace source. After installation, the skills become available automatically when you discuss research tasks.
 
+## Updating
+
+Claude Code caches marketplace repositories locally, so updating the plugin is a two-step process:
+
+```
+/plugin marketplace update superpapers
+/plugin update superpapers
+```
+
+Use `/plugin marketplace update superpapers` to refresh the local clone of the marketplace repository, then `/plugin update superpapers` to reinstall the latest published plugin version from that refreshed marketplace state.
+
 Optional project settings command:
 
 ```

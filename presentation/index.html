@@ -679,7 +679,7 @@
     }
 
     .demo-nav {
-      display: none;
+      display: flex;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -687,16 +687,16 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(2, 6, 23, 0.46);
-      color: rgba(248, 250, 252, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(2, 6, 23, 0.12);
+      color: rgba(248, 250, 252, 0.44);
       font-size: 1.55rem;
       line-height: 1;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 14px 34px rgba(2, 6, 23, 0.2);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .demo-nav-prev {
@@ -716,14 +716,16 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(2, 6, 23, 0.82);
-      color: rgba(248, 250, 252, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(2, 6, 23, 0.12);
+      color: rgba(248, 250, 252, 0.44);
       font-size: 1.6rem;
       line-height: 1;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 18px 44px rgba(2, 6, 23, 0.34);
+      box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .lightbox-nav-prev {
@@ -995,6 +997,8 @@
 
     .reveal .controls {
       color: #c7d2fe;
+      right: max(18px, calc((100vw - var(--content-width)) / 2 + var(--safe-right)));
+      bottom: max(18px, calc(var(--safe-bottom) + 10px));
     }
 
     .reveal .slide-number {
@@ -1002,7 +1006,7 @@
       color: var(--text);
       border-radius: 999px;
       padding: 8px 12px;
-      right: max(16px, calc(var(--safe-right) + 10px));
+      right: max(86px, calc((100vw - var(--content-width)) / 2 + var(--safe-right) + 68px));
       bottom: max(14px, calc(var(--safe-bottom) + 8px));
     }
 
@@ -1103,10 +1107,15 @@
         font-size: 0.92rem;
       }
 
+      .reveal .controls {
+        right: max(10px, calc(var(--safe-right) + 6px));
+        bottom: max(10px, calc(var(--safe-bottom) + 6px));
+      }
+
       .reveal .slide-number {
         padding: 5px 8px;
         font-size: 0.7rem;
-        right: max(10px, calc(var(--safe-right) + 6px));
+        right: max(68px, calc(var(--safe-right) + 56px));
         bottom: max(10px, calc(var(--safe-bottom) + 6px));
       }
 
