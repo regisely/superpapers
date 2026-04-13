@@ -7,7 +7,7 @@ A Claude Code plugin that uses AI subagents and a Socratic method of human-AI in
   - [credit_and_productivity.pdf](https://regisely.com/superpapers/examples/credit_and_productivity.pdf)
   - [monetary_pass_through.pdf](https://regisely.com/superpapers/examples/monetary_pass_through.pdf)
 
-<img src="superpapers-demo.gif" alt="Superpapers demo" width="480">
+<img src="superpapers-demo.gif" alt="Superpapers demo">
 
 > **Disclaimer:** Superpapers works with any Claude subscription or API access, but the **Max plan** with **Claude Opus 4.6 (1M context)** is recommended — building a publishable academic paper is a token-intensive task. All generated code and paper content should be thoroughly reviewed before publication. Check the AI-use policies of your target journals before submitting and make sure you participate in every decision during the process.
 
