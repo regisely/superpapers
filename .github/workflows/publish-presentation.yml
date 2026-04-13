@@ -7,7 +7,7 @@ on:
     paths:
       - ".github/workflows/publish-presentation.yml"
       - "presentation/**"
-      - "credit_and_productivity_paper.pdf"
+      - "credit_and_productivity.pdf"
   workflow_dispatch:
 
 permissions:
@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p public
           cp -R presentation/. public/
-          cp credit_and_productivity_paper.pdf public/credit_and_productivity_paper.pdf
+          cp credit_and_productivity.pdf public/credit_and_productivity.pdf
           touch public/.nojekyll
 
       - name: Upload Pages artifact
