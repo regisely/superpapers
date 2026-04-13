@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Superpapers Presentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2303,13 +2303,15 @@
     }
 
     function mobileConfig() {
-      const mobile = window.innerWidth <= 768 || window.innerHeight <= 500
+      const w = window.innerWidth || 375
+      const h = window.innerHeight || 667
+      const mobile = w <= 768 || h <= 500
       return {
-        width: mobile ? window.innerWidth : 1600,
-        height: mobile ? window.innerHeight : 900,
+        width: mobile ? Math.max(w, 320) : 1600,
+        height: mobile ? Math.max(h, 480) : 900,
         margin: mobile ? 0 : 0.04,
-        minScale: mobile ? 1 : 0.2,
-        maxScale: mobile ? 1 : 1.5,
+        minScale: mobile ? 0.4 : 0.2,
+        maxScale: mobile ? 1.2 : 1.5,
       }
     }
 
