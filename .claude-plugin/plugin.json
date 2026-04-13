@@ -1,10 +1,13 @@
 {
   "name": "superpapers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Claude Code plugin for empirical quantitative research. Adapts the Superpowers pipeline (brainstorm, write-plan, execute-plan) for the full academic paper lifecycle with a replication-driven-research guardrail replacing TDD.",
   "author": {
     "name": "Regis A. Ely"
   },
+  "commands": [
+    "./commands/init.md"
+  ],
   "homepage": "https://github.com/regisely/superpapers",
   "license": "MIT",
   "keywords": [

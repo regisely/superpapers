@@ -26,10 +26,18 @@ Add the plugin from GitHub in any Claude Code session:
 
 Claude Code accepts a GitHub repo directly as the marketplace source. After installation, the skills become available automatically when you discuss research tasks.
 
+Optional project settings command:
+
+```
+/superpapers:init
+```
+
+This creates or updates `CLAUDE.superpapers.md` in the current project. You can run it at the start of a project or later, after brainstorm has already written a spec in `docs/superpapers/specs/`.
+
 <a id="demonstration"></a>
 ## Demonstration
 
-The walkthrough below follows the full research flow from brainstorm to submission in the same real Claude Code session.
+The full walkthrough lives in the interactive presentation. It follows the same real Claude Code session from brainstorm to submission, including failed identification, pivot, robustness, and final manuscript formatting.
 
 The demo is not a scripted toy example. It walks through a real Claude Code session in which:
 
@@ -39,223 +47,19 @@ The demo is not a scripted toy example. It walks through a real Claude Code sess
 - null results, failed diagnostics, robustness checks, and reframing decisions stay explicit;
 - the user remains in the loop for major research decisions.
 
-[Start the walkthrough](#demo-01) · [Brainstorm](#demo-01) · [Design](#demo-04) · [Plan](#demo-11) · [Execute](#demo-12) · [Submit](#demo-23)
+Stages covered in the live presentation:
 
-<a id="demo-01"></a>
-### 01. Brainstorm · The journey begins
+- Brainstorm: define the question, research mode, and contribution.
+- Design: compare approaches, map data, and lock the identification strategy.
+- Plan: expand the research into explicit phased tasks.
+- Execute: collect, prepare, estimate, diagnose failure, pivot, and run robustness checks.
+- Submit: format the manuscript and verify the submission checklist.
 
-![Brainstorm · The journey begins](presentation/screenshots/01-brainstorm-start.png)
+[Open the interactive presentation](https://regisely.github.io/superpapers/)
 
-_The journey begins: Claude asks for the research question._
+![Representative demo screenshot](presentation/screenshots/16-execute-main-analysis.png)
 
-[Back to top](#demonstration) | [Next →](#demo-02)
-
-<a id="demo-02"></a>
-### 02. Brainstorm · Research mode clarified
-
-![Brainstorm · Research mode clarified](presentation/screenshots/02-brainstorm-strategy.png)
-
-_Exploratory or confirmatory? Every downstream decision follows._
-
-[← Previous](#demo-01) | [Back to top](#demonstration) | [Next →](#demo-03)
-
-<a id="demo-03"></a>
-### 03. Brainstorm · Contribution validated
-
-![Brainstorm · Contribution validated](presentation/screenshots/03-brainstorm-gap.png)
-
-_Literature gap verified. Contribution is defensible._
-
-[← Previous](#demo-02) | [Back to top](#demonstration) | [Next →](#demo-04)
-
-<a id="demo-04"></a>
-### 04. Design · Approaches compared
-
-![Design · Approaches compared](presentation/screenshots/04-design-approaches.png)
-
-_Three approaches proposed with explicit trade-offs._
-
-[← Previous](#demo-03) | [Back to top](#demonstration) | [Next →](#demo-05)
-
-<a id="demo-05"></a>
-### 05. Design · Data map locked
-
-![Design · Data map locked](presentation/screenshots/05-design-data.png)
-
-_Data sources mapped: BIS, Penn World Table, World Bank._
-
-[← Previous](#demo-04) | [Back to top](#demonstration) | [Next →](#demo-06)
-
-<a id="demo-06"></a>
-### 06. Design · Identification strategy
-
-![Design · Identification strategy](presentation/screenshots/06-design-identification.png)
-
-_Bartik shift-share instrument from cross-border banking flows._
-
-[← Previous](#demo-05) | [Back to top](#demonstration) | [Next →](#demo-07)
-
-<a id="demo-07"></a>
-### 07. Design · Estimation path defined
-
-![Design · Estimation path defined](presentation/screenshots/07-design-estimation.png)
-
-_Full estimation plan: OLS baseline, 2SLS, decomposition._
-
-[← Previous](#demo-06) | [Back to top](#demonstration) | [Next →](#demo-08)
-
-<a id="demo-08"></a>
-### 08. Design · Outputs planned first
-
-![Design · Outputs planned first](presentation/screenshots/08-outputs-tables.png)
-
-_Tables and figures planned before touching any data._
-
-[← Previous](#demo-07) | [Back to top](#demonstration) | [Next →](#demo-09)
-
-<a id="demo-09"></a>
-### 09. Design · Robustness and journals
-
-![Design · Robustness and journals](presentation/screenshots/09-robustness-journals.png)
-
-_Robustness checks and journal targets locked in upfront._
-
-[← Previous](#demo-08) | [Back to top](#demonstration) | [Next →](#demo-10)
-
-<a id="demo-10"></a>
-### 10. Design · Spec committed
-
-![Design · Spec committed](presentation/screenshots/10-spec-written.png)
-
-_Design spec written, reviewed, and committed._
-
-[← Previous](#demo-09) | [Back to top](#demonstration) | [Next →](#demo-11)
-
-<a id="demo-11"></a>
-### 11. Plan · Execution plan expanded
-
-![Plan · Execution plan expanded](presentation/screenshots/11-write-plan.png)
-
-_Implementation plan: 30+ tasks across six research phases._
-
-[← Previous](#demo-10) | [Back to top](#demonstration) | [Next →](#demo-12)
-
-<a id="demo-12"></a>
-### 12. Execute · Parallel execution begins
-
-![Execute · Parallel execution begins](presentation/screenshots/12-execute-plan.png)
-
-_Subagents dispatch in parallel. Data collection begins._
-
-[← Previous](#demo-11) | [Back to top](#demonstration) | [Next →](#demo-13)
-
-<a id="demo-13"></a>
-### 13. Execute · Collection complete
-
-![Execute · Collection complete](presentation/screenshots/13-execute-collection-complete.png)
-
-_Five collection tasks complete. The data manifest is written before preparation starts._
-
-[← Previous](#demo-12) | [Back to top](#demonstration) | [Next →](#demo-14)
-
-<a id="demo-14"></a>
-### 14. Execute · Preparation complete
-
-![Execute · Preparation complete](presentation/screenshots/14-execute-preparation-complete.png)
-
-_Parallel cleaning and merging produce the final analysis panel._
-
-[← Previous](#demo-13) | [Back to top](#demonstration) | [Next →](#demo-15)
-
-<a id="demo-15"></a>
-### 15. Execute · Exploratory outputs ready
-
-![Execute · Exploratory outputs ready](presentation/screenshots/15-execute-exploratory-analysis.png)
-
-_Descriptives, scatter plot, composition trends, and diagnostics run in parallel._
-
-[← Previous](#demo-14) | [Back to top](#demonstration) | [Next →](#demo-16)
-
-<a id="demo-16"></a>
-### 16. Execute · Main analysis challenged
-
-![Execute · Main analysis challenged](presentation/screenshots/16-execute-main-analysis.png)
-
-_Execution stops when the first stage fails. Diagnosis starts before moving on._
-
-[← Previous](#demo-15) | [Back to top](#demonstration) | [Next →](#demo-17)
-
-<a id="demo-17"></a>
-### 17. Execute · Identification diagnosis
-
-![Execute · Identification diagnosis](presentation/screenshots/17-execute-identification-diagnosis.png)
-
-_Two diagnostic tracks run in parallel. The Bartik construction is fixed, but the first stage still fails._
-
-[← Previous](#demo-16) | [Back to top](#demonstration) | [Next →](#demo-18)
-
-<a id="demo-18"></a>
-### 18. Execute · GMM pivot launched
-
-![Execute · GMM pivot launched](presentation/screenshots/18-execute-gmm-pivot.png)
-
-_The project pivots to system GMM, with main and composition estimations running in parallel._
-
-[← Previous](#demo-17) | [Back to top](#demonstration) | [Next →](#demo-19)
-
-<a id="demo-19"></a>
-### 19. Execute · Results story consolidated
-
-![Execute · Results story consolidated](presentation/screenshots/19-execute-heterogeneity-framing.png)
-
-_Heterogeneity checks add no differential effect, and framing starts from a verified null result._
-
-[← Previous](#demo-18) | [Back to top](#demonstration) | [Next →](#demo-20)
-
-<a id="demo-20"></a>
-### 20. Execute · Framing locked
-
-![Execute · Framing locked](presentation/screenshots/20-execute-literature-framing.png)
-
-_The null result is grounded in literature, mechanisms, and a coherent paper narrative._
-
-[← Previous](#demo-19) | [Back to top](#demonstration) | [Next →](#demo-21)
-
-<a id="demo-21"></a>
-### 21. Execute · Robustness in parallel
-
-![Execute · Robustness in parallel](presentation/screenshots/21-execute-robustness-parallel.png)
-
-_Five robustness checks run in parallel and each one reinforces the null result._
-
-[← Previous](#demo-20) | [Back to top](#demonstration) | [Next →](#demo-22)
-
-<a id="demo-22"></a>
-### 22. Execute · Writing starts cleanly
-
-![Execute · Writing starts cleanly](presentation/screenshots/22-execute-robustness-complete.png)
-
-_Robustness closes cleanly, outputs are inventoried, and the paper draft starts from validated results._
-
-[← Previous](#demo-21) | [Back to top](#demonstration) | [Next →](#demo-23)
-
-<a id="demo-23"></a>
-### 23. Submit · Submission formatting
-
-![Submit · Submission formatting](presentation/screenshots/23-submit-formatting-start.png)
-
-_Journal guidelines are fetched and the manuscript is formatted for the target outlet._
-
-[← Previous](#demo-22) | [Back to top](#demonstration) | [Next →](#demo-24)
-
-<a id="demo-24"></a>
-### 24. Submit · Submission ready
-
-![Submit · Submission ready](presentation/screenshots/24-submit-checklist-verified.png)
-
-_A full submission checklist confirms the paper is formatted and ready for final author details._
-
-[← Previous](#demo-23) | [Back to top](#demonstration)
+_Representative moment from the real session: the first strategy fails under estimation, so the workflow stops to diagnose instead of forcing a result._
 
 ## Skills Overview
 
@@ -280,8 +84,8 @@ Fourteen skills organized by role:
 
 ## Typical Workflow
 
-1. **Start a new project.** Copy `templates/CLAUDE.superpapers.md` into your project root, fill in the research context (field, question, paper language, target journals).
-2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y". The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`.
+1. **Start a new project.** Optionally run `/superpapers:init` to create `CLAUDE.superpapers.md`, the project settings file. You can also skip it and start talking to Claude directly; the plugin can infer settings from context or ask when needed.
+2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y". The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`. This spec is separate from `CLAUDE.superpapers.md`.
 3. **Plan.** Once the spec is approved, the `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts and verification criteria per task, typically saved inside the research project under `docs/superpapers/plans/`.
 4. **Execute.** The `execute-plan` skill dispatches subagents per task, verifies after each phase, and runs the full pipeline end-to-end before declaring any result final.
 5. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements.
@@ -293,11 +97,11 @@ Throughout the workflow, `academic-baseline` enforces the non-negotiable princip
 English:
 
 ```
-I want to write a paper on the effect of Bolsa Família on child nutrition outcomes.
+I want to write a paper on the effect of wildfire smoke exposure on emergency room visits.
 ```
 
 ```
-Help me find recent papers on minimum wage effects in Latin America, verified via DOI.
+Help me find recent papers on incumbency advantage in mayoral elections, verified via DOI.
 ```
 
 ```
@@ -308,7 +112,21 @@ Skills activate automatically based on the conversation context — you do not n
 
 ## Project Setup
 
-For new research projects, copy `templates/CLAUDE.superpapers.md` into the project root and fill in the fields (field, research question, paper language, default seed, target journals). This file tells Claude Code which skills apply to the project and what settings to respect.
+`CLAUDE.superpapers.md` is optional but recommended. It stores persistent project settings such as field, research question, paper language, significance convention, default seed, and target journals.
+
+Recommended path:
+
+```
+/superpapers:init
+```
+
+The command creates or updates `CLAUDE.superpapers.md` in the project root. If you already have a brainstorm spec in `docs/superpapers/specs/`, it should pull settings from that spec and ask only for missing details.
+
+Manual path:
+
+- Copy `templates/CLAUDE.superpapers.md` into the project root and fill in the fields yourself.
+
+If you skip this file entirely, superpapers still works. The skills fall back to project context and direct user instructions when settings are not persisted yet.
 
 The canonical project structure — proposed by `replication-driven-research` on first invocation — is:
 
@@ -335,7 +153,7 @@ You can use `templates/paper-skeleton.tex` as a starting point for the paper its
 
 Plugin internals — SKILL.md files, scripts, templates, code comments, identifiers — are English-only. This keeps the plugin accessible to researchers globally.
 
-Paper content — abstract, sections, table notes, figure captions, output strings — follows the user's chosen paper language. Set `paper_language` in `CLAUDE.superpapers.md` (default: `en`, options include `pt-BR`, `es`, `fr`, and so on). Skills that produce user-facing paper content respect this setting.
+Paper content — abstract, sections, table notes, figure captions, output strings — follows the user's chosen paper language. Set `paper_language` in `CLAUDE.superpapers.md` if you use the settings file, or state it explicitly in the conversation (default: `en`, options include `pt-BR`, `es`, `fr`, and so on). Skills that produce user-facing paper content respect this setting.
 
 Your conversation with Claude Code can happen in any language. Only the plugin internals are fixed to English.
 
