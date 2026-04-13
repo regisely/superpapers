@@ -16,17 +16,17 @@
       --panel-strong: rgba(15, 23, 42, 0.82);
       --panel-soft: rgba(30, 41, 59, 0.48);
       --line: rgba(148, 163, 184, 0.18);
-      --line-strong: rgba(129, 140, 248, 0.36);
+      --line-strong: rgba(96, 165, 250, 0.36);
       --text: #e2e8f0;
       --muted: #94a3b8;
       --subtle: #64748b;
       --white: #f8fafc;
-      --indigo: #6366f1;
-      --violet: #8b5cf6;
+      --indigo: #3b82f6;
+      --violet: #60a5fa;
       --cyan: #38bdf8;
       --emerald: #34d399;
       --shadow: 0 28px 80px rgba(2, 6, 23, 0.48);
-      --glow: 0 0 0 1px rgba(129, 140, 248, 0.18), 0 30px 120px rgba(99, 102, 241, 0.18);
+      --glow: 0 0 0 1px rgba(96, 165, 250, 0.18), 0 30px 120px rgba(59, 130, 246, 0.18);
       --radius-xl: 32px;
       --radius-lg: 24px;
       --radius-md: 18px;
@@ -55,9 +55,9 @@
       margin: 0;
       min-height: 100%;
       background:
-        radial-gradient(circle at top left, rgba(99, 102, 241, 0.25), transparent 28%),
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.25), transparent 28%),
         radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 24%),
-        radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.18), transparent 26%),
+        radial-gradient(circle at 50% 90%, rgba(96, 165, 250, 0.18), transparent 26%),
         linear-gradient(180deg, #111827 0%, #0f172a 45%, #020617 100%);
       color: var(--text);
       overflow: hidden;
@@ -79,7 +79,7 @@
       width: 24vw;
       height: 24vw;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.28), transparent 70%);
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.28), transparent 70%);
     }
 
     body::after {
@@ -88,7 +88,7 @@
       width: 28vw;
       height: 28vw;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 68%);
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.2), transparent 68%);
     }
 
     body.lightbox-open {
@@ -172,7 +172,7 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)) padding-box,
-        linear-gradient(140deg, rgba(99, 102, 241, 0.42), rgba(139, 92, 246, 0.28), rgba(56, 189, 248, 0.18)) border-box;
+        linear-gradient(140deg, rgba(59, 130, 246, 0.42), rgba(96, 165, 250, 0.28), rgba(56, 189, 248, 0.18)) border-box;
       box-shadow: var(--shadow);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
@@ -187,7 +187,7 @@
       gap: 12px;
       background:
         linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.7)) padding-box,
-        linear-gradient(120deg, rgba(99, 102, 241, 0.9), rgba(139, 92, 246, 0.72), rgba(56, 189, 248, 0.68), rgba(99, 102, 241, 0.88)) border-box;
+        linear-gradient(120deg, rgba(59, 130, 246, 0.9), rgba(96, 165, 250, 0.72), rgba(56, 189, 248, 0.68), rgba(59, 130, 246, 0.88)) border-box;
       background-size: 100% 100%, 220% 220%;
       animation: gradient-flow 14s ease infinite;
       overflow: hidden;
@@ -208,7 +208,7 @@
       width: 34vw;
       height: 34vw;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.22), transparent 64%);
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.22), transparent 64%);
       pointer-events: none;
     }
 
@@ -239,7 +239,7 @@
       height: 8px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--cyan), var(--violet));
-      box-shadow: 0 0 14px rgba(99, 102, 241, 0.82);
+      box-shadow: 0 0 14px rgba(59, 130, 246, 0.82);
     }
 
     .display {
@@ -248,7 +248,7 @@
     }
 
     .gradient-text {
-      background: linear-gradient(120deg, #c7d2fe 0%, #818cf8 30%, #a78bfa 58%, #67e8f9 100%);
+      background: linear-gradient(120deg, #dbeafe 0%, #93c5fd 30%, #60a5fa 58%, #67e8f9 100%);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       background-clip: text;
@@ -355,7 +355,7 @@
       height: 40px;
       margin-bottom: 20px;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.22), rgba(139, 92, 246, 0.28));
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(96, 165, 250, 0.28));
       color: #c7d2fe;
       font-size: 0.95rem;
       font-weight: 800;
@@ -546,8 +546,8 @@
     .demo-inspect:hover,
     .lightbox-close:hover {
       transform: translateY(-2px);
-      border-color: rgba(129, 140, 248, 0.42);
-      box-shadow: 0 18px 40px rgba(99, 102, 241, 0.16);
+      border-color: rgba(96, 165, 250, 0.42);
+      box-shadow: 0 18px 40px rgba(59, 130, 246, 0.16);
     }
 
     .demo-stage {
@@ -566,7 +566,7 @@
       border-radius: 28px;
       overflow: hidden;
       background:
-        radial-gradient(circle at top left, rgba(99, 102, 241, 0.22), transparent 28%),
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 28%),
         linear-gradient(180deg, rgba(2, 6, 23, 0.86), rgba(2, 6, 23, 0.62));
       border: 1px solid rgba(148, 163, 184, 0.16);
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 34px 90px rgba(2, 6, 23, 0.45);
@@ -577,7 +577,7 @@
       position: absolute;
       inset: 18px;
       border-radius: 28px;
-      border: 1px solid rgba(129, 140, 248, 0.08);
+      border: 1px solid rgba(96, 165, 250, 0.08);
       pointer-events: none;
     }
 
@@ -637,7 +637,7 @@
       width: 36px;
       height: 36px;
       border-radius: 12px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.28), rgba(139, 92, 246, 0.4));
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.28), rgba(96, 165, 250, 0.4));
       color: #dbeafe;
       font-size: 0.88rem;
       font-weight: 800;
@@ -749,7 +749,7 @@
       height: 100%;
       border-radius: inherit;
       background: linear-gradient(90deg, var(--cyan), var(--indigo), var(--violet));
-      box-shadow: 0 0 24px rgba(99, 102, 241, 0.44);
+      box-shadow: 0 0 24px rgba(59, 130, 246, 0.44);
       transition: width 420ms ease;
     }
 
@@ -814,7 +814,7 @@
       max-width: 900px;
       background:
         linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.82)) padding-box,
-        linear-gradient(135deg, rgba(99, 102, 241, 0.46), rgba(56, 189, 248, 0.22), rgba(139, 92, 246, 0.36)) border-box;
+        linear-gradient(135deg, rgba(59, 130, 246, 0.46), rgba(56, 189, 248, 0.22), rgba(96, 165, 250, 0.36)) border-box;
     }
 
     .install-grid {
@@ -868,7 +868,7 @@
       min-height: 46px;
       padding: 10px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(129, 140, 248, 0.28);
+      border: 1px solid rgba(96, 165, 250, 0.28);
       background: rgba(30, 41, 59, 0.56);
       color: #c7d2fe;
       text-decoration: none;
@@ -902,8 +902,8 @@
       gap: 14px;
       background:
         linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.84)) padding-box,
-        linear-gradient(135deg, rgba(99, 102, 241, 0.78), rgba(56, 189, 248, 0.26), rgba(139, 92, 246, 0.62)) border-box;
-      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.22), 0 40px 120px rgba(99, 102, 241, 0.22);
+        linear-gradient(135deg, rgba(59, 130, 246, 0.78), rgba(56, 189, 248, 0.26), rgba(96, 165, 250, 0.62)) border-box;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.22), 0 40px 120px rgba(59, 130, 246, 0.22);
     }
 
     .lightbox-header {
@@ -961,7 +961,7 @@
       min-height: 40px;
       padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(129, 140, 248, 0.2);
+      border: 1px solid rgba(96, 165, 250, 0.2);
       background: rgba(30, 41, 59, 0.56);
       color: #c7d2fe;
       font-size: 0.84rem;
@@ -1852,6 +1852,7 @@
             </div>
             <h1 class="display gradient-text">SUPERPAPERS</h1>
             <p class="lead">AI-Powered Academic Research <span class="lead-muted">From Idea to Published Paper</span></p>
+            <a class="link-pill" href="https://github.com/regisely/superpapers" target="_blank" rel="noreferrer">github.com/regisely/superpapers</a>
           </div>
         </div>
       </section>
