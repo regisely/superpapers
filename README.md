@@ -59,7 +59,7 @@ Stages covered in the live presentation:
 
 ![Representative demo screenshot](presentation/screenshots/01-brainstorm-start.png)
 
-_Representative moment from the real session: the workflow starts from a concrete research question and begins structuring the project before any implementation._
+_Representative moment from a real session: the workflow starts from a concrete research question and asks follow up questions to structure the project before any implementation._
 
 ## Skills Overview
 
