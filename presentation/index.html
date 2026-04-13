@@ -688,16 +688,14 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(2, 6, 23, 0.5);
-      color: rgba(248, 250, 252, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(2, 6, 23, 0.2);
+      color: rgba(248, 250, 252, 0.74);
       font-size: 1.55rem;
       line-height: 1;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 14px 34px rgba(2, 6, 23, 0.22);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(2, 6, 23, 0.1);
     }
 
     .demo-nav-prev {
@@ -717,16 +715,14 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(2, 6, 23, 0.5);
-      color: rgba(248, 250, 252, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(2, 6, 23, 0.2);
+      color: rgba(248, 250, 252, 0.74);
       font-size: 1.6rem;
       line-height: 1;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 14px 34px rgba(2, 6, 23, 0.22);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(2, 6, 23, 0.1);
     }
 
     .lightbox-nav-prev {
@@ -1009,7 +1005,7 @@
       padding: 8px 12px;
       right: auto;
       bottom: max(14px, calc(var(--safe-bottom) + 8px));
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
     }
 
     @keyframes gradient-flow {
@@ -1584,8 +1580,6 @@
         background: rgba(2, 6, 23, 0.08);
         color: rgba(248, 250, 252, 0.34);
         box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
       }
     }
 
@@ -1595,12 +1589,12 @@
       }
 
       .reveal .slides {
-        height: 100dvh;
+        height: var(--viewport-height, 100dvh);
       }
 
       .reveal .slides section {
         align-items: flex-start;
-        height: 100dvh;
+        height: var(--viewport-height, 100dvh);
         overflow-y: auto;
         overscroll-behavior-y: contain;
         -webkit-overflow-scrolling: touch;
@@ -2264,10 +2258,12 @@
     function getViewportMetrics() {
       const visualViewport = window.visualViewport
       const scale = visualViewport?.scale || 1
+      const width = visualViewport?.width || window.innerWidth || 375
+      const height = visualViewport?.height || window.innerHeight || 667
 
       return {
-        width: Math.max(window.innerWidth || 375, 320),
-        height: Math.max(window.innerHeight || 667, 480),
+        width: Math.max(width, 320),
+        height: Math.max(height, 480),
         scale
       }
     }
@@ -2300,7 +2296,9 @@
     }
 
     function applyRevealConfig() {
+      const metrics = getViewportMetrics()
       syncZoomStateClass()
+      document.documentElement.style.setProperty("--viewport-height", `${Math.round(metrics.height)}px`)
 
       if (typeof Reveal.configure !== "function") {
         return
@@ -2326,14 +2324,20 @@
       const controlsRect = controls.getBoundingClientRect()
 
       let centerX = controlsRect.left + controlsRect.width / 2
+      let centerY = controlsRect.top + controlsRect.height / 2
 
       if (previousRect?.width && nextRect?.width) {
         const previousCenter = previousRect.left + previousRect.width / 2
         const nextCenter = nextRect.left + nextRect.width / 2
+        const previousMiddle = previousRect.top + previousRect.height / 2
+        const nextMiddle = nextRect.top + nextRect.height / 2
         centerX = (previousCenter + nextCenter) / 2
+        centerY = (previousMiddle + nextMiddle) / 2
       }
 
       slideNumber.style.left = `${Math.round(centerX)}px`
+      slideNumber.style.top = `${Math.round(centerY - 2)}px`
+      slideNumber.style.bottom = "auto"
     }
 
     function debounce(callback, delay = 140) {
