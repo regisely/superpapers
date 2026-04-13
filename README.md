@@ -1,11 +1,9 @@
-# Superpapers
+# superpapers
 
-A Claude Code plugin for empirical quantitative research — brainstorm, plan, and execute academic papers with the same discipline that Superpowers brings to software engineering.
-
-Links:
+A Claude Code plugin that uses AI subagents and a Socratic method of human-AI interaction to brainstorm, plan, and execute empirical academic papers. Inspired by the [superpowers](https://github.com/obra/superpowers) plugin philosophy, it brings the same discipline to quantitative research.
 
 - Live presentation: [superpapers](https://regisely.com/superpapers/)
-- Example Paper: [credit_and_productivity_paper.pdf](https://regisely.com/superpapers/credit_and_productivity_paper.pdf)
+- Example Paper: [credit_and_productivity.pdf](https://regisely.com/superpapers/credit_and_productivity.pdf)
 
 ## What It Is
 
@@ -17,35 +15,37 @@ Superpapers is a standalone plugin with no dependencies on Superpowers or any ot
 
 ## Installation
 
-Add the plugin from GitHub in any Claude Code session:
+First, add the marketplace source from GitHub:
 
 ```
 /plugin marketplace add regisely/superpapers
+```
+
+Then install the plugin:
+
+```
 /plugin install superpapers
 ```
 
 Claude Code accepts a GitHub repo directly as the marketplace source. After installation, the skills become available automatically when you discuss research tasks.
 
-## Updating
+## Usage
 
-Claude Code caches marketplace repositories locally, so updating the plugin is a two-step process:
-
-```
-/plugin marketplace update superpapers
-/plugin update superpapers
-```
-
-Use `/plugin marketplace update superpapers` to refresh the local clone of the marketplace repository, then `/plugin update superpapers` to reinstall the latest published plugin version from that refreshed marketplace state.
-
-Optional project settings command:
+After installation, just tell Claude what you want to research. The plugin skills activate automatically based on the conversation context:
 
 ```
-/superpapers:init
+I want to write a paper on the effect of wildfire smoke exposure on emergency room visits.
 ```
 
-This creates or updates `CLAUDE.superpapers.md` in the current project. You can run it at the start of a project or later, after brainstorm has already written a spec in `docs/superpapers/specs/`.
+```
+Help me find recent papers on incumbency advantage in mayoral elections, verified via DOI.
+```
 
-Explicit workflow commands:
+```
+Run a staggered DiD on this panel of state-level policy adoptions from 2010 to 2024.
+```
+
+You can also use explicit slash commands to enter the workflow at a specific stage:
 
 ```
 /superpapers:brainstorm
@@ -53,7 +53,13 @@ Explicit workflow commands:
 /superpapers:execute-plan
 ```
 
-These commands are the superpapers-specific entry points for the main research workflow and avoid confusion with generic commands from other plugins.
+Optionally, you can create or update project settings at any point:
+
+```
+/superpapers:init
+```
+
+This creates `CLAUDE.superpapers.md` in the current project with fields like research question, paper language, target journals, and significance convention. If you run it before brainstorming, you fill in the fields manually. If you brainstorm first and run it after, the init command pulls settings from the spec automatically.
 
 <a id="demonstration"></a>
 ## Demonstration
@@ -105,31 +111,13 @@ Fourteen skills organized by role:
 
 ## Typical Workflow
 
-1. **Start a new project.** Optionally run `/superpapers:init` to create `CLAUDE.superpapers.md`, the project settings file. You can also skip it and start talking to Claude directly; the plugin can infer settings from context or ask when needed.
+1. **Start a new project.** Create a new folder for your research and open Claude Code inside it. Optionally run `/superpapers:init` to create `CLAUDE.superpapers.md` with your project settings, or skip it and start talking to Claude directly. The plugin can infer settings from context or ask when needed.
 2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y" or invoke `/superpapers:brainstorm`. The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`. This spec is separate from `CLAUDE.superpapers.md`.
 3. **Plan.** Once the spec is approved, invoke `/superpapers:write-plan` or continue naturally in the conversation. The `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts and verification criteria per task, typically saved inside the research project under `docs/superpapers/plans/`.
 4. **Execute.** Invoke `/superpapers:execute-plan` or continue naturally in the conversation. The `execute-plan` skill dispatches subagents per task, verifies after each phase, and runs the full pipeline end-to-end before declaring any result final.
 5. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements.
 
 Throughout the workflow, `academic-baseline` enforces the non-negotiable principles and `replication-driven-research` guarantees the pipeline stays reproducible.
-
-## Example Prompts
-
-English:
-
-```
-I want to write a paper on the effect of wildfire smoke exposure on emergency room visits.
-```
-
-```
-Help me find recent papers on incumbency advantage in mayoral elections, verified via DOI.
-```
-
-```
-Run a staggered DiD on this panel of state-level policy adoptions from 2010 to 2024.
-```
-
-Skills activate automatically based on the conversation context — you do not need to invoke them by name.
 
 ## Project Setup
 
@@ -169,6 +157,20 @@ project-root/
 ```
 
 You can use `templates/paper-skeleton.tex` as a starting point for the paper itself and `templates/replication-readme.md` for the replication package.
+
+## Updating
+
+Claude Code caches marketplace repositories locally, so updating the plugin is a two-step process:
+
+```
+/plugin marketplace update superpapers
+```
+
+```
+/plugin update superpapers
+```
+
+The first command refreshes the local clone of the marketplace repository. The second reinstalls the latest plugin version from that refreshed state.
 
 ## Language Policy
 

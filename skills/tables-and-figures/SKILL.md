@@ -36,6 +36,13 @@ This skill produces publication-quality tables and figures that are regenerated 
 
 7. **Table notes and figure captions follow the user's paper language.** The file names and script comments stay in English; the user-facing text in the notes and captions follows the paper's language setting.
 
+8. **No table may overflow the text width.** After generating a table, verify it fits within `\linewidth`. If it overflows:
+   - First, reduce column padding with `@{}` column separators or `\setlength{\tabcolsep}{3pt}`.
+   - Second, abbreviate column headers or use multi-row headers.
+   - Third, use `\resizebox{\linewidth}{!}{...}` — but only if font remains readable.
+   - Last resort: switch the table page to landscape using the `pdflscape` package (`\begin{landscape}...\end{landscape}`). Add `\usepackage{pdflscape}` to the preamble.
+   Never let a table bleed into the margin. After compilation, check for `Overfull \hbox` warnings on table lines and fix them.
+
 ## Table Template
 
 Standard regression results table:
@@ -127,6 +134,9 @@ ggsave(
 - Missing sample description in the table note
 - Using ggplot2's default grey background theme in published figures
 - Color-only differentiation in figures intended for B&W print
+- Tables that overflow into the page margin without correction
+- Using `\resizebox` as a first resort instead of redesigning column layout or reducing padding
+- Wide tables left in portrait when landscape would preserve readability
 
 ## Verification Before Completion
 
@@ -139,3 +149,5 @@ ggsave(
 - [ ] Axis labels and units specified
 - [ ] Colors colorblind-safe where feasible
 - [ ] Table notes and figure captions in the user's paper language
+- [ ] No table overflows the text width or bleeds into margins
+- [ ] Wide tables use landscape orientation or column optimization to remain readable

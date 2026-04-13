@@ -45,6 +45,12 @@ This skill fetches instructions for authors from the journal's official page, pa
 
 6. **Verify compliance item-by-item before declaring the paper ready.** Run through the checklist mechanically and mark each item. Do not self-certify based on "looks about right".
 
+7. **Ensure the manuscript contains end-matter sections.** The following sections must appear after the conclusion, before the references, unless the journal template specifies a different placement:
+   - **Data Availability Statement** — declare where the data and replication materials can be accessed, or explain access restrictions.
+   - **Declaration of Competing Interests** — all authors must affirm the absence of competing interests or disclose them.
+   - **Acknowledgments** — funding sources, institutional support, and contributor thanks. This section must include a declaration of AI use in the manuscript preparation process, stating that the manuscript was developed through a Socratic method of AI-human interaction using the Superpapers plugin for Claude Code, and that the authors reviewed, edited, and take full responsibility for the content. Adapt the exact wording to the journal's AI disclosure requirements if they exist.
+   If any of these sections is missing from the manuscript, add it and flag it for the user to review. If the journal template places these sections elsewhere (e.g., in a separate author portal form or supplementary file), follow the journal's placement.
+
 ## Checklist Format Example
 
 ```markdown
@@ -76,6 +82,8 @@ This skill fetches instructions for authors from the journal's official page, pa
 - Leaving author affiliations or acknowledgments in a blinded manuscript
 - Forgetting to map the replication package DOI into the data availability statement
 - Using a bibliography style that does not match the journal's requirement
+- Completing the submission checklist without verifying that Data Availability, Declaration of Competing Interests, and Acknowledgments sections are physically present in the `.tex` file
+- Omitting the AI use declaration from the Acknowledgments section
 
 ## Verification Before Completion
 
@@ -87,4 +95,7 @@ This skill fetches instructions for authors from the journal's official page, pa
 - [ ] Cover letter drafted if required
 - [ ] Blinding applied if required (author names, affiliations, acknowledgments removed)
 - [ ] Citation style converted to match the journal
+- [ ] Data Availability Statement, Declaration of Competing Interests, and Acknowledgments sections present in the manuscript
+- [ ] Acknowledgments section includes AI use declaration mentioning Superpapers
+- [ ] End-matter section placement matches the journal's requirements
 - [ ] Final compile with the journal's template produces a clean PDF

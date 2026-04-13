@@ -20,7 +20,7 @@ This skill is the constitution of the superpapers plugin. It sets inviolable rul
 
 ## Core Principles
 
-The eight principles below are non-negotiable. Every other superpapers skill operates under them.
+The nine principles below are non-negotiable. Every other superpapers skill operates under them.
 
 1. **Never fabricate citations.** Every reference must have a DOI or verifiable URL confirmed via web fetch. Citing from memory is forbidden. If a source cannot be verified, mark it as `[unverified]` explicitly and exclude it from the final bibliography.
 
@@ -38,10 +38,12 @@ The eight principles below are non-negotiable. Every other superpapers skill ope
 
 8. **Respect the user's paper language.** Plugin internals and code are English-only. Paper content — abstracts, sections, table notes, figure captions, generated text — follows the user's chosen paper language, detected from `CLAUDE.superpapers.md` or explicit instruction. Never mix plugin language into user output.
 
+9. **Write clean, flowing prose.** Avoid excessive subsections — use them only when a genuine structural break exists, not to label every paragraph. Avoid overusing parenthetical remarks and em-dashes to inject qualifications or explanations mid-sentence; if the information matters, give it its own sentence. Parentheses and dashes should be rare punctuation, not a writing habit. Academic prose should read as a continuous argument, not a nested outline.
+
 ## Mandatory Steps
 
 1. Check for `CLAUDE.superpapers.md` in the project root. If present, load its settings (field, paper language, significance convention, seed, target journals) and apply them throughout the session.
-2. Apply the eight principles above to every recommendation and action. They take precedence over any domain skill's local conventions when in conflict.
+2. Apply the nine principles above to every recommendation and action. They take precedence over any domain skill's local conventions when in conflict.
 3. Flag principle violations explicitly when working with the user. Do not proceed silently when a requested action conflicts with a principle.
 4. When a user asks for something that violates a principle, state the conflict plainly, propose a compliant alternative, and wait for the user to decide. Do not refuse without proposing a path forward.
 
@@ -55,6 +57,8 @@ The eight principles below are non-negotiable. Every other superpapers skill ope
 - Framing an exploratory finding as if it were a prior hypothesis
 - Ignoring the paper language setting and producing user-facing text in English when the paper is in another language
 - Proceeding silently with an action that violates a principle
+- Fragmenting a section into many subsections when the content flows naturally as paragraphs
+- Relying on parentheses or dashes as a crutch to pack qualifications into sentences instead of writing them out
 
 ## Verification Before Completion
 
@@ -63,4 +67,5 @@ The eight principles below are non-negotiable. Every other superpapers skill ope
 - [ ] Causal language matches the identification strategy (or has been corrected to correlational)
 - [ ] The user's paper language is respected in all user-facing content
 - [ ] No principle violations remain flagged as open
+- [ ] Prose reads as continuous argument without excessive subsections, parentheses, or dashes
 - [ ] `CLAUDE.superpapers.md` settings have been loaded and applied if present

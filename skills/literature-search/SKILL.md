@@ -37,6 +37,8 @@ This skill searches academic literature with strict web verification of every re
 
 6. **Curate, do not dump.** Prioritize seminal works, recent papers (last five years), highly cited results, and papers that directly address the user's question. Aim for 8 to 15 results per query unless the user asks for more.
 
+7. **Bias toward the user's target journals.** Check `CLAUDE.superpapers.md` for the target journal list (or ask the user). Ensure a substantial share of cited references come from those journals or closely related ones in the same field tier. Prioritize very recent publications (last three to five years) in those outlets — reviewers expect to see that the authors know the journal's recent conversation. If a search returns few results from the target journals, widen to journals of similar scope and rank, but flag the gap to the user.
+
 ## Output Format
 
 ```markdown
@@ -58,6 +60,7 @@ Replace example DOIs with real verified values. Never leave placeholder DOIs in 
 - Listing papers outside the user's field
 - Returning results without DOIs or stable URLs
 - Trusting a paper's existence because a well-known author "probably wrote it"
+- Ignoring the target journal list when curating results — the bibliography should reflect the journal's recent conversation
 
 ## Verification Before Completion
 
@@ -68,3 +71,5 @@ Replace example DOIs with real verified values. Never leave placeholder DOIs in 
 - [ ] Relevance column is populated with substantive reasoning
 - [ ] Results are curated, not dumped
 - [ ] Working papers distinguished from published versions
+- [ ] Substantial share of references come from the user's target journals or closely related outlets
+- [ ] Recent papers (last 3-5 years) from target journals are well represented
