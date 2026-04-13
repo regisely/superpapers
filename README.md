@@ -4,8 +4,8 @@ A Claude Code plugin for empirical quantitative research — brainstorm, plan, a
 
 Links:
 
-- Live presentation: [regisely.github.io/superpapers/](https://regisely.github.io/superpapers/)
-- Example Paper: [regisely.github.io/superpapers/credit_and_productivity_paper.pdf](https://regisely.github.io/superpapers/credit_and_productivity_paper.pdf)
+- Live presentation: [superpapers](https://regisely.com/superpapers/)
+- Example Paper: [credit_and_productivity_paper.pdf](https://regisely.com/superpapers/credit_and_productivity_paper.pdf)
 
 ## What It Is
 
