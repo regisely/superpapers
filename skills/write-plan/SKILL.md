@@ -23,7 +23,7 @@ This skill writes a detailed, research-structured implementation plan from an ap
 
 ## Mandatory Steps
 
-1. **Invoke `academic-baseline` first.** Load `CLAUDE.superpapers.md` if present and carry its settings and principles through the entire planning step.
+1. **Invoke `academic-baseline` first.** This resolves `CLAUDE.superpapers.md` via the walk-up Read (current working directory, then parent directories) and carries its settings and principles through the entire planning step.
 
 2. **Read the design spec in full.** Understand every decision the brainstorm made — research question, identification strategy, data sources, models, robustness plan, submission target.
 
@@ -47,25 +47,28 @@ This skill writes a detailed, research-structured implementation plan from an ap
 
 The plan is organized in these phases — not software phases. Each phase has tasks; each task has an expected artifact and a verification step.
 
-### 1. Collection
+### 1. Literature
+Full literature review that grounds the paper and positions it against existing work. Tasks: invoke `literature-search` in full mode (all Mandatory Steps, including the target-journal bias) to curate 15-30 key references; populate `paper/references.bib` via `citation-management`; produce a synthesized literature notes document (e.g., `docs/superpapers/literature-notes.md`) that will feed the Introduction and Literature Review sections during writing. The brief gap check run inside `brainstorm` is not a substitute — this phase is the substantive literature engagement. Verification: bibliography populated and DOI-verified, notes cover (a) state of the field, (b) methods and data typical in the area, (c) papers this work positions against, (d) recent target-journal publications. Skills involved: `academic-baseline`, `literature-search`, `citation-management`.
+
+### 2. Collection
 Fetch raw data. Tasks: identify sources (via `data-collection`), implement collection scripts, save to `data/raw/`, update `data/manifest.md`. Verification: raw files exist, manifest entries present.
 
-### 2. Preparation
+### 3. Preparation
 Clean and merge. Tasks: cleaning scripts, merge logic, derived variables, sample selection rules. Verification: processed data exists in `data/processed/`, sample selection documented.
 
-### 3. Exploratory Analysis
+### 4. Exploratory Analysis
 Descriptive statistics, visualizations, data quality checks. Tasks: `tab_descriptives.tex`, `fig_trends.pdf`, anomaly detection. Verification: outputs exist; a reviewer can read them before the main analysis.
 
-### 4. Main Analysis
+### 5. Main Analysis
 The specified model from the design. Tasks: one estimation script per specification (main, alternate outcome, alternate controls). Verification: `tab_main_results.tex` exists, coefficients reproducible.
 
-### 5. Robustness
+### 6. Robustness
 Canonical checks for the design (via `robustness-checks`). Tasks: one script per check, one table or column per check. Verification: `tab_robustness.tex` exists; all checks present; failures discussed.
 
-### 6. Writing
+### 7. Writing
 Paper sections from data to narrative. Tasks: draft each section (Abstract, Introduction, Data, Methods, Results, Discussion, Conclusion), pull tables and figures via `\input{}` and `\includegraphics{}`. Writing tasks operate under `academic-baseline`; use `journal-guidelines` here only when the work is already tied to a specific journal template or formatting requirement. Verification: `paper.tex` compiles with `compile-latex`.
 
-### 7. Submission
+### 8. Submission
 Target journal, formatting, checklist. Tasks: invoke `journal-selection` if not already decided, then invoke `journal-guidelines` for the chosen journal, adapt the manuscript and submission materials, and run the final compliance check. Journal-facing work without `journal-guidelines` is invalid. Verification: submission checklist complete.
 
 ## Task Template
@@ -73,7 +76,7 @@ Target journal, formatting, checklist. Tasks: invoke `journal-selection` if not 
 Every task must specify:
 
 - **Title** — imperative, actionable (e.g., "Collect unemployment series from IBGE")
-- **Phase** — one of the 7 above
+- **Phase** — one of the 8 above
 - **Inputs** — files or datasets this task reads
 - **Outputs** — files this task produces
 - **Script** — path to the script that implements it (e.g., `code/01_collect.R`)
@@ -84,6 +87,7 @@ Every task must specify:
 ## Anti-Patterns
 
 - Plan organized by software phases (architecture, backend, frontend) instead of research phases
+- Omitting the Literature phase — every empirical paper plan must include at least one full-literature-review task routed to `literature-search` in full mode, producing a curated bibliography before data collection begins
 - Tasks with vague outputs ("build the analysis", "write the results section")
 - Tasks without verification criteria
 - Skipping the manifest update in the collection phase
@@ -98,7 +102,8 @@ Every task must specify:
 ## Verification Before Completion
 
 - [ ] Every spec requirement mapped to at least one task
-- [ ] All 7 phases represented, or a phase explicitly excluded with reason
+- [ ] All 8 phases represented, or a phase explicitly excluded with reason
+- [ ] Literature phase includes a task that invokes `literature-search` in full mode and populates the bibliography
 - [ ] Every task has inputs, outputs, script path, verification, skills, commit message
 - [ ] Every task includes `academic-baseline` plus the necessary domain skills
 - [ ] Every journal-facing task includes `journal-guidelines` (or `journal-selection` followed by `journal-guidelines` when the outlet is still undecided)

@@ -14,7 +14,7 @@ Execution rules:
 1. Inspect the project for:
    - `docs/superpapers/specs/`
    - `docs/superpapers/plans/`
-   - `CLAUDE.superpapers.md`
+   (`CLAUDE.superpapers.md` is loaded automatically by `academic-baseline` on activation — no manual check needed here.)
 
 2. If no design spec exists, do not improvise a plan from thin air. Tell the user that the expected previous step is `/superpapers:brainstorm`, unless they already have a design elsewhere and want to provide it.
 
@@ -32,4 +32,3 @@ Execution rules:
 
 6. At the end, state the next step explicitly:
    - next step is usually `/superpapers:execute-plan`
-   - `/superpapers:init` can still be used later if the project settings file has not been created yet

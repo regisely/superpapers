@@ -14,8 +14,8 @@ Execution rules:
 1. Inspect the project for:
    - `docs/superpapers/plans/`
    - `docs/superpapers/specs/`
-   - `CLAUDE.superpapers.md`
    - current project structure and outputs
+   (`CLAUDE.superpapers.md` is loaded automatically by `academic-baseline` on activation — no manual check needed here.)
 
 2. If no plan exists, do not jump directly into execution. Tell the user the expected previous step is `/superpapers:write-plan`, unless they already have a concrete plan they want to execute.
 
@@ -33,4 +33,4 @@ Execution rules:
 
 5. Keep this command within superpapers. Do not route to generic execution behavior from other plugins.
 
-6. If `CLAUDE.superpapers.md` is missing, execution can still proceed, but mention that `/superpapers:init` can persist project settings for later stages.
+6. Execution proceeds without `CLAUDE.superpapers.md`; `academic-baseline` asks inline for any setting it needs.

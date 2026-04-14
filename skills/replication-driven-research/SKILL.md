@@ -55,7 +55,7 @@ On first invocation in a project, propose this structure to the user. The user c
 
 3. **Every result must have a generating script.** No exceptions. Pasting numbers from a console or notebook into the paper is forbidden. Tables enter the paper via `\input{output/tables/...}`; figures enter via `\includegraphics{output/figures/...}`.
 
-4. **Fix the seed in every script that uses randomness.** Document the seed in the script header. Use the project-level default from `CLAUDE.superpapers.md` unless the script explicitly overrides it (and explains why).
+4. **Fix the seed in every script that uses randomness.** Document the seed in the script header. Use the project-level default seed from `CLAUDE.superpapers.md` — read from the current working directory, or walk up parent directories until found — unless the script explicitly overrides it and explains why. If the file is absent, ask the user for a project-level default on first need.
 
 5. **Run the pipeline end-to-end before declaring any result verified.** Use a top-level `run_all.sh` (or `Makefile`) that executes scripts in the correct order. Verify exit code 0 and that every expected output file exists and is non-empty.
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0] - 2026-04-14
+
+Reliable `CLAUDE.superpapers.md` loading and multi-paper repository support.
+
+- `CLAUDE.superpapers.md` is now reliably loaded by every skill via an explicit walk-up Read on activation (starting from the current working directory and walking up parent directories until found) instead of the previous soft "check for" language that relied on Claude's discretion
+- Multi-paper repositories are now supported: place a `CLAUDE.superpapers.md` inside each paper subfolder; skills resolve the correct file based on the current working directory
+- `/superpapers:init` repositioned as an opt-in command for advanced users who want to pre-populate settings, pin a reproducibility seed, or add explicit rules; no other command or skill calls or suggests it
+- `/superpapers:init` now writes `CLAUDE.superpapers.md` in the current working directory (not the project root) to support multi-paper layouts, and echoes the written content in its summary so same-session skills see it without re-reading disk
+- `templates/CLAUDE.superpapers.md` cleaned up: `## Directory Structure` block removed (owned by `replication-driven-research`); `Reproducibility` section removed (seed, version, lockfile were either redundant or better inferred automatically); `Code language` field added to Research Context; target-journal bias and recent-publications rules added to Instructions for Claude Code
+- `brainstorm` now explicitly invokes `journal-selection`, `statistical-modeling`, and `data-collection` at the appropriate Socratic steps (publication tier, identification strategy, statistical power, data feasibility), and elevates `replication-driven-research` from a passing guardrail to a foundational step 1 invocation alongside `academic-baseline`
+- `write-plan` now includes a canonical `Literature` phase at the start of the pipeline (phases renumbered from 7 to 8); every plan must contain a task that invokes `literature-search` in full mode (all Mandatory Steps, including target-journal bias) to produce a curated bibliography and notes document before data collection begins. `brainstorm` continues to do only the brief gap verification in Step 4 Contribution — the full literature review is an execution-pipeline task, not a brainstorm step
+- README documents both single-paper and multi-paper layouts with directory trees
+
 ## [1.1.0] - 2026-04-13
 
 Strengthened orchestration rules for skill loading and task routing.
@@ -28,5 +41,6 @@ Initial stable release.
 - Interactive presentation deployed to GitHub Pages
 - Worked example: `examples/credit_and_productivity.pdf`
 
+[1.2.0]: https://github.com/regisely/superpapers/releases/tag/v1.2.0
 [1.1.0]: https://github.com/regisely/superpapers/releases/tag/v1.1.0
 [1.0.0]: https://github.com/regisely/superpapers/releases/tag/v1.0.0

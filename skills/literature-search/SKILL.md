@@ -20,7 +20,7 @@ This skill searches academic literature with strict web verification of every re
 
 ## Mandatory Steps
 
-1. **Identify the research field from context.** Check `CLAUDE.superpapers.md`, the project abstract, or ask the user directly. The field determines which databases to prioritize.
+1. **Identify the research field from context.** Resolve `CLAUDE.superpapers.md` by reading it from the current working directory, or walking up parent directories until found. If the file contains a `field` entry, use it. Otherwise infer from the project abstract or ask the user directly. The field determines which databases to prioritize.
 
 2. **Choose databases based on the field:**
    - **Core (any field):** Google Scholar, Web of Science, JSTOR, Semantic Scholar
@@ -37,7 +37,7 @@ This skill searches academic literature with strict web verification of every re
 
 6. **Curate, do not dump.** Prioritize seminal works, recent papers (last five years), highly cited results, and papers that directly address the user's question. Aim for 8 to 15 results per query unless the user asks for more.
 
-7. **Bias toward the user's target journals.** Check `CLAUDE.superpapers.md` for the target journal list (or ask the user). Ensure a substantial share of cited references come from those journals or closely related ones in the same field tier. Prioritize very recent publications (last three to five years) in those outlets — reviewers expect to see that the authors know the journal's recent conversation. If a search returns few results from the target journals, widen to journals of similar scope and rank, but flag the gap to the user.
+7. **Bias toward the user's target journals.** Use the target journal list resolved from `CLAUDE.superpapers.md` in step 1, or ask the user if the file was absent or the field was unset. Ensure a substantial share of cited references come from those journals or closely related ones in the same field tier. Prioritize very recent publications (last three to five years) in those outlets — reviewers expect to see that the authors know the journal's recent conversation. If a search returns few results from the target journals, widen to journals of similar scope and rank, but flag the gap to the user.
 
 ## Output Format
 

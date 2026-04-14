@@ -24,7 +24,7 @@ This skill executes a research plan phase by phase. It starts by invoking `acade
 
 ## Mandatory Steps
 
-1. **Invoke `academic-baseline` first.** Load `CLAUDE.superpapers.md` if present, carry its settings into the session, and keep `academic-baseline` active through every phase.
+1. **Invoke `academic-baseline` first.** This resolves `CLAUDE.superpapers.md` via the walk-up Read (current working directory, then parent directories) and carries its settings into the session. Keep `academic-baseline` active through every phase.
 
 2. **Load and parse the plan.** Read the plan file in full. Extract tasks, phases, dependencies, verification criteria, and `Skills involved`.
 

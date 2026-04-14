@@ -36,13 +36,13 @@ The nine principles below are non-negotiable. Every other superpapers skill oper
 
 7. **Numerical integrity is non-negotiable.** Fix the random seed in every script that uses randomness. Document package versions in a lockfile. Never hardcode intermediate results in the paper. Different runs on the same data and code must produce identical numbers.
 
-8. **Respect the user's paper language.** Plugin internals and code are English-only. Paper content — abstracts, sections, table notes, figure captions, generated text — follows the user's chosen paper language, detected from `CLAUDE.superpapers.md` or explicit instruction. Never mix plugin language into user output.
+8. **Respect the user's paper language.** Plugin internals and code are English-only. Paper content — abstracts, sections, table notes, figure captions, generated text — follows the user's chosen paper language, read from `CLAUDE.superpapers.md` when present or obtained from explicit user instruction otherwise. Never mix plugin language into user output.
 
 9. **Write clean, flowing prose.** Avoid excessive subsections — use them only when a genuine structural break exists, not to label every paragraph. Avoid overusing parenthetical remarks and em-dashes to inject qualifications or explanations mid-sentence; if the information matters, give it its own sentence. Parentheses and dashes should be rare punctuation, not a writing habit. Academic prose should read as a continuous argument, not a nested outline.
 
 ## Mandatory Steps
 
-1. Check for `CLAUDE.superpapers.md` in the project root. If present, load its settings (field, paper language, significance convention, seed, target journals) and apply them throughout the session.
+1. Resolve `CLAUDE.superpapers.md` by attempting to Read it from the current working directory. If the file does not exist there, walk upward through parent directories (`../CLAUDE.superpapers.md`, `../../CLAUDE.superpapers.md`, and so on) until found or until the filesystem root is reached. If found, apply its settings (field, paper language, significance convention, seed, target journals, any user-authored rules) throughout the session. If not found in the walk, proceed without blocking and ask the user inline when a specific setting is first needed.
 2. Apply the nine principles above to every recommendation and action. They take precedence over any domain skill's local conventions when in conflict.
 3. Flag principle violations explicitly when working with the user. Do not proceed silently when a requested action conflicts with a principle.
 4. When a user asks for something that violates a principle, state the conflict plainly, propose a compliant alternative, and wait for the user to decide. Do not refuse without proposing a path forward.
@@ -68,4 +68,4 @@ The nine principles below are non-negotiable. Every other superpapers skill oper
 - [ ] The user's paper language is respected in all user-facing content
 - [ ] No principle violations remain flagged as open
 - [ ] Prose reads as continuous argument without excessive subsections, parentheses, or dashes
-- [ ] `CLAUDE.superpapers.md` settings have been loaded and applied if present
+- [ ] `CLAUDE.superpapers.md` was resolved via walk-up Read; its settings were applied, or its absence was explicitly handled

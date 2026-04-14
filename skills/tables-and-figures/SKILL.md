@@ -86,7 +86,7 @@ Required packages in paper preamble:
 
 **Alternative:** `* p<0.05, ** p<0.01, *** p<0.001` (common in psychology and medicine).
 
-Detect the convention from the `significance_convention` field in `CLAUDE.superpapers.md`. If not set, ask the user. Always document the convention in the table note — do not assume the reader knows which convention is used.
+Detect the convention by reading `CLAUDE.superpapers.md` from the current working directory, or walking up parent directories until found, and using the `significance_convention` field. If the file is absent or the field is unset, ask the user — do not silently default. Always document the convention in the table note; do not assume the reader knows which convention is used.
 
 ## Figure Standards
 

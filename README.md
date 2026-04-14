@@ -59,13 +59,13 @@ You can also use explicit slash commands to enter the workflow at a specific sta
 /superpapers:execute-plan
 ```
 
-Optionally, you can create or update project settings at any point:
+Advanced users who want to pre-populate project settings, declare a code language preference, or add explicit rules and preferences can optionally run:
 
 ```
 /superpapers:init
 ```
 
-This creates `CLAUDE.superpapers.md` in the current project with fields like research question, paper language, target journals, and significance convention. If you run it before brainstorming, you fill in the fields manually. If you brainstorm first and run it after, the init command pulls settings from the spec automatically.
+This writes `CLAUDE.superpapers.md` in the current paper folder with fields like research question, paper language, target journals, and significance convention. The plugin does not require this command — every skill reads `CLAUDE.superpapers.md` on activation when it exists, and asks for settings inline when it does not.
 
 <a id="demonstration"></a>
 ## Demonstration
@@ -117,8 +117,8 @@ Fourteen skills organized by role:
 
 ## Typical Workflow
 
-1. **Start a new project.** Create a new folder for your research and open Claude Code inside it. Optionally run `/superpapers:init` to create `CLAUDE.superpapers.md` with your project settings, or skip it and start talking to Claude directly. The plugin can infer settings from context or ask when needed.
-2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y" or invoke `/superpapers:brainstorm`. The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`. This spec is separate from `CLAUDE.superpapers.md`.
+1. **Start a new project.** Create a new folder for your research and open Claude Code inside it. Just start talking — the plugin infers settings from context and asks inline when something is unknown. Advanced users may also run `/superpapers:init` to persist a `CLAUDE.superpapers.md` file with project settings and custom rules.
+2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y" or invoke `/superpapers:brainstorm`. The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`.
 3. **Plan.** Once the spec is approved, invoke `/superpapers:write-plan` or continue naturally in the conversation. The `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts, verification criteria, and `Skills involved` routing per task, typically saved inside the research project under `docs/superpapers/plans/`.
 4. **Execute.** Invoke `/superpapers:execute-plan` or continue naturally in the conversation. The `execute-plan` skill dispatches subagents per task, verifies after each phase, honors each task's `Skills involved` field, and runs the full pipeline end-to-end before declaring any result final.
 5. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements. Journal-facing work is not considered valid without `journal-guidelines`.
@@ -127,26 +127,26 @@ Throughout the workflow, `academic-baseline` is invoked first as the standing po
 
 ## Project Setup
 
-`CLAUDE.superpapers.md` is optional but recommended. It stores persistent project settings such as field, research question, paper language, significance convention, default seed, and target journals.
+### Optional: `CLAUDE.superpapers.md`
 
-Recommended path:
+`CLAUDE.superpapers.md` is optional. When it exists, every superpapers skill reads it on activation — walking up from the current working directory until the file is found — and applies its settings for the session. Without it, skills ask inline for settings they need. The file typically stores field, research question summary, paper language, code language, significance convention, target journals, and any custom rules or preferences the user wants every skill to respect.
+
+To create or update it, advanced users can run:
 
 ```
 /superpapers:init
 ```
 
-The command creates or updates `CLAUDE.superpapers.md` in the project root. If you already have a brainstorm spec in `docs/superpapers/specs/`, it should pull settings from that spec and ask only for missing details.
+The command gathers what it can from existing specs, plans, and project context, asks only for high-value missing fields, and writes `CLAUDE.superpapers.md` in the current working directory. Alternatively, copy `templates/CLAUDE.superpapers.md` into the paper folder and fill in the fields manually.
 
-Manual path:
+### Single-paper layout
 
-- Copy `templates/CLAUDE.superpapers.md` into the project root and fill in the fields yourself.
-
-If you skip this file entirely, superpapers still works. The skills fall back to project context and direct user instructions when settings are not persisted yet.
-
-The canonical project structure — proposed by `replication-driven-research` on first invocation — is:
+For a single-paper repository, place `CLAUDE.superpapers.md` at the repo root alongside the canonical research structure proposed by `replication-driven-research` on first invocation:
 
 ```
 project-root/
+├── CLAUDE.md                    # optional: repo-wide context (auto-loaded by Claude Code)
+├── CLAUDE.superpapers.md        # optional: paper settings and custom rules
 ├── data/
 │   ├── raw/
 │   ├── processed/
@@ -156,11 +156,33 @@ project-root/
 │   ├── tables/
 │   ├── figures/
 │   └── logs/
-├── paper/
-│   ├── paper.tex
-│   └── references.bib
-└── CLAUDE.superpapers.md
+└── paper/
+    ├── paper.tex
+    └── references.bib
 ```
+
+### Multi-paper layout
+
+For a repository containing multiple papers, keep the canonical structure inside each paper subfolder and place a `CLAUDE.superpapers.md` in each paper's root. The repo root may carry `CLAUDE.md` for context that applies to the whole repository (for example, shared conventions, shared data sources, or author-wide preferences):
+
+```
+repo-root/
+├── CLAUDE.md                    # optional: repo-wide context (auto-loaded)
+├── paper-1/
+│   ├── CLAUDE.superpapers.md    # settings specific to paper 1
+│   ├── data/
+│   ├── code/
+│   ├── output/
+│   └── paper/
+└── paper-2/
+    ├── CLAUDE.superpapers.md    # settings specific to paper 2
+    ├── data/
+    ├── code/
+    ├── output/
+    └── paper/
+```
+
+Skills resolve the right `CLAUDE.superpapers.md` by walking up from the current working directory — so `cd` into the specific paper folder before invoking skills or commands when working in a multi-paper repository.
 
 You can use `templates/paper-skeleton.tex` as a starting point for the paper itself and `templates/replication-readme.md` for the replication package.
 
@@ -182,7 +204,7 @@ The first command refreshes the local clone of the marketplace repository. The s
 
 Plugin internals — SKILL.md files, scripts, templates, code comments, identifiers — are English-only. This keeps the plugin accessible to researchers globally.
 
-Paper content — abstract, sections, table notes, figure captions, output strings — follows the user's chosen paper language. Set `paper_language` in `CLAUDE.superpapers.md` if you use the settings file, or state it explicitly in the conversation (default: `en`, options include `pt-BR`, `es`, `fr`, and so on). Skills that produce user-facing paper content respect this setting.
+Paper content — abstract, sections, table notes, figure captions, output strings — follows the user's chosen paper language. Set `paper_language` in `CLAUDE.superpapers.md` (every skill reads the file on activation) or state it explicitly in the conversation (default: `en`, options include `pt-BR`, `es`, `fr`, and so on). Skills that produce user-facing paper content respect this setting.
 
 Your conversation with Claude Code can happen in any language. Only the plugin internals are fixed to English.
 
