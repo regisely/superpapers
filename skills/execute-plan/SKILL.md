@@ -30,7 +30,17 @@ This skill executes a research plan phase by phase. It starts by invoking `acade
 
 3. **Invoke `replication-driven-research` to ensure project structure.** If directories are missing, propose scaffolding. Wait for user confirmation before creating directories or files at the project root.
 
-4. **Honor task skill routing before execution.** Treat each task's `Skills involved` field as authoritative routing metadata. Explicitly invoke those skills before executing the task. If a task is missing a clearly necessary skill, stop and repair the plan before proceeding.
+4. **Pre-flight declaration before every task.** Before executing any task, output a structured block:
+
+   ```
+   ## Task: <task title>
+   Phase: <phase name>
+   Skills (from routing table): <list from CLAUDE.superpapers.md table>
+   Skills (from plan): <list from plan's Skills involved field>
+   Will invoke: <union of both lists, no duplicates>
+   ```
+
+   Invoke every skill in the union list before doing any task work. If `paper-writing` appears, confirm you are in the main session — never dispatch it to a subagent. If `journal-guidelines` appears, confirm the target journal is resolved — if not, invoke `journal-selection` first. If a task is missing a clearly necessary skill, stop and repair the plan before proceeding.
 
 5. **Enforce journal routing.** Any task or review involving a target journal, author instructions, formatting, templates, blinding, cover letters, checklists, or submission portals must invoke `journal-guidelines` before work begins. If the outlet is not fixed yet, invoke `journal-selection` first, then `journal-guidelines`. Never declare journal compliance or submission readiness without this step.
 

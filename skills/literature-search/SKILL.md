@@ -18,6 +18,16 @@ This skill searches academic literature with strict web verification of every re
 - Verifying that a specific paper exists
 - Checking the correct citation details for a paper the user remembers partially
 
+## Modes
+
+This skill operates in two modes. The caller specifies which.
+
+### Gap-check mode
+Used during `brainstorm` to verify a research gap exists. Scope: 1-2 targeted queries, 5-8 results maximum, no bibliography file output. Web-verify every result (the anti-hallucination rule still applies). Output the standard markdown table but do not populate `references.bib`.
+
+### Full mode
+Used during `execute-plan`'s Literature phase. Run all Mandatory Steps below. Curate 15-30 references, bias toward target journals, populate `references.bib` via `citation-management`, produce literature notes. This is the default when no mode is specified.
+
 ## Mandatory Steps
 
 1. **Identify the research field from context.** Resolve `CLAUDE.superpapers.md` by reading it from the current working directory, or walking up parent directories until found. If the file contains a `field` entry, use it. Otherwise infer from the project abstract or ask the user directly. The field determines which databases to prioritize.

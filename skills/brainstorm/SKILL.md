@@ -42,7 +42,7 @@ Do NOT invoke `write-plan`, `execute-plan`, data collection, analysis, or any li
    - **Causal vs descriptive:** What would a causal answer require — and is that answerable with the available data?
    - **Identification strategy:** Candidate — DiD, RD, IV, SC, time-series, none (descriptive)? Invoke `statistical-modeling` to apply its guidance on specification, assumptions, and diagnostics for the chosen strategy.
    - **Data:** What would you need? Does it exist? Is it accessible? At what cost? Invoke `data-collection` for source-discovery guidance only; the hard gate above still blocks actual collection.
-   - **Contribution:** What's the contribution over existing literature? Invoke `literature-search` briefly to verify the gap is real. This is a narrow gap check, NOT a full literature review — the full review is a task in the execution pipeline (see `write-plan`'s Literature phase).
+   - **Contribution:** What's the contribution over existing literature? Invoke `literature-search` in **gap-check mode**: one or two targeted queries, 5-8 results maximum, no bibliography output. This is NOT the full literature review. The full review runs in the plan's Literature phase, where `literature-search` is invoked in **full mode** with all its Mandatory Steps. Do not conflate the two invocations.
    - **Statistical power:** Order-of-magnitude check — is the sample large enough to detect plausible effect sizes? Invoke `statistical-modeling` for its power-calculation and effect-size guidance.
    - **Publication tier:** Target journal tier — and is the design consistent with that tier's expectations? Invoke `journal-selection` to match the paper to candidate outlets given field, method, and contribution.
 
