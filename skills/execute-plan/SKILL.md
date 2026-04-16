@@ -63,7 +63,7 @@ Use subagents for:
 Do NOT use subagents for:
 
 - Sequential tasks where one depends on another's output
-- Writing paper sections (context-dependent, needs the main session's understanding of the project)
+- Writing paper sections (context-dependent, needs the main session's understanding of the project; the `paper-writing` skill is invoked in the main session for these tasks)
 - Decisions that require user input
 - Tasks that touch the same file (git conflicts, clobber risk)
 

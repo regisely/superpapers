@@ -38,7 +38,7 @@ The nine principles below are non-negotiable. Every other superpapers skill oper
 
 8. **Respect the user's paper language.** Plugin internals and code are English-only. Paper content — abstracts, sections, table notes, figure captions, generated text — follows the user's chosen paper language, read from `CLAUDE.superpapers.md` when present or obtained from explicit user instruction otherwise. Never mix plugin language into user output.
 
-9. **Write clean, flowing prose.** Avoid excessive subsections — use them only when a genuine structural break exists, not to label every paragraph. Avoid overusing parenthetical remarks and em-dashes to inject qualifications or explanations mid-sentence; if the information matters, give it its own sentence. Parentheses and dashes should be rare punctuation, not a writing habit. Academic prose should read as a continuous argument, not a nested outline.
+9. **Write clean, flowing prose.** Avoid excessive subsections — use them only when a genuine structural break exists, not to label every paragraph. Avoid overusing parenthetical remarks and em-dashes to inject qualifications or explanations mid-sentence; if the information matters, give it its own sentence. Parentheses and dashes should be rare punctuation, not a writing habit. Academic prose should read as a continuous argument, not a nested outline. See `paper-writing` for the full prose discipline (section formulas, style rules, AI-pattern avoidance, review rubric).
 
 ## Mandatory Steps
 

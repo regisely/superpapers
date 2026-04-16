@@ -57,7 +57,10 @@ You can also use explicit slash commands to enter the workflow at a specific sta
 /superpapers:brainstorm
 /superpapers:write-plan
 /superpapers:execute-plan
+/superpapers:write-paper
 ```
+
+The `write-paper` command applies the `paper-writing` skill directly to drafting, rewriting, reviewing, or auditing prose for any section (Abstract, Introduction, Methods, Results, Conclusion) or specialized output (job market paper, grant proposal, policy brief, referee response).
 
 Advanced users who want to pre-populate project settings, declare a code language preference, or add explicit rules and preferences can optionally run:
 
@@ -96,7 +99,7 @@ _Representative moment from a real session: the workflow starts from a concrete 
 
 ## Skills Overview
 
-Fourteen skills organized by role:
+Fifteen skills organized by role:
 
 | Skill | Role | Purpose |
 |---|---|---|
@@ -112,6 +115,7 @@ Fourteen skills organized by role:
 | `statistical-modeling` | Analysis | Open-ended modeling process with method-family references |
 | `tables-and-figures` | Analysis | Publication-quality LaTeX tables and vector PDF figures |
 | `robustness-checks` | Analysis | Design-appropriate canonical robustness checks |
+| `paper-writing` | Writing | Section formulas, style rules, AI-pattern avoidance, 100-point review rubric |
 | `journal-selection` | Submission | Field-agnostic journal matching with tier strategy |
 | `journal-guidelines` | Submission | Parses instructions for authors, builds submission checklist |
 

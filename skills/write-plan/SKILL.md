@@ -66,7 +66,7 @@ The specified model from the design. Tasks: one estimation script per specificat
 Canonical checks for the design (via `robustness-checks`). Tasks: one script per check, one table or column per check. Verification: `tab_robustness.tex` exists; all checks present; failures discussed.
 
 ### 7. Writing
-Paper sections from data to narrative. Tasks: draft each section (Abstract, Introduction, Data, Methods, Results, Discussion, Conclusion), pull tables and figures via `\input{}` and `\includegraphics{}`. Writing tasks operate under `academic-baseline`; use `journal-guidelines` here only when the work is already tied to a specific journal template or formatting requirement. Verification: `paper.tex` compiles with `compile-latex`.
+Paper sections from data to narrative. Tasks: draft each section (Abstract, Introduction, Data, Methods, Results, Discussion, Conclusion), pull tables and figures via `\input{}` and `\includegraphics{}`. Writing tasks operate under `academic-baseline` and must include `paper-writing` in `Skills involved` — that skill carries the section formulas, style rules, AI-pattern avoidance, and review rubric. Use `journal-guidelines` here only when the work is already tied to a specific journal template or formatting requirement. Verification: `paper.tex` compiles with `compile-latex`.
 
 ### 8. Submission
 Target journal, formatting, checklist. Tasks: invoke `journal-selection` if not already decided, then invoke `journal-guidelines` for the chosen journal, adapt the manuscript and submission materials, and run the final compliance check. Journal-facing work without `journal-guidelines` is invalid. Verification: submission checklist complete.
