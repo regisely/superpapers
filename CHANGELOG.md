@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.0] - 2026-04-18
+
+Pre-submission audit skill and command.
+
+- `paper-review` skill added: terminal, cross-cutting pre-submission audit covering numerical consistency (paper prose ↔ tables ↔ logs), narrative coherence (abstract ↔ introduction ↔ results ↔ conclusion), literature dialogue in Results and Discussion, citation integrity, code and reproducibility hygiene (hard-coded paths, seeds, data-loading errors, orphaned scripts), tables and figures quality (booktabs, vector figures, `Overfull \hbox` detection), AI-pattern surface scan including em-dash density, and language consistency
+- New command `/superpapers:paper-review` — runs standalone on papers written inside or outside the plugin; produces a persistent audit report at `docs/superpapers/review/audit-YYYYMMDD-HHMM.md` with severity-ranked findings (Critical / Major / Minor) and a go/no-go verdict
+- `execute-plan` ends with a non-blocking suggestion to run the new audit before submission; no auto-invocation and no gate on plan completion
+- Audit report is written in the paper's declared `paper_language`; remediation is per-finding via AskUserQuestion — never batch-fixed
+
 ## [1.2.0] - 2026-04-14
 
 Reliable `CLAUDE.superpapers.md` loading and multi-paper repository support.
@@ -41,6 +50,7 @@ Initial stable release.
 - Interactive presentation deployed to GitHub Pages
 - Worked example: `examples/credit_and_productivity.pdf`
 
+[1.4.0]: https://github.com/regisely/superpapers/releases/tag/v1.4.0
 [1.2.0]: https://github.com/regisely/superpapers/releases/tag/v1.2.0
 [1.1.0]: https://github.com/regisely/superpapers/releases/tag/v1.1.0
 [1.0.0]: https://github.com/regisely/superpapers/releases/tag/v1.0.0

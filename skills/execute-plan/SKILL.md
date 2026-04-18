@@ -62,6 +62,8 @@ This skill executes a research plan phase by phase. It starts by invoking `acade
 
 13. **Report status to the user at phase boundaries.** At the end, summarize what was built, what passed review, and where the artifacts live.
 
+14. **Suggest the pre-submission audit.** After the final summary, recommend that the user run `/superpapers:paper-review` before submission. The `paper-review` skill performs a cross-cutting audit of prose, code, tables, figures, citations, and reproducibility and writes a consolidated report. This suggestion is non-blocking — do not auto-invoke and do not gate the plan's completion on it.
+
 ## Subagent Dispatch
 
 Use subagents for:

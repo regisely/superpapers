@@ -58,6 +58,7 @@ You can also use explicit slash commands to enter the workflow at a specific sta
 /superpapers:write-plan
 /superpapers:execute-plan
 /superpapers:write-paper
+/superpapers:paper-review
 ```
 
 The `write-paper` command applies the `paper-writing` skill directly to drafting, rewriting, reviewing, or auditing prose for any section (Abstract, Introduction, Methods, Results, Conclusion) or specialized output (job market paper, grant proposal, policy brief, referee response).
@@ -99,7 +100,7 @@ _Representative moment from a real session: the workflow starts from a concrete 
 
 ## Skills Overview
 
-Fifteen skills organized by role:
+Sixteen skills organized by role:
 
 | Skill | Role | Purpose |
 |---|---|---|
@@ -116,6 +117,7 @@ Fifteen skills organized by role:
 | `tables-and-figures` | Analysis | Publication-quality LaTeX tables and vector PDF figures |
 | `robustness-checks` | Analysis | Design-appropriate canonical robustness checks |
 | `paper-writing` | Writing | Section formulas, style rules, AI-pattern avoidance, 100-point review rubric |
+| `paper-review` | Review | Pre-submission holistic audit across text, code, tables, figures, results, citations, and reproducibility; works standalone on external papers |
 | `journal-selection` | Submission | Field-agnostic journal matching with tier strategy |
 | `journal-guidelines` | Submission | Parses instructions for authors, builds submission checklist |
 
@@ -125,7 +127,8 @@ Fifteen skills organized by role:
 2. **Brainstorm.** Ask Claude Code something like "I want to study the effect of X on Y" or invoke `/superpapers:brainstorm`. The `brainstorm` skill activates and asks Socratic questions about your research question, identification strategy, data, and contribution. The output is a design spec saved inside the research project, typically under `docs/superpapers/specs/`.
 3. **Plan.** Once the spec is approved, invoke `/superpapers:write-plan` or continue naturally in the conversation. The `write-plan` skill generates a phased research plan (collection, preparation, analysis, robustness, writing, submission) with explicit artifacts, verification criteria, and `Skills involved` routing per task, typically saved inside the research project under `docs/superpapers/plans/`.
 4. **Execute.** Invoke `/superpapers:execute-plan` or continue naturally in the conversation. The `execute-plan` skill dispatches subagents per task, verifies after each phase, honors each task's `Skills involved` field, and runs the full pipeline end-to-end before declaring any result final.
-5. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements. Journal-facing work is not considered valid without `journal-guidelines`.
+5. **Review.** Before submission, run `/superpapers:paper-review` for a holistic pre-submission audit that cross-cuts text, code, tables, figures, results, citations, and reproducibility in one pass and writes a consolidated report to `docs/superpapers/review/`. The `paper-review` skill works standalone as well — it can audit any paper folder, even one written outside the plugin.
+6. **Submit.** When the paper is ready, use `journal-selection` to pick a target outlet and `journal-guidelines` to format the paper to that journal's requirements. Journal-facing work is not considered valid without `journal-guidelines`.
 
 Throughout the workflow, `academic-baseline` is invoked first as the standing policy layer, and `replication-driven-research` guarantees the pipeline stays reproducible.
 
