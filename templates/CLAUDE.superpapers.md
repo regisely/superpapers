@@ -27,6 +27,9 @@
 - Use the code language preference above for all new scripts; when multiple languages are allowed, prefer the one already used in the project.
 - Plugin internals, scripts, and code comments remain in English regardless of paper language.
 - Never fabricate citations — verify every reference via web.
+- When looking up literature for any purpose (gap verification, citation, literature review), bias toward the user's target journals and closely related outlets in the same field tier.
+- Prioritize recent publications (last 3-5 years) from target journals.
+- Never hardcode results in `paper/paper.tex` — always use `\input{}` from `output/`.
 
 ## Skill Routing by Phase
 
@@ -36,13 +39,10 @@ Before executing any plan task, consult this table and invoke every listed skill
 |---|---|
 | Literature | `literature-search`, `citation-management` |
 | Collection | `data-collection` |
-| Preparation | `replication-driven-research` |
+| Preparation | — (mandatory baseline skills only) |
 | Exploratory Analysis | `statistical-modeling`, `tables-and-figures` |
 | Main Analysis | `statistical-modeling`, `tables-and-figures` |
 | Robustness | `robustness-checks`, `tables-and-figures` |
 | Writing | `paper-writing` (main session only, never subagent), `compile-latex` |
-| Review | `paper-review` (pre-submission holistic audit; produces `docs/superpapers/review/audit-*.md`) |
+| Review | `paper-review` (optional pre-submission audit, typically run via `/superpapers:paper-review` after Writing; not one of the 8 canonical plan phases) |
 | Submission | `journal-selection` (if outlet not fixed), then `journal-guidelines`, `compile-latex` |
-- When looking up literature for any purpose (gap verification, citation, literature review), bias toward the user's target journals and closely related outlets in the same field tier.
-- Prioritize recent publications (last 3-5 years) from target journals.
-- Never hardcode results in `paper/paper.tex` — always use `\input{}` from `output/`.

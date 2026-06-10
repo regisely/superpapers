@@ -1,6 +1,6 @@
 ---
 description: Translate an approved superpapers design spec into a research execution plan
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion, Skill
 ---
 
 Use the `academic-baseline` skill first, then the `write-plan` skill from the superpapers plugin for the current project.

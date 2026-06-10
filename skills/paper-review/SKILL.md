@@ -28,6 +28,8 @@ Do not use this skill:
 
 ## Mandatory Steps
 
+The executable per-dimension checklist — every check with its criterion, severity, and remediation hint — lives in `references/audit-rubric.md`. Load it before running steps 3–9 and use its severity rules when classifying findings.
+
 1. **Discover the paper structure.** Locate: `paper.tex` (or the equivalent main TeX file), `references.bib`, `output/tables/`, `output/figures/`, `output/logs/`, the code directory, `run_all.sh`. Walk up from the working directory. If any essential path is missing, ask the user via AskUserQuestion with concrete options (include "Other" for custom paths). Record the paths for reuse. Do not assume `CLAUDE.superpapers.md` or `docs/superpapers/plans/` exist — the skill must work on externally authored papers.
 
 2. **Inventory artifacts.** List every file relevant to the audit by category: prose files (`.tex`), bibliography (`.bib`), table files (`output/tables/*.tex`), figure files (`output/figures/*.pdf`), code (`.R`, `.py`, `.do`, `.jl`, etc.), logs, and the data manifest. Store the inventory for reuse across subsequent steps.

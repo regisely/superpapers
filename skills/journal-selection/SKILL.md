@@ -64,7 +64,7 @@ This skill helps select target journals for a paper based on current web informa
 - Suggesting only top-5 journals without analyzing fit
 - Ignoring regional or national journals when the paper has regional relevance
 - Not verifying the journal is still active and accepting submissions
-- Suggesting predatory journals — always check Beall's list or DOAJ membership when in doubt
+- Suggesting predatory journals — check DOAJ membership and the Think. Check. Submit. criteria when in doubt (Beall's list is archived and no longer maintained)
 - Copying rankings from memory (rankings update quarterly or annually)
 - Confusing impact factor with field-relative quality (a Q1 in a specialized field may have lower IF than a Q2 in a broad field)
 - Recommending a single journal without fallback options

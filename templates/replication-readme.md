@@ -61,8 +61,10 @@ This executes scripts in order:
 Then compile the paper:
 
 ```bash
-./skills/compile-latex/scripts/compile.sh paper/paper.tex
+latexmk -pdf -cd paper/paper.tex
 ```
+
+If `latexmk` is unavailable, run the manual sequence from `paper/`: engine pass, `bibtex` (or `biber`), then two more engine passes.
 
 ## Random Seed
 

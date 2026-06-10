@@ -27,7 +27,7 @@ dir=$(dirname "$file")
 base=$(basename "$file" .tex)
 
 # Detect engine
-if grep -qE '^[^%]*\\usepackage\{?fontspec\}?' "$file"; then
+if grep -qE '^[^%]*\\usepackage(\[.*\])?\{fontspec\}' "$file"; then
   engine="xelatex"
 else
   engine="pdflatex"

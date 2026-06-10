@@ -63,6 +63,7 @@ Do NOT invoke `write-plan`, `execute-plan`, data collection, analysis, or any li
 ## Guardrails
 
 - Invoke `academic-baseline` principles throughout — especially the causal-versus-correlational distinction.
+- The user's answers to the Socratic questions are binding design inputs. Record them faithfully in the spec; if a recommendation or later step conflicts with an answer, surface the conflict explicitly instead of silently overriding it.
 - Never commit to a result framing in advance. The brainstorm ends with a design, not with conclusions.
 - Questions asked in the user's conversation language. Spec documents written in English (plugin artifact). User paper content respects the paper language later.
 

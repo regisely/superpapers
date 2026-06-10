@@ -40,7 +40,7 @@ This skill executes a research plan phase by phase. It starts by invoking `acade
    Will invoke: <union of both lists, no duplicates>
    ```
 
-   Invoke every skill in the union list before doing any task work. If `paper-writing` appears, confirm you are in the main session — never dispatch it to a subagent. If `journal-guidelines` appears, confirm the target journal is resolved — if not, invoke `journal-selection` first. If a task is missing a clearly necessary skill, stop and repair the plan before proceeding.
+   If `CLAUDE.superpapers.md` is absent or contains no routing table, write `n/a` for the routing-table line and use the plan's `Skills involved` field (plus `academic-baseline`) as the routing source. Invoke every skill in the union list before doing any task work. If `paper-writing` appears, confirm you are in the main session — never dispatch it to a subagent. If `journal-guidelines` appears, confirm the target journal is resolved — if not, invoke `journal-selection` first. If a task is missing a clearly necessary skill, stop and repair the plan before proceeding.
 
 5. **Enforce journal routing.** Any task or review involving a target journal, author instructions, formatting, templates, blinding, cover letters, checklists, or submission portals must invoke `journal-guidelines` before work begins. If the outlet is not fixed yet, invoke `journal-selection` first, then `journal-guidelines`. Never declare journal compliance or submission readiness without this step.
 

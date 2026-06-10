@@ -1,6 +1,6 @@
 ---
 description: Start the superpapers brainstorm workflow for a research project
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion, Skill, WebFetch, WebSearch
 ---
 
 Use the `academic-baseline` skill first, then the `brainstorm` skill from the superpapers plugin for the current project.

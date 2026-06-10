@@ -49,7 +49,7 @@ Starting-point reference for data with repeated observations on the same units (
 
 **Methods:**
 - **Arellano-Bond (difference GMM):** First-differences the equation, instruments lagged changes with lagged levels
-- **Blundell-Bover (system GMM):** Adds levels equation to improve efficiency when persistence is high
+- **Blundell-Bond (system GMM):** Adds levels equation to improve efficiency when persistence is high
 - **Arellano-Bover orthogonal deviations:** Alternative transformation useful with unbalanced panels
 
 **Diagnostics:**

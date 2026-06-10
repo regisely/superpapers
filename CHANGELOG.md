@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.4.1] - 2026-06-10
+
+Consistency and reliability fixes from a comprehensive plugin review.
+
+- README disclaimer no longer names a specific model; it now recommends the most capable available model with a large context window (1M tokens when available)
+- `execute-plan` pre-flight declaration gained an explicit fallback when `CLAUDE.superpapers.md` (or its routing table) is absent: use the plan's `Skills involved` field plus `academic-baseline`
+- `paper-review` now explicitly loads `references/audit-rubric.md` — the executable per-dimension checklist with severity criteria — before running audit steps 3–9 (the file existed but was never referenced)
+- `templates/CLAUDE.superpapers.md` routing table fixed: Preparation row no longer repeats the always-mandatory `replication-driven-research`; Review row annotated as an optional post-Writing audit outside the 8 canonical plan phases; orphaned rule bullets moved into Instructions for Claude Code
+- `brainstorm` gained a guardrail making user answers to Socratic questions binding design inputs — conflicts must be surfaced, never silently overridden
+- Command frontmatter `allowed-tools` now includes `Skill` everywhere skills are invoked, `WebFetch`/`WebSearch` for `brainstorm` and `execute-plan`, and `Task` for `execute-plan` subagent dispatch — fewer permission prompts mid-workflow
+- `compile.sh` engine detection now recognizes `\usepackage[options]{fontspec}`
+- `templates/replication-readme.md` compile instruction no longer points to a plugin-internal script path that does not exist in a distributed replication package; uses `latexmk -pdf -cd paper/paper.tex`
+- `templates/paper-skeleton.tex` notes that switching to fontspec/xelatex requires removing `inputenc`, `fontenc`, and `lmodern`
+- Typo fixed in panel methods reference: Blundell-Bond (system GMM), not "Blundell-Bover"
+- `journal-selection` predatory-journal guidance updated: DOAJ and Think. Check. Submit. (Beall's list is archived and unmaintained)
+- CHANGELOG backfilled with the missing 1.3.0 and 1.3.1 entries; 1.0.0 release date corrected to 2026-04-13
+
 ## [1.4.0] - 2026-04-18
 
 Pre-submission audit skill and command.
@@ -8,6 +25,22 @@ Pre-submission audit skill and command.
 - New command `/superpapers:paper-review` — runs standalone on papers written inside or outside the plugin; produces a persistent audit report at `docs/superpapers/review/audit-YYYYMMDD-HHMM.md` with severity-ranked findings (Critical / Major / Minor) and a go/no-go verdict
 - `execute-plan` ends with a non-blocking suggestion to run the new audit before submission; no auto-invocation and no gate on plan completion
 - Audit report is written in the paper's declared `paper_language`; remediation is per-finding via AskUserQuestion — never batch-fixed
+
+## [1.3.1] - 2026-04-16
+
+Skill invocation reliability.
+
+- `templates/CLAUDE.superpapers.md` gained a `Skill Routing by Phase` table mapping each canonical research phase to the skills that must be invoked, used as a supplement to (union with) each task's `Skills involved` field
+- `execute-plan` now emits a pre-flight declaration before every task — task title, phase, skills from the routing table, skills from the plan, and the union list to invoke — and invokes every skill in the union before doing any task work
+- `brainstorm` and `literature-search` wording tightened to keep gap-check mode and full mode clearly separated
+
+## [1.3.0] - 2026-04-15
+
+Universal paper-writing skill.
+
+- `paper-writing` skill added: section formulas (Abstract, Introduction, Methods, Data, Results, Discussion, Conclusion, and specialized outputs), style rules with AI-pattern avoidance, research-design narratives for Methods sections, 3-reviewer simulation and 100-point review rubric
+- New command `/superpapers:write-paper` — drafts, rewrites, reviews, or audits prose for any section or specialized output (job market paper, grant proposal, policy brief, referee response)
+- Writing-phase tasks in plans must include `paper-writing` in `Skills involved`; `execute-plan` runs it in the main session, never in a subagent
 
 ## [1.2.0] - 2026-04-14
 
@@ -32,7 +65,7 @@ Strengthened orchestration rules for skill loading and task routing.
 - `execute-plan` now explicitly honors each task's declared `Skills involved` field during execution
 - `CLAUDE.superpapers.md` template and README updated to document the stronger orchestration contract
 
-## [1.0.0] - 2025-04-13
+## [1.0.0] - 2026-04-13
 
 Initial stable release.
 
@@ -50,7 +83,10 @@ Initial stable release.
 - Interactive presentation deployed to GitHub Pages
 - Worked example: `examples/credit_and_productivity.pdf`
 
+[1.4.1]: https://github.com/regisely/superpapers/releases/tag/v1.4.1
 [1.4.0]: https://github.com/regisely/superpapers/releases/tag/v1.4.0
+[1.3.1]: https://github.com/regisely/superpapers/releases/tag/v1.3.1
+[1.3.0]: https://github.com/regisely/superpapers/releases/tag/v1.3.0
 [1.2.0]: https://github.com/regisely/superpapers/releases/tag/v1.2.0
 [1.1.0]: https://github.com/regisely/superpapers/releases/tag/v1.1.0
 [1.0.0]: https://github.com/regisely/superpapers/releases/tag/v1.0.0

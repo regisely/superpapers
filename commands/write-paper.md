@@ -1,6 +1,6 @@
 ---
 description: Draft, rewrite, review, or audit prose for a paper section using the superpapers paper-writing skill
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion, Skill
 ---
 
 Use the `academic-baseline` skill first, then the `paper-writing` skill from the superpapers plugin for the current project.

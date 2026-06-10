@@ -1,6 +1,6 @@
 ---
 description: Execute a superpapers research plan phase by phase with reproducibility checks
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion, Skill, Task, WebFetch, WebSearch
 ---
 
 Use the `academic-baseline` skill first, then the `execute-plan` skill from the superpapers plugin for the current project.

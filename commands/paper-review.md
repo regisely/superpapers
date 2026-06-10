@@ -1,6 +1,6 @@
 ---
 description: Run a holistic pre-submission audit on a completed paper
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion, Skill
 ---
 
 Use the `academic-baseline` skill first, then the `paper-review` skill from the superpapers plugin for the current project.
