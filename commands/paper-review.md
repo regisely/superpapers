@@ -22,7 +22,7 @@ Execution rules:
 
 3. Run the `paper-review` skill as the authoritative workflow:
    - invoke `academic-baseline` first and keep it active through the audit
-   - execute all 11 mandatory steps in order (discovery → inventory → numerical → narrative → citations → code → tables/figures → AI-patterns → language → report → summary)
+   - execute all 12 mandatory steps in order (discovery → inventory → numerical → narrative → citations → code → tables/figures → AI-patterns → language → report → summary → remediation cycle when invoked as a blocking Submission task)
    - produce the report at `docs/superpapers/review/audit-YYYYMMDD-HHMM.md`
    - write the report in the paper's declared language (`paper_language` from `CLAUDE.superpapers.md` or detected heuristically)
    - surface findings with severity (Critical / Major / Minor) and location (`file:line`)

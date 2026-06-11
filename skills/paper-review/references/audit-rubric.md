@@ -52,6 +52,15 @@ Extraction targets in prose: `\d+\.\d+`, `\d+%`, "N =", "n =", "R² =", "p =", "
 | Subheading density | No more than ~3 subheadings per printed page. | Minor/Major | Collapse adjacent short subsections into flowing prose. |
 | Short sections in a row | Not 3+ consecutive sections under the word floor. | Major | Indicates scaffold rather than prose; rewrite. |
 
+### Structural completeness (empirical papers)
+
+| Check | Criterion | Severity | Remediation |
+|---|---|---|---|
+| Discussion section present | A Discussion section exists, or a combined "Results and Discussion" with an explicit justification. Results (or Robustness) → Conclusion is incomplete. | Major | Draft Discussion per `paper-writing`'s section formula: substantive restatement, literature dialogue, mechanisms, external validity, limitations. |
+| Conceptual framework present | A conceptual framework / mechanisms section exists, or its omission is justified. | Minor | Draft per `paper-writing`'s Conceptual Framework formula. |
+| Results + Discussion weight | Results + Discussion ≥ ~30% of body prose (target 35–45%); Results ≥ ~1,000 words, Discussion ≥ ~500. | Major | Expand magnitude interpretation, heterogeneity, mechanism tests, literature comparison. |
+| Abstract has no parentheses | Abstract contains no parenthetical asides; statistics integrated into prose. | Minor | Rewrite the aside as a clause: "with a Cohen's kappa of 0.81". |
+
 ---
 
 ## 3. Citation Integrity
@@ -115,12 +124,13 @@ Delegate executable end-to-end verification to `replication-driven-research`.
 
 | Check | Criterion | Severity | Remediation |
 |---|---|---|---|
-| `booktabs` rules | Uses `\toprule`, `\midrule`, `\bottomrule`; no `\hline`. | Minor | Replace rules; add `\usepackage{booktabs}`. |
-| `threeparttable` when notes | Tables with notes use `threeparttable` or equivalent. | Minor | Wrap table; move notes into `tablenotes`. |
+| `booktabs` rules | Uses `\toprule`, `\midrule`, `\bottomrule`; no `\hline`. Run `tables-and-figures`' `scripts/check-tables.sh`. | Minor | Replace rules; add `\usepackage{booktabs}`. |
+| `threeparttable` when notes | Tables with notes use `threeparttable` or equivalent; notes inside `tablenotes` with `\footnotesize`/`\scriptsize`. | Minor | Wrap table; move notes into `tablenotes` with a reduced font. |
+| **Human-readable labels** | No code identifiers (snake_case, escaped underscores, dataset column names) in headers or row labels — `check-tables.sh` flags them. | Major | Add a label dictionary in the generating script (`fixest::etable(dict=)`, `coef_map`, column rename) and regenerate. |
 | Self-contained caption | Caption names the outcome, sample, method, and period. | Major | Rewrite caption; include enough for stand-alone reading. |
 | Column units declared | Units stated in caption or column header. | Major | Add units. |
 | Significance convention explicit | Stars or explicit p-values documented in notes. | Major | State the convention once, in the notes. |
-| **No margin overflow** | No `Overfull \hbox` warning for the table in `output/logs/paper.log` (or the run of `compile-latex`). | Major | `\resizebox{\textwidth}{!}{...}` or `\begin{adjustbox}{width=\textwidth}`, landscape rotation, or narrow columns. |
+| **No margin overflow** | `compile-latex`'s `scripts/check-log.sh` reports no `Overfull \hbox` above tolerance. | Major | Apply the `tables-and-figures` overflow ladder: smaller font, tighter padding, abbreviated headers, `\resizebox`, landscape. |
 
 ### Figures
 
@@ -128,8 +138,16 @@ Delegate executable end-to-end verification to `replication-driven-research`.
 |---|---|---|---|
 | Vector format | Files are `.pdf`, `.eps`, or `.svg`; no `.png`/`.jpg` unless inherently raster. | Major | Re-export from the plotting script as PDF. |
 | Self-contained caption | Caption describes axes, sample, method. | Major | Rewrite caption. |
+| **No overlapping elements** | Read the PDF: annotations, value labels, and legend do not overlap data or each other; no clipped labels. | Major | `ggrepel`, expanded axis limits, legend outside the plot area; regenerate. |
+| Human-readable axis labels | Axes and legend use publication labels with units, not code identifiers. | Major | Fix labels in the generating script. |
 | Legible fonts | Axis text readable at print size. | Minor | Increase font size in the generating script. |
 | Color-blind safe | Uses viridis / okabe-ito / other CB-safe palette. | Minor | Change palette in the generating script. |
+
+### Citation rendering
+
+| Check | Criterion | Severity | Remediation |
+|---|---|---|---|
+| Style matches requirement | Citations render author–year in the PDF unless the target journal requires numeric (`check-log.sh` verifies both preamble and rendered text). | Major | For natbib-loading classes (elsarticle), add the `authoryear` class option; otherwise fix the natbib/biblatex options. Recompile and re-run `check-log.sh`. |
 
 For remediation patterns, reference `tables-and-figures`.
 

@@ -51,7 +51,11 @@ This skill executes a research plan phase by phase. It starts by invoking `acade
 8. **Run end-to-end integration at each phase boundary.** Execute the full pipeline from `data/raw/` to the farthest artifact produced so far. Confirm exit code 0 and that all expected outputs exist.
 
 9. **Two-stage phase review:**
-   - **Stage 1 — correctness.** Are the results right? Does the analysis make sense? Narrative review of the outputs, specs, and diagnostics.
+   - **Stage 1 — correctness.** Are the results right? Does the analysis make sense? Narrative review of the outputs, specs, and diagnostics. Stage 1 includes phase-specific blocking checks:
+     - Any phase that produced tables or figures (Exploratory, Main Analysis, Robustness, Writing): run `tables-and-figures`' `scripts/check-tables.sh` on `output/tables/` and Read each new figure PDF to check for overlapping annotations, legends, or labels. Both must pass.
+     - Writing phase boundary, additionally: (a) compile via `compile-latex`; (b) run its `scripts/check-log.sh` — zero `Overfull \hbox` above tolerance, zero undefined citations or references, citations rendered author–year (or the journal's documented style); (c) Read the compiled PDF and skim every page containing a table or figure to confirm nothing bleeds into the margins or overlaps; (d) confirm the manuscript contains Discussion and Conceptual Framework sections, or that the plan records a justification for their absence.
+
+     **Gate: a phase review does not pass while any of these checks fails.**
    - **Stage 2 — reproducibility.** Is the pipeline clean end-to-end? Is the seed fixed? Is the manifest updated? Use the `replication-driven-research` verification checklist.
 
 10. **Only proceed to the next phase after both stages pass.**
@@ -62,7 +66,7 @@ This skill executes a research plan phase by phase. It starts by invoking `acade
 
 13. **Report status to the user at phase boundaries.** At the end, summarize what was built, what passed review, and where the artifacts live.
 
-14. **Suggest the pre-submission audit.** After the final summary, recommend that the user run `/superpapers:paper-review` before submission. The `paper-review` skill performs a cross-cutting audit of prose, code, tables, figures, citations, and reproducibility and writes a consolidated report. This suggestion is non-blocking — do not auto-invoke and do not gate the plan's completion on it.
+14. **Pre-submission audit.** If the plan contains a Submission phase, the `paper-review` audit-and-remediate task is part of it and **blocks plan completion**: run the audit, remediate every Critical and Major finding (with per-finding user approval as `paper-review` requires; the user may explicitly waive a finding), re-run the audit, and repeat until the verdict is "go". After three cycles without a "go", stop and escalate the remaining findings to the user. If the plan has no Submission phase, recommend `/superpapers:paper-review` as a non-blocking next step after the final summary.
 
 ## Subagent Dispatch
 
@@ -88,6 +92,7 @@ Do NOT use subagents for:
 - **Invalidation on input change is mandatory.** If raw data or a script changes mid-execution, all downstream outputs are stale. Re-run the affected phases — do not patch around the invalidation.
 - **No result is final until the pipeline runs end-to-end.** "It worked in my session" is not evidence. Only a clean end-to-end run counts.
 - **Journal compliance claims require `journal-guidelines`.** Formatting a manuscript for a named journal, checking a submission checklist, applying blinding rules, or adapting a template without `journal-guidelines` is invalid.
+- **Phase-boundary table, figure, and compile checks are not optional.** A failing `check-log.sh` or `check-tables.sh` blocks the phase exactly like a failing task verification.
 - **Stop on any verification failure.** Do not mask errors by re-running, ignoring warnings, or adjusting thresholds.
 
 ## Anti-Patterns
@@ -104,6 +109,8 @@ Do NOT use subagents for:
 - Forgetting to update the manifest or logs
 - Skipping user confirmation for scaffolding or destructive actions
 - Declaring success without the final full-pipeline run
+- Declaring the Writing phase complete without reading the compiled PDF
+- Declaring the plan complete with an unresolved no-go audit verdict in the Submission phase
 
 ## Verification Before Completion
 
@@ -112,7 +119,9 @@ Do NOT use subagents for:
 - [ ] Verification command of every task passed
 - [ ] Every task executed with the skills declared in `Skills involved`
 - [ ] Every phase ended with an end-to-end pipeline run
-- [ ] Two-stage review (correctness + reproducibility) completed per phase
+- [ ] Two-stage review (correctness + reproducibility) completed per phase, including the phase-specific blocking checks (`check-tables.sh`, `check-log.sh`, PDF inspection)
+- [ ] Writing phase: compiled PDF was Read page by page for table/figure overflow and overlap; Discussion and Conceptual Framework present or justified
+- [ ] Submission phase (when present): `paper-review` audit reached a "go" verdict or remaining findings were explicitly waived by the user
 - [ ] Every journal-facing task invoked `journal-guidelines` in the current session
 - [ ] Final full-pipeline run exits with code 0
 - [ ] `data/manifest.md` up to date with every dataset used

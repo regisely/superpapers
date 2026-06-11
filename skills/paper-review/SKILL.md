@@ -40,6 +40,7 @@ The executable per-dimension checklist — every check with its criterion, sever
    - *Coherence:* abstract ↔ introduction ↔ results ↔ conclusion must agree on research question, main result with magnitude, identification strategy, and key caveats. Divergence — abstract says "12% effect", conclusion says "around 10%" — is a **Major** finding.
    - *Literature dialogue:* Results and Discussion sections must cite prior literature, comparing the paper's findings against cited papers rather than merely reporting numbers in isolation. A Discussion section with zero `\cite{}` is a **Major** finding. Fewer than one citation per page of prose in Discussion or Results is a **Major** gap.
    - *Structural flow:* flag any `\section`, `\subsection`, or `\subsubsection` whose body is under 80 words. Flag pages where the density of subheadings suggests over-fragmentation (roughly ≥3 subheadings in one page's worth of text). Over-fragmentation is **Minor** with a suggested merge; severely choppy writing — multiple short sections in a row — escalates to **Major**.
+   - *Structural completeness:* an empirical paper must contain a Discussion section (or an explicitly combined Results and Discussion) and, by default, a conceptual framework/mechanisms section; the Abstract must contain no parenthetical asides; Results + Discussion should carry the weight of the body prose. Criteria and severities live in the rubric's structure table.
 
 5. **Citation integrity.** Every `\cite{key}` must have a matching entry in `.bib`. Every `.bib` entry must be cited at least once. No duplicate keys. For malformed entries or missing required fields, delegate to `citation-management`.
 
@@ -56,10 +57,11 @@ The executable per-dimension checklist — every check with its criterion, sever
    For executable end-to-end verification, delegate to `replication-driven-research`. Findings are **Critical** when they block reproducibility (hard-coded paths, missing seeds in stochastic scripts, orphaned main scripts, missing data file referenced by a script), and **Major** otherwise.
 
 7. **Tables and figures quality.**
-   - Tables in `output/tables/*.tex` use `booktabs` (`\toprule`, `\midrule`, `\bottomrule`). Table notes use `threeparttable` when present.
+   - Run `tables-and-figures`' `scripts/check-tables.sh` on the tables directory — it covers code-identifier labels, booktabs discipline, and note formatting in one pass. Each FAIL line becomes a finding per the rubric.
    - Figures in `output/figures/` are vector (`.pdf`, `.eps`, `.svg`). Raster images (`.png`, `.jpg`) are a **Major** finding unless the figure is inherently raster (maps with imagery).
+   - Read each figure PDF and inspect for overlapping annotations, legends covering data, or clipped labels — each overlap is a **Major** finding.
    - Captions must be self-contained — a reader should understand the table or figure from the caption alone.
-   - **Margin overflow.** If a compilation log exists at `output/logs/paper.log` or the paper directory, parse it for `Overfull \hbox` warnings inside table environments. If no log exists, invoke `compile-latex` to produce one. Each overflow is a **Major** finding localized to the table with suggested remediation: `\resizebox{\textwidth}{!}{...}`, `adjustbox`, landscape rotation, or column narrowing. For deeper remediation patterns, reference `tables-and-figures`.
+   - **Margin overflow and citation rendering.** Run `compile-latex`'s `scripts/check-log.sh` on the main TeX file (compile first via `compile-latex` if no log exists). Each `Overfull \hbox` above tolerance is a **Major** finding localized to the table with suggested remediation per the `tables-and-figures` overflow ladder. A citation-style FAIL (numeric rendering without a documented journal requirement) is a **Major** finding.
 
 8. **AI-pattern surface scan.**
    - *Banned-word density.* Count occurrences of "leverage", "delve into", "landscape" (non-literal), "multifaceted", "notably", "furthermore", "comprehensive", "pivotal", "groundbreaking", "shed light on", "pave the way", "tapestry", "intricate", "underscore", "it is important to note", "utilize". Density above 1 per 1000 words of prose is flagged with counts and locations.
@@ -72,6 +74,8 @@ The executable per-dimension checklist — every check with its criterion, sever
 10. **Generate the consolidated report.** Create `docs/superpapers/review/` if absent. Write `audit-YYYYMMDD-HHMM.md` using the template at `references/report-template.md`. Populate every section. Each finding has: severity (Critical / Major / Minor), location (`file:line`), description, suggested fix. Mark any step that could not run (no compilation log and no LaTeX installed, for example) as "Inconclusive" with the reason — never silently skip.
 
 11. **Deliver the summary and offer remediation.** In chat, present: finding counts by severity, report path, and go/no-go verdict. "Go" requires zero Critical findings. Offer via AskUserQuestion to remediate findings one at a time, starting with Critical. Never edit without per-finding approval. Never apply a batch fix.
+
+12. **Remediation cycle (when invoked as a blocking Submission-phase task by `execute-plan`).** After the user approves fixes, apply them through the generating scripts (never hand-edit outputs), re-run the affected audit dimensions, and regenerate the report with a new timestamp. Repeat until the verdict is "go" or the user explicitly waives each remaining finding — record waivers in the report. Never leave an approved finding unfixed.
 
 ## Standalone vs Integrated Mode
 

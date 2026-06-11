@@ -7,7 +7,7 @@ description: Use when adding citations to a .bib file, importing references by D
 
 ## Overview
 
-This skill manages the project's `references.bib` directly, using the CrossRef API to resolve DOIs into complete BibTeX entries. It does not require Zotero, any external CLI, or any desktop application. Everything happens through standard tools: `curl` (or equivalent HTTP client) and text editing of the `.bib` file.
+This skill manages the project's `references.bib` directly, using the CrossRef API to resolve DOIs into complete BibTeX entries. It does not require Zotero, any external CLI, or any desktop application. Everything happens through standard tools: `curl` (or equivalent HTTP client) and text editing of the `.bib` file. Citation *rendering* style (author–year by default; see `academic-baseline` and `compile-latex`) is outside this skill's scope — a clean `.bib` does not by itself guarantee the citations render in the right style.
 
 ## When to Use
 

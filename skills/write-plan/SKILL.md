@@ -66,10 +66,10 @@ The specified model from the design. Tasks: one estimation script per specificat
 Canonical checks for the design (via `robustness-checks`). Tasks: one script per check, one table or column per check. Verification: `tab_robustness.tex` exists; all checks present; failures discussed.
 
 ### 7. Writing
-Paper sections from data to narrative. Tasks: draft each section (Abstract, Introduction, Data, Methods, Results, Discussion, Conclusion), pull tables and figures via `\input{}` and `\includegraphics{}`. Writing tasks operate under `academic-baseline` and must include `paper-writing` in `Skills involved` — that skill carries the section formulas, style rules, AI-pattern avoidance, and review rubric. Use `journal-guidelines` here only when the work is already tied to a specific journal template or formatting requirement. Verification: `paper.tex` compiles with `compile-latex`.
+Paper sections from data to narrative. Tasks: draft each section — Abstract, Introduction, **Conceptual Framework**, Data, Methods, Results, **Discussion**, Conclusion. For empirical papers the Conceptual Framework and Discussion tasks are required — exclude them only with a written justification in the plan; a plan whose Writing phase ends at Results + Conclusion is incomplete. Writing tasks operate under `academic-baseline` and must include `paper-writing` in `Skills involved` — that skill carries the section formulas, structural gates, style rules, AI-pattern avoidance, and review rubric. Use `journal-guidelines` here only when the work is already tied to a specific journal template or formatting requirement. Verification for the phase: `paper.tex` compiles with `compile-latex` and its `scripts/check-log.sh` exits 0 (no overfull boxes, no undefined references, author–year citations unless the journal requires numeric), and `tables-and-figures`' `scripts/check-tables.sh` exits 0 on `output/tables/`.
 
 ### 8. Submission
-Target journal, formatting, checklist. Tasks: invoke `journal-selection` if not already decided, then invoke `journal-guidelines` for the chosen journal, adapt the manuscript and submission materials, and run the final compliance check. Journal-facing work without `journal-guidelines` is invalid. Verification: submission checklist complete.
+Target journal, formatting, checklist. Tasks: invoke `journal-selection` if not already decided, then invoke `journal-guidelines` for the chosen journal, adapt the manuscript and submission materials, and run the final compliance check. Journal-facing work without `journal-guidelines` is invalid. The phase must also include a **paper-review audit-and-remediate task**: run the `paper-review` audit, fix every Critical and Major finding (or record an explicit user waiver per finding), then re-run the audit; repeat until the verdict is "go". Verification: submission checklist complete; latest report in `docs/superpapers/review/` has zero Critical and zero unwaived Major findings.
 
 ## Task Template
 
@@ -96,6 +96,8 @@ Every task must specify:
 - A task that mixes multiple phases
 - Omitting `academic-baseline` from a task's `Skills involved`
 - Scheduling journal-facing work without `journal-guidelines`
+- Writing phase without Conceptual Framework and Discussion tasks (and no written justification)
+- Submission phase without a `paper-review` audit-and-remediate task
 - Placeholders anywhere in the plan — any "fill in later" marker or empty step
 - Using "similar to Task N" instead of repeating the details — tasks are often read in isolation
 
@@ -107,6 +109,8 @@ Every task must specify:
 - [ ] Every task has inputs, outputs, script path, verification, skills, commit message
 - [ ] Every task includes `academic-baseline` plus the necessary domain skills
 - [ ] Every journal-facing task includes `journal-guidelines` (or `journal-selection` followed by `journal-guidelines` when the outlet is still undecided)
+- [ ] Writing phase includes Conceptual Framework and Discussion tasks, or a written justification for excluding them
+- [ ] Submission phase includes the `paper-review` audit-and-remediate task
 - [ ] No placeholders in the plan
 - [ ] Dependencies between tasks explicit
 - [ ] Plan saved to `docs/superpapers/plans/` in English

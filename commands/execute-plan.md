@@ -28,6 +28,8 @@ Execution rules:
    - invoke `replication-driven-research`
    - invoke `journal-guidelines` for any journal-facing task
    - execute phase by phase
+   - run the blocking phase-boundary checks: `check-tables.sh` and figure PDF inspection for any phase producing tables/figures; compile + `check-log.sh` + compiled-PDF inspection + Discussion/Conceptual Framework presence at the Writing boundary
+   - run the Submission-phase `paper-review` audit-and-remediate cycle until the verdict is "go" (or findings are explicitly waived); it blocks plan completion
    - stop on verification failures
    - summarize phase boundaries and final status
 

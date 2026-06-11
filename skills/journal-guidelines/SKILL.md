@@ -24,7 +24,7 @@ This skill fetches instructions for authors from the journal's official page, pa
 
 2. **Parse key requirements into a structured list:**
    - **Word and page limits:** Main manuscript, abstract, each section if specified
-   - **Citation style:** APA, Chicago, Harvard, numeric, bespoke — with any journal-specific tweaks
+   - **Citation style:** APA, Chicago, Harvard, numeric, bespoke — with any journal-specific tweaks. The plugin default is author–year; the journal's requirement overrides it. Record the resolved style explicitly in the checklist ("author-year" or "numeric") — downstream compile checks depend on it.
    - **Section structure:** Some journals require IMRAD, structured abstracts, specific subsections
    - **Figures and tables:** Placement (embedded vs at end), format (PDF, EPS, TIFF), size, resolution, color vs B&W, number allowed
    - **Supplementary material:** What is allowed, size limits, format
@@ -39,9 +39,9 @@ This skill fetches instructions for authors from the journal's official page, pa
 
 3. **Produce a checklist in markdown** with each requirement as a verifiable item. Each item must be actionable — "reduce word count to 8,000" is actionable, "check length" is not.
 
-4. **If the journal provides a LaTeX template:** download it via web, adapt the paper to the template's structure, map existing `\input{}` table calls to the template's expectations, preserve the bibliography.
+4. **If the journal provides a LaTeX template:** download it via web, adapt the paper to the template's structure, map existing `\input{}` table calls to the template's expectations, preserve the bibliography. When the journal class loads natbib internally (elsarticle and similar), set the citation mode via the class option — `authoryear` for Harvard-style journals (`\documentclass[preprint,12pt,authoryear]{elsarticle}`); the `\bibliographystyle` alone does not switch the mode. After adaptation, recompile and run `compile-latex`'s `scripts/check-log.sh` with the resolved style (`--citation-style=numeric` only if the journal requires numeric). **Gate: do not declare the template adaptation complete until citations render in the journal's required style in the PDF.**
 
-5. **If no template:** adjust the existing paper — margins, font, spacing, citation style — to meet the requirements without breaking the replication pipeline.
+5. **If no template:** adjust the existing paper — margins, font, spacing, citation style — to meet the requirements without breaking the replication pipeline. The same recompile-and-check gate from step 4 applies.
 
 6. **Verify compliance item-by-item before declaring the paper ready.** Run through the checklist mechanically and mark each item. Do not self-certify based on "looks about right".
 
@@ -95,6 +95,7 @@ This skill fetches instructions for authors from the journal's official page, pa
 - [ ] Cover letter drafted if required
 - [ ] Blinding applied if required (author names, affiliations, acknowledgments removed)
 - [ ] Citation style converted to match the journal
+- [ ] Rendered citation style in the PDF matches the journal requirement — verified via `check-log.sh`, not assumed from the preamble
 - [ ] Data Availability Statement, Declaration of Competing Interests, and Acknowledgments sections present in the manuscript
 - [ ] Acknowledgments section includes AI use declaration mentioning Superpapers
 - [ ] End-matter section placement matches the journal's requirements

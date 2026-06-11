@@ -26,7 +26,7 @@ The nine principles below are non-negotiable. Every other superpapers skill oper
 
 2. **Replication is mandatory.** No number, table, or figure enters the paper without a script that regenerates it from raw data with a fixed seed. Manual copying of results into the paper is forbidden. See `replication-driven-research` for the full discipline.
 
-3. **LaTeX is the default output format.** Tables use `booktabs` and `threeparttable`. Figures are vector PDFs. Papers are `.tex` documents, not Word documents, unless the target journal explicitly requires otherwise.
+3. **LaTeX is the default output format.** Tables use `booktabs` and `threeparttable`. Figures are vector PDFs. Citations render in author–year style by default; numeric style only when the target journal explicitly requires it. Papers are `.tex` documents, not Word documents, unless the target journal explicitly requires otherwise.
 
 4. **Distinguish causal from correlational claims.** Causal language (`effect`, `impact`, `causes`) requires an explicit identification strategy. When in doubt, use correlational language (`associated with`, `correlated with`, `related to`). Wrong framing is a substantive error, not a stylistic one.
 

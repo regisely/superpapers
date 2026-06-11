@@ -22,26 +22,33 @@ This skill produces publication-quality tables and figures that are regenerated 
 
 1. **Generate every table and figure from a script** in `code/` that reads from `data/processed/` and writes to `output/tables/` or `output/figures/`. Never hand-edit the output file.
 
-2. **Use booktabs rules in tables.** `\toprule`, `\midrule`, `\bottomrule`. Never `\hline`. Never vertical bars.
+2. **Use human-readable labels everywhere in rendered output.** Raw code identifiers (snake_case, camelCase, dataset column names like `roa`, `cost_income`, `d_substantive`, `cik`) are forbidden in table headers, row labels, fixed-effects rows, and figure axes and legends. Maintain a single label dictionary in `code/` (e.g., `code/labels.R` or `code/labels.py`) mapping every variable to a publication label with units — `roa` → "Return on assets (%)", `ret_vol` → "Return volatility (annualized)", `cik` → "Bank". In R, pass it via `fixest::etable(dict = ...)` or `setFixest_dict()`, or `modelsummary(coef_map = ...)`; in Python, rename columns before export. Fixed-effects rows must read "Bank fixed effects" or "Quarter fixed effects", never the code variable name.
 
-3. **Wrap every table in `threeparttable`** with a notes block documenting: standard error type, significance convention, sample, data source.
+3. **Use booktabs rules in tables.** `\toprule`, `\midrule`, `\bottomrule`. Never `\hline`. Never vertical bars.
 
-4. **Save figures as vector PDF.** Use ggplot2 with `ggsave(..., device = cairo_pdf)` in R, or `matplotlib.pyplot.savefig(..., format='pdf')` in Python. Raster formats (PNG, JPG) are forbidden in the final paper.
+4. **Wrap every table in `threeparttable`** with a notes block documenting: standard error type, significance convention, sample, data source. Notes always live inside `tablenotes` with `\footnotesize` or `\scriptsize` — never as loose `\par`/`\raggedright` text below the tabular.
 
-5. **Include in the paper with `\input{}` or `\includegraphics{}`.** Never paste numbers or copy images.
+5. **Save figures as vector PDF.** Use ggplot2 with `ggsave(..., device = cairo_pdf)` in R, or `matplotlib.pyplot.savefig(..., format='pdf')` in Python. Raster formats (PNG, JPG) are forbidden in the final paper.
 
-6. **Use the naming convention:**
+6. **Include in the paper with `\input{}` or `\includegraphics{}`.** Never paste numbers or copy images.
+
+7. **Use the naming convention:**
    - Tables: `tab_<purpose>.tex` — `tab_descriptives.tex`, `tab_main_results.tex`, `tab_robustness.tex`
    - Figures: `fig_<purpose>.pdf` — `fig_event_study.pdf`, `fig_trends.pdf`
 
-7. **Table notes and figure captions follow the user's paper language.** The file names and script comments stay in English; the user-facing text in the notes and captions follows the paper's language setting.
+8. **Table notes and figure captions follow the user's paper language.** The file names and script comments stay in English; the user-facing text in the notes and captions follows the paper's language setting.
 
-8. **No table may overflow the text width.** After generating a table, verify it fits within `\linewidth`. If it overflows:
-   - First, reduce column padding with `@{}` column separators or `\setlength{\tabcolsep}{3pt}`.
-   - Second, abbreviate column headers or use multi-row headers.
-   - Third, use `\resizebox{\linewidth}{!}{...}` — but only if font remains readable.
+9. **No table may overflow the text width.** If a table is wide, apply the ladder in order:
+   - First, reduce the table font: `\small`, then `\footnotesize`, with notes set to `\scriptsize` inside `tablenotes`.
+   - Second, cut column padding with `@{}` column separators or `\setlength{\tabcolsep}{3pt}`.
+   - Third, abbreviate column headers (defining the abbreviations in the notes) or use multi-row headers.
+   - Fourth, use `\resizebox{\linewidth}{!}{...}` — but only if the font remains readable.
    - Last resort: switch the table page to landscape using the `pdflscape` package (`\begin{landscape}...\end{landscape}`). Add `\usepackage{pdflscape}` to the preamble.
-   Never let a table bleed into the margin. After compilation, check for `Overfull \hbox` warnings on table lines and fix them.
+   Never let a table bleed into the margin.
+
+10. **Run the post-generation checks.** After generating or modifying any table: run `scripts/check-tables.sh output/tables/` (labels, booktabs, notes), then compile the paper with `compile-latex` and run its `scripts/check-log.sh` (no `Overfull \hbox` above 5pt). **Gate: the table task is not complete until both scripts exit 0.** This is part of producing the table, not a final-polish step.
+
+11. **Visually inspect every figure.** After saving a figure, Read the generated PDF and confirm: no overlapping text, legend not covering data, annotations clear of data points and of each other, axis labels fully visible, fonts legible at print size. **Gate: the figure task is not complete until the rendered PDF has been inspected.**
 
 ## Table Template
 
@@ -95,9 +102,11 @@ Detect the convention by reading `CLAUDE.superpapers.md` from the current workin
 - **Theme:** `theme_minimal()` or `theme_classic()` in ggplot2, with adjustments for print. Avoid grey backgrounds from ggplot2's default theme.
 - **Colors:** Colorblind-safe palettes (`viridis`, `RColorBrewer` Dark2 or Set1). For B&W print compatibility, use dash patterns or shapes rather than relying on color alone.
 - **Titles:** Do not embed plot titles in the figure. The title goes in the LaTeX caption.
-- **Axis labels:** Clear, with units (`Unemployment rate (%)`, `Year`, `Real GDP (log)`).
-- **Legend:** Minimal. Remove if only one series.
+- **Axis labels:** Clear, with units (`Unemployment rate (%)`, `Year`, `Real GDP (log)`). Human-readable labels only — never code identifiers on axes or in legends.
+- **Legend:** Minimal. Remove if only one series. Place outside the plot area (`legend.position = "bottom"`), never over the data.
+- **No overlapping elements:** Text annotations, value labels, and legends must not overlap data points, lines, or each other. Use `ggrepel::geom_text_repel()` for point labels; expand axis limits (`expand_limits()`, `scale_*_continuous(expand = ...)`) to make room for annotations; nudge or shorten annotation text rather than letting it collide with series or reference lines.
 - **Saving:** `ggsave("output/figures/fig_name.pdf", width = W, height = H, device = cairo_pdf)`.
+- **Inspection:** After saving, Read the PDF and check for overlaps and legibility (Mandatory Step 11).
 
 Example figure code (R/ggplot2):
 
@@ -135,8 +144,12 @@ ggsave(
 - Using ggplot2's default grey background theme in published figures
 - Color-only differentiation in figures intended for B&W print
 - Tables that overflow into the page margin without correction
-- Using `\resizebox` as a first resort instead of redesigning column layout or reducing padding
+- Using `\resizebox` as a first resort instead of reducing font size, padding, or redesigning the column layout
 - Wide tables left in portrait when landscape would preserve readability
+- Code identifiers (snake_case column names, `d_treatment`, `cik`) as labels in tables or figures
+- Table notes outside `tablenotes` or without a reduced font size
+- Declaring a table done without running `check-tables.sh` and a compile check
+- Annotations or legends overlapping data in figures; figures shipped without inspecting the rendered PDF
 
 ## Verification Before Completion
 
@@ -149,5 +162,8 @@ ggsave(
 - [ ] Axis labels and units specified
 - [ ] Colors colorblind-safe where feasible
 - [ ] Table notes and figure captions in the user's paper language
-- [ ] No table overflows the text width or bleeds into margins
-- [ ] Wide tables use landscape orientation or column optimization to remain readable
+- [ ] A label dictionary exists in `code/` and every rendered label is human-readable with units (no code identifiers)
+- [ ] `scripts/check-tables.sh output/tables/` exits 0
+- [ ] Paper compiled and `compile-latex`'s `check-log.sh` exits 0 (no table overflows the text width)
+- [ ] Wide tables use reduced font, landscape orientation, or column optimization to remain readable
+- [ ] Every figure PDF was Read and inspected: no overlapping annotations, legend, or labels

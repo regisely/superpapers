@@ -9,6 +9,7 @@
 - **Paper language:** <en | pt-BR | es | fr | ...>  <!-- default: en -->
 - **Code language:** <R | Python | both | other>
 - **Significance convention:** <econ (0.10/0.05/0.01) | psi-med (0.05/0.01/0.001)>
+- **Citation style:** <author-year (default) | numeric (only if the target journal requires it)>
 
 ## Target Outlets
 
@@ -30,6 +31,7 @@
 - When looking up literature for any purpose (gap verification, citation, literature review), bias toward the user's target journals and closely related outlets in the same field tier.
 - Prioritize recent publications (last 3-5 years) from target journals.
 - Never hardcode results in `paper/paper.tex` — always use `\input{}` from `output/`.
+- Citations default to author–year style; switch to numeric only with an explicit journal requirement documented via `journal-guidelines`.
 
 ## Skill Routing by Phase
 
@@ -43,6 +45,6 @@ Before executing any plan task, consult this table and invoke every listed skill
 | Exploratory Analysis | `statistical-modeling`, `tables-and-figures` |
 | Main Analysis | `statistical-modeling`, `tables-and-figures` |
 | Robustness | `robustness-checks`, `tables-and-figures` |
-| Writing | `paper-writing` (main session only, never subagent), `compile-latex` |
-| Review | `paper-review` (optional pre-submission audit, typically run via `/superpapers:paper-review` after Writing; not one of the 8 canonical plan phases) |
-| Submission | `journal-selection` (if outlet not fixed), then `journal-guidelines`, `compile-latex` |
+| Writing | `paper-writing` (main session only, never subagent), `tables-and-figures` (table/figure fixes surfaced while writing), `compile-latex` |
+| Review | `paper-review` (standalone audit via `/superpapers:paper-review`; also runs as the blocking Submission-phase audit) |
+| Submission | `journal-selection` (if outlet not fixed), then `journal-guidelines`, `compile-latex`, `paper-review` (audit-and-remediate until "go") |

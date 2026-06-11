@@ -37,6 +37,7 @@ Deep material lives in `references/`; load a reference file when the task calls 
 8. Use causal language only when the design supports it; otherwise correlational. (Academic-baseline principle 4.)
 9. Produce output in `paper_language` from `CLAUDE.superpapers.md`. (Academic-baseline principle 8.)
 10. Defer non-prose work to the sibling skills listed in the Overview.
+11. **Enforce structural completeness for empirical papers.** The paper must contain a Discussion section (or an explicitly justified combined Results and Discussion) and a Conceptual Framework / mechanisms section by default; the Abstract must contain no parenthetical asides; Results + Discussion must carry the weight prescribed by the Section Proportions in `references/section-formulas.md`. **Gate: do not declare a full-paper draft or a Writing-phase task complete while any of these is missing without a justification recorded to the user.**
 
 ## The Seven Core Principles
 
@@ -75,6 +76,10 @@ If `field` is unset, ask the user inline before applying field-specific advice.
 - Conclusion that copy-pastes the abstract or introduction. Each phrases the same findings differently.
 - Declaring output done without running the five-pass self-check from `references/style-rules.md`.
 - Replicating content already in sibling skills (tables, figures, `.bib`, LaTeX commands, replication standards).
+- Abstract with parenthetical statistics — integrate them into the prose.
+- Ending the paper at Results (or Robustness) + Conclusion with no Discussion.
+- Results section that only narrates table values, without magnitudes, mechanisms, or dialogue with the literature.
+- Skipping the Conceptual Framework section without recording a justification.
 
 ## Verification Before Completion
 
@@ -88,3 +93,6 @@ If `field` is unset, ask the user inline before applying field-specific advice.
 - [ ] No AI-pattern banned words in the final text.
 - [ ] When reviewing: 3-reviewer perspectives applied and 100-point rubric scored.
 - [ ] Non-prose work deferred to sibling skills.
+- [ ] Empirical paper has Discussion and Conceptual Framework sections (or a recorded justification for their absence).
+- [ ] Abstract contains no parentheses.
+- [ ] Results + Discussion meet the Section Proportions floors (Results ≥ 1,000 words, Discussion ≥ 500).

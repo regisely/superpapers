@@ -48,6 +48,7 @@ Write the abstract LAST, after the introduction is complete. Extract key sentenc
 ### Rules
 
 - Be CONCRETE. Say what you find, not what you look for.
+- Do NOT use parenthetical asides — an abstract should contain zero parentheses. Integrate statistics into the prose: "Inter-rater agreement is high, with a Cohen's kappa of 0.81", never "(Cohen's kappa = 0.81)". Confidence intervals after a point estimate are the one tolerated exception when the journal expects them.
 - Do NOT mention other literature in the abstract. Exception: one prior finding to establish a puzzle is acceptable if brief.
 - Do NOT use passive voice.
 - Do NOT use jargon unnecessarily — make it intelligible to a smart college-educated non-specialist in your field.
@@ -141,6 +142,26 @@ Outline the paper's organization. CUSTOMIZE it to your specific paper — do not
 4. **Throat-clearing**: pages of motivation before stating what you do.
 5. **Bland enumeration**: listing papers without telling a story ("Smith found X. Jones found Y.").
 6. **No results in intro**: making readers wait until the results section for any findings.
+
+---
+
+## Conceptual Framework / Mechanisms
+
+Default for empirical papers. This is NOT the formal Theory/Model section (see below) and NOT a standalone literature review — it is 1–2 pages answering *why* X should affect Y before the reader sees any regression.
+
+### Structure
+
+1. **The economic (or clinical, or political) logic**: which forces connect the treatment to the outcome? State each candidate channel in plain English.
+2. **Hypotheses**: for confirmatory work, number them (H1, H2, …) and tie each to a channel. For exploratory work, state the guiding expectations without dressing them up as priors.
+3. **Competing mechanisms**: what would each channel predict differently? This is what makes the framework testable rather than decorative.
+4. **Dialogue with theory**: cite the theoretical literature each channel comes from. This section carries citations, not just intuition.
+5. **Map to the empirics**: state which results section tests which channel. The Results section's mechanism analysis (see below) must trace back here.
+
+### Rules
+
+- Include this section by default in empirical papers. Omit it only when the mechanism is genuinely self-evident, and record the justification to the user — never drop it silently.
+- Keep it short: 1–2 pages. If it grows formal (primitives, equilibrium), it has become a Theory/Model section.
+- Every hypothesis must be falsifiable by the data described in the Data section.
 
 ---
 
@@ -278,13 +299,13 @@ Skip if your paper is purely applied empirical with no formal model.
 
 ## Discussion
 
-Often combined with Results in shorter papers; separate in medical and clinical journals.
+A Discussion section is **mandatory** in empirical papers. It may be merged into a combined "Results and Discussion" section only with an explicit justification recorded to the user (a short paper, a strict page limit, a journal convention) — never silently omitted. A paper that jumps from Results (or Robustness) straight to the Conclusion is incomplete: the dialogue with the literature and the mechanism interpretation below have nowhere to live.
 
 ### Structure
 
 1. **Restate the main finding in substantive terms** (one short paragraph).
-2. **Place the finding in the literature**: which prior debate does this resolve, refine, or complicate?
-3. **Mechanisms**: what does the evidence say about why the effect appears?
+2. **Place the finding in the literature**: which prior debate does this resolve, refine, or complicate? Name the papers and compare magnitudes — "our estimate is roughly half of Smith (2019)'s" — not just "consistent with prior work". A Discussion without citations is a defect, not a style choice.
+3. **Mechanisms**: what does the evidence say about why the effect appears? Tie back to the channels laid out in the Conceptual Framework — which survived, which the data reject.
 4. **External validity**: what populations, settings, time periods does this generalize to?
 5. **Limitations**: what does the design *not* identify? Avoid over-claiming.
 
@@ -336,15 +357,20 @@ Identify 1–2 specific, concrete directions:
 ### Standard Applied Empirical Paper
 
 1. Title
-2. Abstract (100–150 words, concrete findings)
+2. Abstract (100–150 words, concrete findings, no parentheses)
 3. Introduction (3–5 pages, includes literature review)
-4. Theoretical Framework (optional; only if it adds to understanding the empirics)
+4. Conceptual Framework / Mechanisms (default; omit only with a recorded justification)
 5. Data and Descriptive Statistics
 6. Empirical Framework (estimation + identification strategy)
 7. Results (main, robustness, mechanisms, limitations)
-8. Conclusion (summary, implications, future research)
-9. References
-10. Appendix / Online Supplement
+8. Discussion (mandatory; or an explicitly justified combined Results and Discussion)
+9. Conclusion (summary, implications, future research)
+10. References
+11. Appendix / Online Supplement
+
+### Section Proportions (empirical papers)
+
+For a 25–40 page empirical paper, the body prose should roughly split as: Introduction 15–20%; Conceptual Framework 5–10%; Data + Methods 20–25%; **Results + Discussion 35–45% — the heart of the paper**; Conclusion at most 5%. Floors, not targets: Results ≥ 1,000 words, Discussion ≥ 500 words. A Results section under ~800 words in an empirical paper signals underdeveloped analysis — expand magnitude interpretation, heterogeneity, and mechanism tests before moving on. A paper whose Data + Methods outweigh Results + Discussion reads as a data memo, not a paper.
 
 ### Theory Paper
 
